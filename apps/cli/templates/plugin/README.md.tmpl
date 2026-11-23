@@ -1,0 +1,10 @@
+# __PACKAGE__
+
+The `__NAME__` plugin for [Edgway](https://github.com/scoobydrew83/edgway), created with `edgway plugin new __NAME__`.
+
+Add it to the `plugins` list in the repo root's `edgway.config.json`, then regenerate both registries: `pnpm --filter @edgway/gateway gen:plugins` and `pnpm --filter @edgway/admin gen:plugins` (`pnpm drift` checks they're current). The admin then accepts it, validating its config against the schema in `src/index.ts`, and the gateway runs it. Configure it like any Kong plugin (`name: __NAME__`) in a decK file or through the admin API.
+
+| Field | Default | Meaning |
+| --- | --- | --- |
+| `header_name` | `x-__NAME__` | Response header to set |
+| `header_value` | `on` | Its value |

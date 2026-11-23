@@ -1,0 +1,35 @@
+# Kong's Terraform provider and the Edgway module against a local admin
+#: `terraform init`, `plan` and `apply` of infra/terraform/examples/kong,
+# then a second `plan` that must show no changes. Runs
+# infra/terraform/test/run.sh, the same script used locally.
+name: terraform
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read-only: the job only checks out and runs a local script (S21).
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
+        with:
+          terraform_version: 1.13.4
+          # run.sh reads exit codes from `plan -detailed-exitcode` itself.
+          terraform_wrapper: false
+      - run: pnpm install --frozen-lockfile
+      - run: bash infra/terraform/test/run.sh

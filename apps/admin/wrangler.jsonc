@@ -1,0 +1,95 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "edgway-admin",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-04-14",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Cloudflare Access settings (ACCESS_TEAM, ACCESS_AUD, ADMIN_ROLES) are set
+  // on the deployed Worker, not here (docs/deploy.md): `keep_vars` keeps
+  // them through every deploy, so a build from this repository never resets
+  // them. Unset, the admin fails closed. Locally: .dev.vars. After a
+  // dashboard edit, a terminal `wrangler deploy` warns that they would be
+  // removed: they aren't, so answer yes and don't copy them in here.
+  "keep_vars": true,
+
+  // Public values only; secrets (the snapshot signing key) are Worker secrets.
+  "vars": {
+    "WORKSPACE_ID": "",
+    // The route tester sends through the GATEWAY binding below; this URL,
+    // when set, names the gateway's host (for host-matched routes), and is
+    // the tester's only way in where the binding is absent (local runs).
+    "GATEWAY_URL": "",
+    // The overview dashboard's Analytics Engine account (with the
+    // AE_API_TOKEN secret). Empty: the dashboard shows its empty state.
+    "CF_ACCOUNT_ID": ""
+  },
+
+  // The route tester's gateway, Worker to Worker (no workers.dev hop).
+  // `pnpm run deploy` deploys the admin once without it on a first install,
+  // since the gateway (which binds this Worker's ConfigVersion) comes next.
+  "services": [{ "binding": "GATEWAY", "service": "edgway-gateway" }],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "edgway-admin",
+      // No id: `pnpm run deploy` (tools/deploy.mjs) finds or creates the
+      // database and writes its id here, before running its migrations.
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // The published snapshots the gateway reads (shared with apps/gateway). No
+  // id: `pnpm run deploy` creates one namespace for both Workers and writes it in.
+  "kv_namespaces": [
+    {
+      "binding": "CONFIG_KV"
+    }
+  ],
+
+  // The admin UI (apps/ui, built to apps/ui/dist/ui), served under /ui/
+  // (ADMIN_UI.basePath in @edgway/constants). src/index.ts
+  // serves the files from ASSETS and falls back to the SPA's index.html for
+  // client routes.
+  // The Kong mount keeps /, the native API /api/v1.
+  "assets": {
+    "directory": "../ui/dist",
+    "binding": "ASSETS",
+    // The Worker answers /ui first, so the UI carries its security headers
+    // and serves files from ASSETS.
+    "run_worker_first": ["/ui/*", "/ui"]
+  },
+  // Builds the UI first, so `wrangler deploy` and `wrangler dev` ship it.
+  "build": {
+    "command": "pnpm --filter @edgway/ui build"
+  },
+
+  // The live config version gateways check (set on publish and rollback).
+  "durable_objects": {
+    "bindings": [
+      { "name": "CONFIG_VERSION", "class_name": "ConfigVersion" },
+      // Batches developers' key changes from the portal.
+      { "name": "PORTAL_PUBLISHER", "class_name": "PortalPublisher" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["ConfigVersion"] },
+    { "tag": "v2", "new_sqlite_classes": ["PortalPublisher"] }
+  ],
+
+  // Secret: TRACE_SIGNING_KEY, the Ed25519 private JWK that signs the route
+  // tester's trace tokens; the gateway's TRACE_PUBLIC_KEY is its public half
+  // (a key of its own, not the snapshot key).
+  // Secret (never in vars): CONFIG_SIGNING_KEY, the Ed25519 private JWK that
+  // signs snapshots. `pnpm run deploy` creates the pair on the first deploy;
+  // the gateway's CONFIG_PUBLIC_KEY secret is its public half.
+  // Secret: KONG_ADMIN_TOKENS, JSON of sha256(token) → role for the Kong mount
+  // (decK, Terraform send the token as Kong-Admin-Token).
+  // Secret: AE_API_TOKEN, a Cloudflare API token with Account Analytics read,
+  // for the overview dashboard's Analytics Engine queries.
+
+  "observability": {
+    "enabled": true
+  }
+}

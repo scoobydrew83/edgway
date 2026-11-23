@@ -1,0 +1,74 @@
+{
+  "name": "@edgway/i18n",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobydrew83/edgway.git",
+    "directory": "packages/i18n"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Edgway message catalog (FormatJS), per-request locale (Hono) and Intl formatting",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./messages": "./src/messages.ts",
+    "./catalogs": "./src/catalogs.ts"
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "extract": "formatjs extract \"src/**/*.ts\" --ignore \"src/**/*.test.ts\" --ignore \"src/generated/**\" --out-file lang/en.json",
+    "compile": "formatjs compile lang/en.json --ast --out-file src/generated/en.json && formatjs compile lang/en.json --ast --pseudo-locale en-XA --out-file src/generated/x-pseudo.json",
+    "generate": "pnpm run extract && pnpm run compile",
+    "verify": "formatjs verify --source-locale en --missing-keys --extra-keys --structural-equality \"lang/*.json\"",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run",
+    "ra-messages": "node scripts/ra-messages.mjs",
+    "build": "tsc -b tsconfig.build.json",
+    "prepack": "pnpm run build && node ../../tools/release/prepack.mjs",
+    "postpack": "node ../../tools/release/postpack.mjs"
+  },
+  "dependencies": {
+    "@edgway/constants": "workspace:*",
+    "@formatjs/intl": "^6.1.2",
+    "hono": "^4.13.10"
+  },
+  "devDependencies": {
+    "@formatjs/cli": "^6.16.32",
+    "@rjsf/utils": "6.11.0",
+    "@types/node": "^22.0.0",
+    "ra-language-english": "5.15.4",
+    "typescript": "^5.8.2",
+    "vitest": "4.1.11"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./messages": {
+        "types": "./dist/messages.d.ts",
+        "import": "./dist/messages.js",
+        "default": "./dist/messages.js"
+      },
+      "./catalogs": {
+        "types": "./dist/catalogs.d.ts",
+        "import": "./dist/catalogs.js",
+        "default": "./dist/catalogs.js"
+      }
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  }
+}

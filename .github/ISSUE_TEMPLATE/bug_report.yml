@@ -1,0 +1,50 @@
+name: Bug report
+description: Something in Edgway behaves differently from its docs, or from Kong where Edgway claims compatibility.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. **Security issues go to the private form in SECURITY.md, not here.** Remove secrets, keys and tokens from anything you paste.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Gateway (data plane)
+        - Admin API (native /api/v1)
+        - Kong-compatible Admin API (decK, Terraform)
+        - Admin UI
+        - Developer portal
+        - CLI
+        - A plugin
+        - Terraform module
+        - Docs
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The Edgway version or commit, and your deploy method (CLI, `pnpm run deploy`, the Deploy button).
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what happened instead. Include the `EDG-*` error code and the request id if there was one.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest decK file, admin API calls or requests that show it.
+      render: shell
+  - type: textarea
+    id: kong
+    attributes:
+      label: Kong behaviour
+      description: For a compatibility bug, what Kong (and its version) does with the same configuration.

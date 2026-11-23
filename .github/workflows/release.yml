@@ -1,0 +1,61 @@
+# Releases (audit R2). On every push to main, changesets/action either
+# opens or updates the "Version Packages" pull request (`changeset version`),
+# or, once that pull request is merged, publishes every public package whose
+# version isn't on npm yet (`changeset publish`, which packs through each
+# package's prepack) with npm provenance, and creates a GitHub Release per
+# published package. Needs the NPM_TOKEN repository secret (an npm automation
+# token for the @edgway scope and the `edgway` package). Actions are pinned
+# by commit SHA, as in ci.yml.
+#
+# Releases come only from the public repository, so npm provenance and the
+# GitHub Releases point at source anyone can read. In any other copy of
+# this workflow (a fork, or the maintainers' private working repository)
+# the job is skipped.
+name: release
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'scoobydrew83/edgway'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      # Version commits, tags and GitHub Releases.
+      contents: write
+      # The "Version Packages" pull request.
+      pull-requests: write
+      # npm provenance (an OIDC token signs the build attestation).
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
+        with:
+          version: pnpm run version-packages
+          publish: pnpm run release
+          title: "Version Packages"
+          commit: "Version Packages"
+          createGithubReleases: true
+          # Commits and tags go through the GitHub API with GITHUB_TOKEN, so
+          # checkout never persists a credential (signed by GitHub, too).
+          commitMode: github-api
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"

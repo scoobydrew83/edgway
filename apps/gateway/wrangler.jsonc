@@ -1,0 +1,100 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "edgway-gateway",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-04-14",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // CONFIG_PUBLIC_KEY, the admin's snapshot-signing public key (JWK), is set
+  // per deployment as a Worker secret by `pnpm run deploy` (with the admin's
+  // private half); locally, in .dev.vars. Secrets never go in vars (CLAUDE.md §4).
+  // TRACE_PUBLIC_KEY, the public half of the admin's trace-token key,
+  // is a secret set by `pnpm run deploy` too; without it, nothing is traced.
+
+  // Published config snapshots (config:current, config:v{n}), read by the data
+  // plane. No id: `pnpm run deploy` binds the admin's namespace here.
+  "kv_namespaces": [
+    {
+      "binding": "CONFIG_KV"
+    }
+  ],
+
+  // rate-limiting's exact counters (@edgway/adapters-cf RateLimitCounter).
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "RATE_LIMIT_COUNTER",
+        "class_name": "RateLimitCounter"
+      }
+    ]
+  },
+
+  // The live config version, read through the admin's read-only
+  // ConfigVersionReader: a publish reaches every isolate within a
+  // second, a KV write can't roll it back, and the gateway can't move it.
+  "services": [
+    {
+      "binding": "CONFIG_VERSION",
+      "service": "edgway-admin",
+      "entrypoint": "ConfigVersionReader"
+    }
+  ],
+
+  // One migration: the scaffold's v1/v2 chain created and then
+  // deleted a RateLimiter class this Worker no longer exports, which a fresh
+  // account may refuse. No install was deployed with the old tags.
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["RateLimitCounter"]
+    }
+  ],
+
+  // Optional: http-log's retry buffer. Failed deliveries are queued and
+  // re-sent with backoff by this Worker's queue handler.
+  // "queues": {
+  //   "producers": [{ "binding": "HTTP_LOG_RETRY", "queue": "edgway-http-log-retry" }],
+  //   "consumers": [{ "queue": "edgway-http-log-retry", "max_retries": 10 }]
+  // },
+
+  // Request metrics for the admin's overview dashboard (Workers Analytics
+  // Engine). The dataset name is @edgway/telemetry's REQUEST_DATASET.
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "edgway_requests"
+    },
+    // Per-plugin timing, one data point per plugin per phase:
+    // @edgway/telemetry's PLUGIN_DATASET.
+    {
+      "binding": "PLUGIN_ANALYTICS",
+      "dataset": "edgway_plugins"
+    }
+  ],
+
+  // Workers AI: ai-proxy's `workers-ai:` models and its fallback when a
+  // provider fails.
+  "ai": { "binding": "AI" },
+
+  // Uploaded plugins run in Dynamic Workers (Worker Loader, beta),
+  // with no network and, for now, no bindings allow-listed.
+  "worker_loaders": [{ "binding": "LOADER" }],
+
+  // Upstreams: public HTTPS services need no binding. Service Bindings and
+  // Workers VPC services are declared under "services" / "vpc_services"; a
+  // service tagged `edgway-binding:<BINDING>` or `edgway-tunnel:<BINDING>`
+  // is sent to that binding. Only bindings named UPSTREAM_* can be
+  // tagged, e.g. { "binding": "UPSTREAM_ORDERS", "service": "orders" }.
+  // Kong upstreams need no binding.
+  // Workers Logs, and traces with a span per plugin phase and one for the
+  // upstream call. Traces are off by default: turn them on, and to
+  // export them over OTLP name a destination created in the dashboard
+  // (Observability > Destinations), e.g.
+  //   "traces": { "enabled": true, "head_sampling_rate": 0.05,
+  //               "destinations": ["honeycomb-traces"], "persist": false }
+  // Traces count toward Cloudflare Observability usage; see docs/deploy.md.
+  "observability": {
+    "enabled": true,
+    "traces": { "enabled": false }
+  }
+}

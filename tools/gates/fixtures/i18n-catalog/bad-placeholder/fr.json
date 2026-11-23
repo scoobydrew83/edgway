@@ -1,0 +1,6 @@
+{
+  "errors.hello": {
+    "defaultMessage": "Bonjour {nom}",
+    "description": "Greeting"
+  }
+}

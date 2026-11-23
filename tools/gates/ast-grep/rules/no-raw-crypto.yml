@@ -1,0 +1,13 @@
+id: no-raw-crypto
+language: TypeScript
+severity: error
+message: Hashing and ID generation go through @edgway/core crypto helpers (nanoid, uuidv7, sha256).
+rule:
+  any:
+    - pattern: crypto.subtle.digest($$$ARGS)
+    - pattern: crypto.randomUUID($$$ARGS)
+ignores:
+  - "**/packages/core/src/crypto*"
+  # legacy-scaffold (docs/custom-code-register.yaml)
+  - "**/apps/gateway/src/db/api-keys.ts"
+  - "**/apps/gateway/src/admin/api.ts"

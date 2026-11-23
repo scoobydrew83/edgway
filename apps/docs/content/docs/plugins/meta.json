@@ -1,0 +1,24 @@
+{
+  "title": "Plugins",
+  "pages": [
+    "index",
+    "acl",
+    "ai-prompt-guard",
+    "ai-proxy",
+    "ai-rate-limiting-advanced",
+    "basic-auth",
+    "correlation-id",
+    "cors",
+    "http-log",
+    "ip-restriction",
+    "jwt",
+    "key-auth",
+    "openid-connect",
+    "proxy-cache",
+    "rate-limiting",
+    "request-size-limiting",
+    "request-termination",
+    "request-transformer",
+    "response-transformer"
+  ]
+}

@@ -1,0 +1,31 @@
+# The real decK CLI against the Kong-compatible admin mount: dump and diff of
+# the seeded demo config; reset, `deck gateway sync examples/deck/*.yaml`,
+# an empty diff, publish, and the gateway serving the synced routes; then the
+# examples/deck/kong-samples corpus must sync above 90%. Runs
+# tools/kong-compat-e2e.sh, the same script used locally.
+name: kong-compat
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read-only: the job only checks out and runs a local script (S21).
+permissions:
+  contents: read
+
+jobs:
+  deck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: bash tools/kong-compat-e2e.sh

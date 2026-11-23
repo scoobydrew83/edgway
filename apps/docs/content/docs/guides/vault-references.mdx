@@ -1,0 +1,33 @@
+---
+title: Vault references
+description: Keep secrets out of the configuration with Kong vault references.
+---
+
+Keep secrets out of Edgway's database with Kong **vault references**, which the gateway resolves when it loads a published configuration:
+
+- a jwt credential's `secret` and a certificate's private keys must be references: the admin refuses a raw value;
+- a secret field in a plugin's configuration (one Kong marks referenceable, such as an OIDC `client_secret`) should be one. A raw value is accepted, so decK configs keep syncing, but every publish lists it under `warnings`, which the admin UI and `edgway publish` show. A raw value is stored in the database and in the published configuration.
+
+## Where references point
+
+| Reference | Reads |
+| --- | --- |
+| `{vault://env/vault-jwt-key}` | The gateway's Worker secret `VAULT_JWT_KEY`. Kong's mapping applies: upper case, dashes become underscores. |
+| `{vault://cf-secrets-store/NAME}` | The Secrets Store binding `NAME` on the gateway. |
+| `{vault://env/vault-oidc/client_secret}` | One field (`client_secret`) of a JSON secret. |
+
+Only secrets whose names start with `VAULT_` can be read, so a reference can never read the gateway's own secrets, such as `CONFIG_PUBLIC_KEY`.
+
+```sh
+pnpm --filter @edgway/gateway exec wrangler secret put VAULT_JWT_KEY
+```
+
+## Where references resolve
+
+A reference resolves only in the fields Kong marks as referenceable in a plugin's schema, and in jwt credential secrets and certificate keys. A publish that has a reference in any other plugin field is refused with 400 [EDG-ADM-004](/errors/EDG-ADM-004), naming the fields under `vault_references`, so a reference can't be used to send a secret back to a client or to a log endpoint. An uploaded plugin has no Kong schema, so its configuration can hold no references. A certificate's key must be a reference too, although certificates don't reach the gateway yet.
+
+## When a reference doesn't resolve
+
+The gateway fails closed: the routes that use it answer 500 with [EDG-CFG-003](/errors/EDG-CFG-003), and the gateway tries again every 10 seconds. Add the missing secret; no publish is needed.
+
+In the admin UI, secret fields show **Hidden** for anything that isn't a reference, and show the reference itself otherwise.

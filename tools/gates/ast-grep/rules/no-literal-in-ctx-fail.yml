@@ -1,0 +1,13 @@
+id: no-literal-in-ctx-fail
+language: TypeScript
+severity: error
+message: ctx.fail() takes an error from @edgway/errors (ERR.*), never a string.
+rule:
+  any:
+    - pattern: $CTX.fail($ARG)
+    - pattern: $CTX.fail($ARG, $$$REST)
+constraints:
+  ARG:
+    any:
+      - kind: string
+      - kind: template_string

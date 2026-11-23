@@ -1,0 +1,44 @@
+---
+title: Getting started
+description: Deploy Edgway to your Cloudflare account and publish a first route.
+---
+
+## Deploy
+
+One command deploys the three Workers, creates the KV namespace and the D1 database they share, runs the migrations and creates the snapshot signing keys:
+
+```sh
+pnpm install
+pnpm --filter @edgway/admin exec wrangler login   # or set CLOUDFLARE_API_TOKEN
+pnpm run deploy
+```
+
+Every step is idempotent, so running it again redeploys. `pnpm run deploy -- --dry-run` bundles the Workers and touches nothing remote. The repository's `docs/deploy.md` also covers the Deploy to Cloudflare button.
+
+## Protect the admin
+
+The admin fails closed until Cloudflare Access is set up: every API call answers 401.
+
+1. In Zero Trust, add a self-hosted application on the admin Worker's hostname for the paths `/api/v1` and `/ui`, and copy its AUD tag. The rest of the hostname, the Kong-compatible mount that decK and Terraform use, stays outside Access: it checks `Kong-Admin-Token` itself.
+2. On the deployed admin Worker (dashboard: Settings, Variables and Secrets), set `ACCESS_TEAM`, `ACCESS_AUD` and `ADMIN_ROLES` (a JSON map from an email or service-token client id to `viewer`, `editor`, `publisher` or `owner`) as plain-text variables. They take effect when saved, and later deploys keep them (the admin's config sets `keep_vars`). A terminal deploy after a dashboard edit warns that the remote configuration differs and lists them as removed: answer yes, and don't let wrangler copy them into `wrangler.jsonc` (see [Deploying](https://github.com/scoobydrew83/edgway/blob/main/docs/deploy.md#after-the-first-deploy)).
+
+## Publish a first route
+
+With the admin UI (`https://<admin>/ui`), or the native API:
+
+```sh
+ADMIN=https://<admin>/api/v1
+curl -X POST $ADMIN/services -H 'content-type: application/json' \
+  -d '{"name":"httpbin","protocol":"https","host":"httpbin.org","port":443}'
+curl -X POST $ADMIN/routes -H 'content-type: application/json' \
+  -d '{"name":"httpbin","service_id":"<service id>","paths":["/httpbin"]}'
+curl -X POST $ADMIN/config/publish -H 'content-type: application/json' -d '{}'
+```
+
+(Add Access's `cf-access-client-id` and `cf-access-client-secret` headers for a service token.) The gateway serves `https://<gateway>/httpbin/get` within about a second of the publish.
+
+## Next
+
+- Add plugins from the admin UI's plugin catalog, or the API. Each plugin's options are on its [reference page](/plugins/key-auth).
+- Test a route with the admin UI's route tester: it shows each plugin's decision.
+- Let developers issue their own keys in the portal (see `docs/deploy.md`).

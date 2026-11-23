@@ -1,0 +1,22 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreDependencies": ["cloudflare"],
+  "workspaces": {
+    ".": {
+      "entry": ["tools/gates/*.ts", "infra/terraform/test/*.mjs"],
+      "ignore": ["tools/gates/fixtures/**"]
+    },
+    "apps/gateway": {
+      "entry": ["scripts/*.mjs", "test/**/*.ts"]
+    },
+    "apps/portal": {
+      "entry": ["zudoku.config.tsx"]
+    },
+    "packages/i18n": {
+      "includeEntryExports": true
+    },
+    "packages/sdk": {
+      "ignore": ["src/generated/**"]
+    }
+  }
+}

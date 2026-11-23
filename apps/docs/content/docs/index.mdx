@@ -1,0 +1,25 @@
+---
+title: Edgway
+description: A Kong-compatible API gateway on Cloudflare Workers.
+---
+
+Edgway speaks Kong's Admin API, entity model, plugin names and plugin configuration, and runs on Cloudflare Workers. Your decK files and Kong's Terraform provider work against it, and it reaches private backends through Cloudflare Tunnel.
+
+It is three Workers:
+
+- **`edgway-gateway`**: the data plane. It serves the published configuration from KV, runs the plugins and forwards to your upstreams.
+- **`edgway-admin`**: the control plane. The native admin API at `/api/v1`, the Kong-compatible Admin API at `/` for decK and Terraform, and the admin UI at `/ui`.
+- **`edgway-portal`**: the developer portal, where your API's developers sign in and manage their own API keys.
+
+Changes are staged, then published: an admin edit never reaches the gateway until someone publishes it, and a publish can be rolled back.
+
+## Start here
+
+- [Getting started](/guides/getting-started): deploy Edgway and serve a first route.
+- [Migrating from Kong](/guides/migrate-from-kong): sync an existing decK file with `deck gateway sync`.
+
+## Reference
+
+- [Plugins](/plugins/key-auth): every supported plugin's configuration, from Kong's own schemas.
+- [Error codes](/errors): every error Edgway returns.
+- [Admin API](/admin-api/openapi): the native admin API, from its OpenAPI document.

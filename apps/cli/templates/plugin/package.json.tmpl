@@ -1,0 +1,30 @@
+{
+  "name": "__PACKAGE__",
+  "version": "0.0.0",
+  "description": "The __NAME__ plugin for Edgway; also plain Hono middleware",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "keywords": ["edgway-plugin"],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@edgway/plugin-sdk": "__SDK_VERSION__",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "hono": "^4.13.10",
+    "typescript": "^5.9.3",
+    "vitest": "4.1.11"
+  },
+  "peerDependencies": {
+    "hono": "^4.12.34"
+  }
+}

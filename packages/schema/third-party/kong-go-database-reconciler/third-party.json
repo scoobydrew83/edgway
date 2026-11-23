@@ -1,0 +1,7 @@
+{
+  "name": "Kong/go-database-reconciler",
+  "version": "04b4e6a01d4a182cc432406d708f8c3220b9125e",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Kong/go-database-reconciler",
+  "copied": "The decK file JSON Schema (vendor/kong-schemas/deck/kong_json_schema.json), compiled into src/generated/deck.ts"
+}

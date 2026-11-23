@@ -1,0 +1,23 @@
+{
+  "$comment": "The plugins bundled into the gateway, and the plugins the admin accepts. After a change, run `pnpm --filter @edgway/gateway gen:plugins` and `pnpm --filter @edgway/admin gen:plugins` (`pnpm drift` checks both).",
+  "plugins": [
+    "@edgway/plugin-acl",
+    "@edgway/plugin-ai-prompt-guard",
+    "@edgway/plugin-ai-proxy",
+    "@edgway/plugin-ai-rate-limiting-advanced",
+    "@edgway/plugin-basic-auth",
+    "@edgway/plugin-correlation-id",
+    "@edgway/plugin-cors",
+    "@edgway/plugin-http-log",
+    "@edgway/plugin-ip-restriction",
+    "@edgway/plugin-jwt",
+    "@edgway/plugin-key-auth",
+    "@edgway/plugin-openid-connect",
+    "@edgway/plugin-proxy-cache",
+    "@edgway/plugin-rate-limiting",
+    "@edgway/plugin-request-size-limiting",
+    "@edgway/plugin-request-termination",
+    "@edgway/plugin-request-transformer",
+    "@edgway/plugin-response-transformer"
+  ]
+}

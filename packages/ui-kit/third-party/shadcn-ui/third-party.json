@@ -1,0 +1,7 @@
+{
+  "name": "shadcn/ui",
+  "version": "copied by the shadcn CLI",
+  "license": "MIT",
+  "homepage": "https://ui.shadcn.com",
+  "copied": "UI components in src/components/ui and the neutral theme behind @edgway/tokens"
+}

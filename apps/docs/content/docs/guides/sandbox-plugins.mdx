@@ -1,0 +1,47 @@
+---
+title: Sandbox plugins
+description: Upload your own plugin code and run it in an isolated Dynamic Worker.
+---
+
+A sandbox plugin is JavaScript you upload through the admin. The gateway runs it in its own Dynamic Worker (Cloudflare's Worker Loader), with no network access and with CPU and subrequest limits. Uploaded code is part of the configuration: it is staged, published, versioned and rolled back like any other change.
+
+## Write one
+
+A plugin is an ES module that exports an `access` function, a `header_filter` function, or both. Each one takes the request (`access`) or the response (`header_filter`), the plugin instance's `config`, and `env`, and returns an object:
+
+```js
+export async function access(request, config, env) {
+  if (request.headers.get("x-team") !== config.team) {
+    return { response: new Response("Forbidden", { status: 403 }) };
+  }
+  const next = new Request(request);
+  next.headers.set("x-checked-by", "sandbox");
+  return { request: next };
+}
+
+export async function header_filter(response, config) {
+  const next = new Response(response.body, response);
+  next.headers.set("x-team", config.team);
+  return { response: next };
+}
+```
+
+- In `access`, `{ response }` answers the client straight away, and `{ request }` replaces the request sent upstream.
+- In `header_filter`, `{ response }` replaces the response.
+- Returning `{}` changes nothing.
+
+## Upload and attach it
+
+1. In the admin UI, open **Uploaded plugins**, then create one: a name, a version and the code (an editor with JavaScript highlighting). Its name can't be one of Kong's plugin names.
+2. Optionally set its limits: CPU time (default 50 ms, up to 500 ms) and subrequests (default 10, up to 50) per call.
+3. Add a plugin instance with that name to a route, a service or globally, with any JSON `config`.
+4. Publish.
+
+## Limits and failures
+
+- `fetch()` to the internet fails: the sandbox has no network.
+- `env` holds only the bindings the gateway allow-lists for sandboxes. The default gateway allow-lists none.
+- Code over 1 MiB is refused.
+- A sandbox that throws or exceeds its CPU or subrequest limit fails closed: the request answers 502 with [EDG-PLG-009](/errors/EDG-PLG-009). Other requests keep working.
+
+Sandbox plugins need the gateway's `LOADER` binding (`worker_loaders` in `apps/gateway/wrangler.jsonc`), which is in the default config. Without it, the routes that use a sandbox plugin fail closed with [EDG-CFG-003](/errors/EDG-CFG-003).

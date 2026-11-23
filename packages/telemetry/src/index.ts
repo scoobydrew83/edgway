@@ -1,0 +1,35 @@
+export {
+  ATTR_EDGWAY_ERROR_CODE,
+  ATTR_EDGWAY_PHASE,
+  ATTR_EDGWAY_REQUEST_ID,
+  ATTR_EDGWAY_ROUTE_ID,
+  ATTR_EDGWAY_ROUTES_SKIPPED,
+  ATTR_EDGWAY_SERVICE_ID,
+  ATTR_EDGWAY_UPSTREAMS_FALLBACK,
+  ATTR_ERROR_TYPE,
+  ATTR_EXCEPTION_MESSAGE,
+  ATTR_EXCEPTION_STACKTRACE,
+  ATTR_HTTP_REQUEST_METHOD,
+  ATTR_HTTP_RESPONSE_STATUS_CODE,
+  ATTR_URL_PATH,
+  EVENT,
+  SPAN,
+} from "./fields.js";
+export { configureLogging, getLogger, type LoggingOptions } from "./logger.js";
+export {
+  consumerUsageSql,
+  type DataPoint,
+  overviewConsumersSql,
+  overviewLatencySql,
+  overviewRoutesSql,
+  overviewSeriesSql,
+  PLUGIN_COLUMNS,
+  PLUGIN_DATASET,
+  type PluginMetric,
+  pluginDataPoint,
+  REQUEST_COLUMNS,
+  REQUEST_DATASET,
+  type RequestMetric,
+  requestDataPoint,
+} from "./metrics.js";
+export { requestIdMiddleware } from "./request-id.js";

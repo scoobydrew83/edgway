@@ -1,0 +1,1 @@
+ALTER TABLE `consumers` ADD `display_name` text;

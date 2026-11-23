@@ -1,0 +1,37 @@
+# Copy to .dev.vars for local `wrangler dev` (gitignored). Values here
+# override the `vars` in wrangler.jsonc. ACCESS_TEAM, ACCESS_AUD and
+# ADMIN_ROLES are only set here locally; deployed, they are set on the Worker
+# (docs/deploy.md). In production, set the secrets with
+# `wrangler secret put` (`pnpm run deploy` creates the two signing keys).
+# tools/kong-compat-e2e.sh shows a complete local setup with --var.
+
+# Cloudflare Access for the native API (/api/v1) and the admin UI (/ui).
+# Locally there is no Access in front, so /api/v1 answers 401 (EDG-ADM-007)
+# unless you send a real Access assertion; use the Kong mount below instead.
+ACCESS_TEAM=
+ACCESS_AUD=
+# Email or service-token client id -> viewer, editor, publisher or owner.
+ADMIN_ROLES={}
+
+# Secret. sha256(token) -> role, for the Kong-compatible Admin API (decK,
+# Terraform), sent as the Kong-Admin-Token header. Example for the token
+# "local-dev-token" as owner (compute your own with
+# `printf %s "$TOKEN" | sha256sum`):
+# KONG_ADMIN_TOKENS={"<sha256 hex>":"owner"}
+KONG_ADMIN_TOKENS={}
+
+# Secret. Ed25519 private JWK (JSON) that signs published snapshots; the
+# gateway's CONFIG_PUBLIC_KEY must be its public half. Without it, publish
+# answers 503 (EDG-ADM-015).
+CONFIG_SIGNING_KEY=
+# Secret. Ed25519 private JWK for route-tester trace tokens; the gateway's
+# TRACE_PUBLIC_KEY is its public half. Without it the tester answers 503.
+TRACE_SIGNING_KEY=
+
+# Optional: where the route tester sends requests when there is no GATEWAY
+# service binding, e.g. http://localhost:8787.
+GATEWAY_URL=
+# Optional: the overview dashboard's Analytics Engine queries. AE_API_TOKEN
+# is a secret (a Cloudflare API token with Account Analytics Read).
+CF_ACCOUNT_ID=
+AE_API_TOKEN=

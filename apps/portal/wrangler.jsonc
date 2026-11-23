@@ -1,0 +1,76 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "edgway-portal",
+  "main": "src/worker.ts",
+  "compatibility_date": "2025-04-14",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Public values only. The IdP developers sign in with; empty
+  // until set, and the key API refuses every request (docs/deploy.md).
+  // The site reads the same issuer and client id at build time from
+  // ZUDOKU_PUBLIC_OIDC_ISSUER and ZUDOKU_PUBLIC_OIDC_CLIENT_ID.
+  "vars": {
+    "OIDC_ISSUER": "",
+    "OIDC_AUDIENCE": "",
+    "WORKSPACE_ID": "",
+    // Origins the API reference's playground may call, space- or
+    // comma-separated: usually the gateway's, e.g. "https://api.example.com".
+    "PORTAL_CONNECT_SRC": "",
+    // Optional: who may sign up, as email domains, space- or
+    // comma-separated, e.g. "example.com partner.example". A developer
+    // needs a verified email at one of them. Empty: anyone your IdP signs in.
+    "PORTAL_ALLOWED_EMAIL_DOMAINS": "",
+    // Optional: with the secret AE_API_TOKEN, developers see their
+    // own usage on the API keys page.
+    "CF_ACCOUNT_ID": ""
+  },
+
+  // The site (Zudoku's build). /api runs the Worker first; any other path
+  // that isn't a file is a client route.
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // The Worker answers first everywhere, so the static site carries the
+    // security headers too; it serves the files from ASSETS.
+    "run_worker_first": true
+  },
+  "build": {
+    "command": "pnpm --filter @edgway/portal build"
+  },
+
+  // The admin's database: developers' consumers and keys are staged there.
+  // No id: `pnpm run deploy` binds the admin's database here.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "edgway-admin",
+      "migrations_dir": "../admin/migrations"
+    }
+  ],
+  // The admin's PortalPublish entrypoint: a developer's key changes
+  // go live through the admin's batched publish. The portal holds no signing
+  // key, no config KV and no ConfigVersion binding. `pnpm run deploy`
+  // deploys the admin first.
+  // Developers' key writes per minute: @edgway/constants
+  // PORTAL.writesPerMinute and PORTAL.writesPeriodSeconds. The namespace id
+  // is any integer unique to this account.
+  "ratelimits": [
+    {
+      "name": "PORTAL_WRITES",
+      "namespace_id": "1074",
+      "simple": { "limit": 10, "period": 60 }
+    }
+  ],
+  "services": [
+    {
+      "binding": "ADMIN",
+      "service": "edgway-admin",
+      "entrypoint": "PortalPublish"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

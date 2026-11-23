@@ -1,0 +1,7 @@
+entries:
+  - name: claimed
+    paths: ["apps/web/src/**"]
+    reason: fixture
+wrappers:
+  - library: hono
+    paths: ["packages/lib/src/**"]

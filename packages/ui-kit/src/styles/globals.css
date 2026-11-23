@@ -1,0 +1,26 @@
+/*
+ * The kit's stylesheet: Tailwind v4, shadcn's animations, and the colors and
+ * radii from @edgway/tokens. Apps import this once and add their own @source.
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@edgway/tokens/theme.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* IBM Plex, self-hosted by each app through @fontsource (ui-guidelines.md, "Type"). */
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@source "../components";
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

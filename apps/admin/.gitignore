@@ -1,0 +1,8 @@
+# The gateway bundle the publish e2e test builds (vitest.config.ts).
+.gateway-bundle/
+# decK, downloaded by tools/kong-compat-e2e.sh.
+.deck/
+# The third-party plugin e2e (apps/cli/test/plugin-e2e.test.ts):
+# a scaffolded plugin and a copy of src with a registry including it.
+.e2e-plugins/
+.e2e-registry/

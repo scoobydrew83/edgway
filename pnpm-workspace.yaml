@@ -1,0 +1,47 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "plugins/*"
+  # The docs site's generators.
+  - "tools/docs-gen"
+
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
+  - sharp
+  - "@ast-grep/cli"
+
+
+# Patched versions of transitive dependencies with high or critical
+# advisories (audit R4); `pnpm audit --prod --audit-level high` is a
+# gate. Each override is scoped to the vulnerable range, so it lapses once
+# the parent depends on a fixed release; Renovate proposes the parent bumps.
+overrides:
+  # zudoku pins piscina 5.3.0 (GHSA critical, fixed in 5.3.2).
+  "piscina@>=5.0.0 <5.3.2": "5.3.2"
+  # zudoku → graphql-yoga; no 11.x release is patched.
+  "@graphql-tools/utils@<12.0.1": "^12.0.3"
+  # zudoku → @apidevtools/json-schema-ref-parser.
+  "js-yaml@>=4.0.0 <4.3.2": "^4.3.2"
+  # zudoku → remark-mdx-frontmatter, which only calls `parse`
+  # (GHSA-4qx8-w7c3-pj3p, GHSA-9j65-hcg3-gc64, GHSA-9qmh-m7c6-f92p).
+  "toml@<5.0.1": "^5.0.1"
+  # fumadocs-openapi and @ai-sdk/provider-utils.
+  "undici@>=7.0.0 <7.30.1": "^7.30.1"
+  # fumadocs-mdx → vite → postcss.
+  "source-map-js@>=1.0.0 <1.2.2": "^1.2.2"
+  # monaco-editor 0.57.0 pins dompurify 3.4.15 (GHSA-cg2g-xh64-v4q7, critical).
+  "dompurify@>=3.4.4 <3.4.17": "^3.4.17"
+  # zudoku pins vite 8.1.5, through 0.93.0 (GHSA-587h-7wmj-h5pm, high).
+  "vite@>=8.0.0 <8.1.6": "8.1.6"
+  # zudoku pins zod 4.4.3 (GHSA-mrhx-c7xc-m3w5, high); the workspace pins 4.6.7.
+  "zod@>=4.0.0 <4.6.6": "4.6.7"
+  # query-string 9 (ui-kit) → 0.5.0, and ra-core → query-string 7 → 0.2.2
+  # (GHSA-qr28-fpjm-wq7f, high; every release before 0.5.1). 0.5.1 is
+  # ESM-only, so patches/query-string@7.1.3.patch makes query-string 7's
+  # require() read its default export.
+  "decode-uri-component@<0.5.1": "0.5.1"
+
+# ra-core's query-string 7 under decode-uri-component 0.5.1.
+patchedDependencies:
+  query-string@7.1.3: patches/query-string@7.1.3.patch

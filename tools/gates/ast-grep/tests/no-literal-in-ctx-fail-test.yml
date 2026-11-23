@@ -1,0 +1,7 @@
+id: no-literal-in-ctx-fail
+valid:
+  - "return ctx.fail(ERR.RATE_LIMITED);"
+  - "return ctx.fail(ERR.AUTH_MISSING, { realm });"
+invalid:
+  - 'return ctx.fail("rate limited");'
+  - "return ctx.fail(`missing ${name}`, details);"

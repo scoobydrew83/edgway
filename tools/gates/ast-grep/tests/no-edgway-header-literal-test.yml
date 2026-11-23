@@ -1,0 +1,8 @@
+id: no-edgway-header-literal
+valid:
+  - 'import { HEADER } from "@edgway/constants"; res.headers.set(HEADER.requestId, id);'
+  - 'const h = "x-request-id";'
+invalid:
+  - 'res.headers.set("x-edgway-request-id", id);'
+  - "const h = 'X-Edgway-Route';"
+  - "const h = `x-edgway-cache`;"

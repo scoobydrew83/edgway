@@ -1,0 +1,40 @@
+---
+title: The edgway CLI
+description: Deploy, import decK files, review and publish from a terminal or CI.
+---
+
+The `edgway` CLI lives in `apps/cli`. From the repository, `pnpm --filter edgway build` builds it, and `node apps/cli/dist/index.js --help` lists the commands. `edgway --version` prints its version, and `--debug` adds stack traces to errors.
+
+## Configure
+
+`edgway init` writes `edgway.config.ts` with your admin's URL; `--yes` accepts the defaults without prompting, for CI. Every command also takes `--admin-url`.
+
+The native API is behind Cloudflare Access. Give the CLI a service token through `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET`, or a user token with `--token "$(cloudflared access token -app https://<admin>)"`.
+
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `edgway deploy` | Provision, migrate and deploy the admin, gateway and portal Workers. `pnpm run deploy` runs it. `--dry-run` bundles and checks without touching anything remote. |
+| `edgway import-deck <file>` | Import a decK file into the admin's local D1, for `wrangler dev`. With `--remote` it writes to the deployed admin through its Kong-compatible API instead, using `--kong-token` (or `EDGWAY_KONG_TOKEN`). |
+| `edgway diff` | Show the staged changes the next publish would make. `--exit-code` exits with 1 while there are any, to fail a CI job. |
+| `edgway publish` | Publish the staged configuration. `--note` records a note in the version history. |
+| `edgway versions` | List the published versions, newest first. |
+| `edgway rollback <version>` | Make an earlier version live again. |
+| `edgway plugin new <name>` | Scaffold a plugin package. See [Third-party plugins](#third-party-plugins). |
+
+`diff`, `publish`, `versions` and `rollback` take `--json` to print JSON.
+
+## In CI
+
+```sh
+edgway import-deck kong.yaml --remote --admin-url "$ADMIN" --kong-token "$EDGWAY_KONG_TOKEN"
+edgway diff --json --admin-url "$ADMIN"
+edgway publish --note "ci: $GITHUB_SHA" --admin-url "$ADMIN"
+```
+
+## Third-party plugins
+
+`edgway plugin new my-plugin` creates a package built on `@edgway/plugin-sdk`. Add the package to the root `edgway.config.json`. The gateway and the admin both generate their plugin registries from that one list, so the admin validates the plugin's configuration against its own schema, and the gateway runs it after a publish. A plugin that isn't in the list is refused at publish.
+
+To run code without rebuilding the gateway, upload it as a [sandbox plugin](/guides/sandbox-plugins) instead.

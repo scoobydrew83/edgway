@@ -1,0 +1,7 @@
+{
+  "name": "Kong/kong",
+  "version": "3.9.0",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Kong/kong",
+  "copied": "Route priority and path handling ported from kong/router/transform.lua, kong/router/utils.lua and kong/tools/uri.lua (src/router/priority.ts, src/router/paths.ts), modified"
+}

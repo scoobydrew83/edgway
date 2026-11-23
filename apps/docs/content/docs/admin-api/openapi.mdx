@@ -1,0 +1,569 @@
+---
+title: Admin API
+description: The native admin API (/api/v1), from its OpenAPI document.
+full: true
+_openapi:
+  preload:
+    - ../admin/openapi.json
+  toc:
+    - depth: 2
+      title: Me
+      url: '#me'
+    - depth: 2
+      title: List_certificates
+      url: '#list_certificates'
+    - depth: 2
+      title: Create_certificates
+      url: '#create_certificates'
+    - depth: 2
+      title: Get_certificates
+      url: '#get_certificates'
+    - depth: 2
+      title: Patch_certificates
+      url: '#patch_certificates'
+    - depth: 2
+      title: Delete_certificates
+      url: '#delete_certificates'
+    - depth: 2
+      title: Put_certificates
+      url: '#put_certificates'
+    - depth: 2
+      title: List_ca_certificates
+      url: '#list_ca_certificates'
+    - depth: 2
+      title: Create_ca_certificates
+      url: '#create_ca_certificates'
+    - depth: 2
+      title: Get_ca_certificates
+      url: '#get_ca_certificates'
+    - depth: 2
+      title: Patch_ca_certificates
+      url: '#patch_ca_certificates'
+    - depth: 2
+      title: Delete_ca_certificates
+      url: '#delete_ca_certificates'
+    - depth: 2
+      title: Put_ca_certificates
+      url: '#put_ca_certificates'
+    - depth: 2
+      title: List_services
+      url: '#list_services'
+    - depth: 2
+      title: Create_services
+      url: '#create_services'
+    - depth: 2
+      title: Get_services
+      url: '#get_services'
+    - depth: 2
+      title: Patch_services
+      url: '#patch_services'
+    - depth: 2
+      title: Delete_services
+      url: '#delete_services'
+    - depth: 2
+      title: Put_services
+      url: '#put_services'
+    - depth: 2
+      title: List_routes
+      url: '#list_routes'
+    - depth: 2
+      title: Create_routes
+      url: '#create_routes'
+    - depth: 2
+      title: Get_routes
+      url: '#get_routes'
+    - depth: 2
+      title: Patch_routes
+      url: '#patch_routes'
+    - depth: 2
+      title: Delete_routes
+      url: '#delete_routes'
+    - depth: 2
+      title: Put_routes
+      url: '#put_routes'
+    - depth: 2
+      title: List_upstreams
+      url: '#list_upstreams'
+    - depth: 2
+      title: Create_upstreams
+      url: '#create_upstreams'
+    - depth: 2
+      title: Get_upstreams
+      url: '#get_upstreams'
+    - depth: 2
+      title: Patch_upstreams
+      url: '#patch_upstreams'
+    - depth: 2
+      title: Delete_upstreams
+      url: '#delete_upstreams'
+    - depth: 2
+      title: Put_upstreams
+      url: '#put_upstreams'
+    - depth: 2
+      title: List_targets
+      url: '#list_targets'
+    - depth: 2
+      title: Create_targets
+      url: '#create_targets'
+    - depth: 2
+      title: Get_targets
+      url: '#get_targets'
+    - depth: 2
+      title: Patch_targets
+      url: '#patch_targets'
+    - depth: 2
+      title: Delete_targets
+      url: '#delete_targets'
+    - depth: 2
+      title: Put_targets
+      url: '#put_targets'
+    - depth: 2
+      title: List_snis
+      url: '#list_snis'
+    - depth: 2
+      title: Create_snis
+      url: '#create_snis'
+    - depth: 2
+      title: Get_snis
+      url: '#get_snis'
+    - depth: 2
+      title: Patch_snis
+      url: '#patch_snis'
+    - depth: 2
+      title: Delete_snis
+      url: '#delete_snis'
+    - depth: 2
+      title: Put_snis
+      url: '#put_snis'
+    - depth: 2
+      title: List_vaults
+      url: '#list_vaults'
+    - depth: 2
+      title: Create_vaults
+      url: '#create_vaults'
+    - depth: 2
+      title: Get_vaults
+      url: '#get_vaults'
+    - depth: 2
+      title: Patch_vaults
+      url: '#patch_vaults'
+    - depth: 2
+      title: Delete_vaults
+      url: '#delete_vaults'
+    - depth: 2
+      title: Put_vaults
+      url: '#put_vaults'
+    - depth: 2
+      title: List_consumers
+      url: '#list_consumers'
+    - depth: 2
+      title: Create_consumers
+      url: '#create_consumers'
+    - depth: 2
+      title: Get_consumers
+      url: '#get_consumers'
+    - depth: 2
+      title: Patch_consumers
+      url: '#patch_consumers'
+    - depth: 2
+      title: Delete_consumers
+      url: '#delete_consumers'
+    - depth: 2
+      title: Put_consumers
+      url: '#put_consumers'
+    - depth: 2
+      title: List_consumer_groups
+      url: '#list_consumer_groups'
+    - depth: 2
+      title: Create_consumer_groups
+      url: '#create_consumer_groups'
+    - depth: 2
+      title: Get_consumer_groups
+      url: '#get_consumer_groups'
+    - depth: 2
+      title: Patch_consumer_groups
+      url: '#patch_consumer_groups'
+    - depth: 2
+      title: Delete_consumer_groups
+      url: '#delete_consumer_groups'
+    - depth: 2
+      title: Put_consumer_groups
+      url: '#put_consumer_groups'
+    - depth: 2
+      title: List_plugins
+      url: '#list_plugins'
+    - depth: 2
+      title: Create_plugins
+      url: '#create_plugins'
+    - depth: 2
+      title: Get_plugins
+      url: '#get_plugins'
+    - depth: 2
+      title: Patch_plugins
+      url: '#patch_plugins'
+    - depth: 2
+      title: Delete_plugins
+      url: '#delete_plugins'
+    - depth: 2
+      title: Put_plugins
+      url: '#put_plugins'
+    - depth: 2
+      title: List_jwt_secrets
+      url: '#list_jwt_secrets'
+    - depth: 2
+      title: Create_jwt_secrets
+      url: '#create_jwt_secrets'
+    - depth: 2
+      title: Get_jwt_secrets
+      url: '#get_jwt_secrets'
+    - depth: 2
+      title: Patch_jwt_secrets
+      url: '#patch_jwt_secrets'
+    - depth: 2
+      title: Delete_jwt_secrets
+      url: '#delete_jwt_secrets'
+    - depth: 2
+      title: Put_jwt_secrets
+      url: '#put_jwt_secrets'
+    - depth: 2
+      title: List_acls
+      url: '#list_acls'
+    - depth: 2
+      title: Create_acls
+      url: '#create_acls'
+    - depth: 2
+      title: Get_acls
+      url: '#get_acls'
+    - depth: 2
+      title: Patch_acls
+      url: '#patch_acls'
+    - depth: 2
+      title: Delete_acls
+      url: '#delete_acls'
+    - depth: 2
+      title: Put_acls
+      url: '#put_acls'
+    - depth: 2
+      title: List_sandbox_plugins
+      url: '#list_sandbox_plugins'
+    - depth: 2
+      title: Create_sandbox_plugins
+      url: '#create_sandbox_plugins'
+    - depth: 2
+      title: Get_sandbox_plugins
+      url: '#get_sandbox_plugins'
+    - depth: 2
+      title: Patch_sandbox_plugins
+      url: '#patch_sandbox_plugins'
+    - depth: 2
+      title: Delete_sandbox_plugins
+      url: '#delete_sandbox_plugins'
+    - depth: 2
+      title: Put_sandbox_plugins
+      url: '#put_sandbox_plugins'
+    - depth: 2
+      title: List_key_auth
+      url: '#list_key_auth'
+    - depth: 2
+      title: Create_key_auth
+      url: '#create_key_auth'
+    - depth: 2
+      title: Rotate_key_auth
+      url: '#rotate_key_auth'
+    - depth: 2
+      title: Block_portal_developer
+      url: '#block_portal_developer'
+    - depth: 2
+      title: Unblock_portal_developer
+      url: '#unblock_portal_developer'
+    - depth: 2
+      title: List_basic_auth
+      url: '#list_basic_auth'
+    - depth: 2
+      title: Create_basic_auth
+      url: '#create_basic_auth'
+    - depth: 2
+      title: Update_basic_auth
+      url: '#update_basic_auth'
+    - depth: 2
+      title: Delete_basic_auth
+      url: '#delete_basic_auth'
+    - depth: 2
+      title: Delete_key_auth
+      url: '#delete_key_auth'
+    - depth: 2
+      title: List_group_members
+      url: '#list_group_members'
+    - depth: 2
+      title: Add_group_member
+      url: '#add_group_member'
+    - depth: 2
+      title: Remove_group_member
+      url: '#remove_group_member'
+    - depth: 2
+      title: List_audit_events
+      url: '#list_audit_events'
+    - depth: 2
+      title: Pending_changes
+      url: '#pending_changes'
+    - depth: 2
+      title: Publish
+      url: '#publish'
+    - depth: 2
+      title: List_versions
+      url: '#list_versions'
+    - depth: 2
+      title: Rollback
+      url: '#rollback'
+    - depth: 2
+      title: Plugin_catalog
+      url: '#plugin_catalog'
+    - depth: 2
+      title: Which_plugins
+      url: '#which_plugins'
+    - depth: 2
+      title: Plugin_schema
+      url: '#plugin_schema'
+    - depth: 2
+      title: Config_snapshots
+      url: '#config_snapshots'
+    - depth: 2
+      title: Test_route
+      url: '#test_route'
+    - depth: 2
+      title: Analytics_overview
+      url: '#analytics_overview'
+  structuredData:
+    headings:
+      - content: Me
+        id: me
+      - content: List_certificates
+        id: list_certificates
+      - content: Create_certificates
+        id: create_certificates
+      - content: Get_certificates
+        id: get_certificates
+      - content: Patch_certificates
+        id: patch_certificates
+      - content: Delete_certificates
+        id: delete_certificates
+      - content: Put_certificates
+        id: put_certificates
+      - content: List_ca_certificates
+        id: list_ca_certificates
+      - content: Create_ca_certificates
+        id: create_ca_certificates
+      - content: Get_ca_certificates
+        id: get_ca_certificates
+      - content: Patch_ca_certificates
+        id: patch_ca_certificates
+      - content: Delete_ca_certificates
+        id: delete_ca_certificates
+      - content: Put_ca_certificates
+        id: put_ca_certificates
+      - content: List_services
+        id: list_services
+      - content: Create_services
+        id: create_services
+      - content: Get_services
+        id: get_services
+      - content: Patch_services
+        id: patch_services
+      - content: Delete_services
+        id: delete_services
+      - content: Put_services
+        id: put_services
+      - content: List_routes
+        id: list_routes
+      - content: Create_routes
+        id: create_routes
+      - content: Get_routes
+        id: get_routes
+      - content: Patch_routes
+        id: patch_routes
+      - content: Delete_routes
+        id: delete_routes
+      - content: Put_routes
+        id: put_routes
+      - content: List_upstreams
+        id: list_upstreams
+      - content: Create_upstreams
+        id: create_upstreams
+      - content: Get_upstreams
+        id: get_upstreams
+      - content: Patch_upstreams
+        id: patch_upstreams
+      - content: Delete_upstreams
+        id: delete_upstreams
+      - content: Put_upstreams
+        id: put_upstreams
+      - content: List_targets
+        id: list_targets
+      - content: Create_targets
+        id: create_targets
+      - content: Get_targets
+        id: get_targets
+      - content: Patch_targets
+        id: patch_targets
+      - content: Delete_targets
+        id: delete_targets
+      - content: Put_targets
+        id: put_targets
+      - content: List_snis
+        id: list_snis
+      - content: Create_snis
+        id: create_snis
+      - content: Get_snis
+        id: get_snis
+      - content: Patch_snis
+        id: patch_snis
+      - content: Delete_snis
+        id: delete_snis
+      - content: Put_snis
+        id: put_snis
+      - content: List_vaults
+        id: list_vaults
+      - content: Create_vaults
+        id: create_vaults
+      - content: Get_vaults
+        id: get_vaults
+      - content: Patch_vaults
+        id: patch_vaults
+      - content: Delete_vaults
+        id: delete_vaults
+      - content: Put_vaults
+        id: put_vaults
+      - content: List_consumers
+        id: list_consumers
+      - content: Create_consumers
+        id: create_consumers
+      - content: Get_consumers
+        id: get_consumers
+      - content: Patch_consumers
+        id: patch_consumers
+      - content: Delete_consumers
+        id: delete_consumers
+      - content: Put_consumers
+        id: put_consumers
+      - content: List_consumer_groups
+        id: list_consumer_groups
+      - content: Create_consumer_groups
+        id: create_consumer_groups
+      - content: Get_consumer_groups
+        id: get_consumer_groups
+      - content: Patch_consumer_groups
+        id: patch_consumer_groups
+      - content: Delete_consumer_groups
+        id: delete_consumer_groups
+      - content: Put_consumer_groups
+        id: put_consumer_groups
+      - content: List_plugins
+        id: list_plugins
+      - content: Create_plugins
+        id: create_plugins
+      - content: Get_plugins
+        id: get_plugins
+      - content: Patch_plugins
+        id: patch_plugins
+      - content: Delete_plugins
+        id: delete_plugins
+      - content: Put_plugins
+        id: put_plugins
+      - content: List_jwt_secrets
+        id: list_jwt_secrets
+      - content: Create_jwt_secrets
+        id: create_jwt_secrets
+      - content: Get_jwt_secrets
+        id: get_jwt_secrets
+      - content: Patch_jwt_secrets
+        id: patch_jwt_secrets
+      - content: Delete_jwt_secrets
+        id: delete_jwt_secrets
+      - content: Put_jwt_secrets
+        id: put_jwt_secrets
+      - content: List_acls
+        id: list_acls
+      - content: Create_acls
+        id: create_acls
+      - content: Get_acls
+        id: get_acls
+      - content: Patch_acls
+        id: patch_acls
+      - content: Delete_acls
+        id: delete_acls
+      - content: Put_acls
+        id: put_acls
+      - content: List_sandbox_plugins
+        id: list_sandbox_plugins
+      - content: Create_sandbox_plugins
+        id: create_sandbox_plugins
+      - content: Get_sandbox_plugins
+        id: get_sandbox_plugins
+      - content: Patch_sandbox_plugins
+        id: patch_sandbox_plugins
+      - content: Delete_sandbox_plugins
+        id: delete_sandbox_plugins
+      - content: Put_sandbox_plugins
+        id: put_sandbox_plugins
+      - content: List_key_auth
+        id: list_key_auth
+      - content: Create_key_auth
+        id: create_key_auth
+      - content: Rotate_key_auth
+        id: rotate_key_auth
+      - content: Block_portal_developer
+        id: block_portal_developer
+      - content: Unblock_portal_developer
+        id: unblock_portal_developer
+      - content: List_basic_auth
+        id: list_basic_auth
+      - content: Create_basic_auth
+        id: create_basic_auth
+      - content: Update_basic_auth
+        id: update_basic_auth
+      - content: Delete_basic_auth
+        id: delete_basic_auth
+      - content: Delete_key_auth
+        id: delete_key_auth
+      - content: List_group_members
+        id: list_group_members
+      - content: Add_group_member
+        id: add_group_member
+      - content: Remove_group_member
+        id: remove_group_member
+      - content: List_audit_events
+        id: list_audit_events
+      - content: Pending_changes
+        id: pending_changes
+      - content: Publish
+        id: publish
+      - content: List_versions
+        id: list_versions
+      - content: Rollback
+        id: rollback
+      - content: Plugin_catalog
+        id: plugin_catalog
+      - content: Which_plugins
+        id: which_plugins
+      - content: Plugin_schema
+        id: plugin_schema
+      - content: Config_snapshots
+        id: config_snapshots
+      - content: Test_route
+        id: test_route
+      - content: Analytics_overview
+        id: analytics_overview
+    contents: []
+---
+
+{/* This file was generated by Fumadocs. Do not edit this file directly. Any changes should be made by running the generation command again. */}
+
+export default function Layout(props) {
+  const { OpenAPIPage } = props.components ?? {};
+  return (
+    <>
+      {props.children}
+      <OpenAPIPage document="../admin/openapi.json" webhooks={[]} operations={[{"path":"/me","method":"get"},{"path":"/certificates","method":"get"},{"path":"/certificates","method":"post"},{"path":"/certificates/{id}","method":"get"},{"path":"/certificates/{id}","method":"patch"},{"path":"/certificates/{id}","method":"delete"},{"path":"/certificates/{id}","method":"put"},{"path":"/ca_certificates","method":"get"},{"path":"/ca_certificates","method":"post"},{"path":"/ca_certificates/{id}","method":"get"},{"path":"/ca_certificates/{id}","method":"patch"},{"path":"/ca_certificates/{id}","method":"delete"},{"path":"/ca_certificates/{id}","method":"put"},{"path":"/services","method":"get"},{"path":"/services","method":"post"},{"path":"/services/{id}","method":"get"},{"path":"/services/{id}","method":"patch"},{"path":"/services/{id}","method":"delete"},{"path":"/services/{id}","method":"put"},{"path":"/routes","method":"get"},{"path":"/routes","method":"post"},{"path":"/routes/{id}","method":"get"},{"path":"/routes/{id}","method":"patch"},{"path":"/routes/{id}","method":"delete"},{"path":"/routes/{id}","method":"put"},{"path":"/upstreams","method":"get"},{"path":"/upstreams","method":"post"},{"path":"/upstreams/{id}","method":"get"},{"path":"/upstreams/{id}","method":"patch"},{"path":"/upstreams/{id}","method":"delete"},{"path":"/upstreams/{id}","method":"put"},{"path":"/targets","method":"get"},{"path":"/targets","method":"post"},{"path":"/targets/{id}","method":"get"},{"path":"/targets/{id}","method":"patch"},{"path":"/targets/{id}","method":"delete"},{"path":"/targets/{id}","method":"put"},{"path":"/snis","method":"get"},{"path":"/snis","method":"post"},{"path":"/snis/{id}","method":"get"},{"path":"/snis/{id}","method":"patch"},{"path":"/snis/{id}","method":"delete"},{"path":"/snis/{id}","method":"put"},{"path":"/vaults","method":"get"},{"path":"/vaults","method":"post"},{"path":"/vaults/{id}","method":"get"},{"path":"/vaults/{id}","method":"patch"},{"path":"/vaults/{id}","method":"delete"},{"path":"/vaults/{id}","method":"put"},{"path":"/consumers","method":"get"},{"path":"/consumers","method":"post"},{"path":"/consumers/{id}","method":"get"},{"path":"/consumers/{id}","method":"patch"},{"path":"/consumers/{id}","method":"delete"},{"path":"/consumers/{id}","method":"put"},{"path":"/consumer_groups","method":"get"},{"path":"/consumer_groups","method":"post"},{"path":"/consumer_groups/{id}","method":"get"},{"path":"/consumer_groups/{id}","method":"patch"},{"path":"/consumer_groups/{id}","method":"delete"},{"path":"/consumer_groups/{id}","method":"put"},{"path":"/plugins","method":"get"},{"path":"/plugins","method":"post"},{"path":"/plugins/{id}","method":"get"},{"path":"/plugins/{id}","method":"patch"},{"path":"/plugins/{id}","method":"delete"},{"path":"/plugins/{id}","method":"put"},{"path":"/jwt_secrets","method":"get"},{"path":"/jwt_secrets","method":"post"},{"path":"/jwt_secrets/{id}","method":"get"},{"path":"/jwt_secrets/{id}","method":"patch"},{"path":"/jwt_secrets/{id}","method":"delete"},{"path":"/jwt_secrets/{id}","method":"put"},{"path":"/acls","method":"get"},{"path":"/acls","method":"post"},{"path":"/acls/{id}","method":"get"},{"path":"/acls/{id}","method":"patch"},{"path":"/acls/{id}","method":"delete"},{"path":"/acls/{id}","method":"put"},{"path":"/sandbox_plugins","method":"get"},{"path":"/sandbox_plugins","method":"post"},{"path":"/sandbox_plugins/{id}","method":"get"},{"path":"/sandbox_plugins/{id}","method":"patch"},{"path":"/sandbox_plugins/{id}","method":"delete"},{"path":"/sandbox_plugins/{id}","method":"put"},{"path":"/consumers/{id}/key-auth","method":"get"},{"path":"/consumers/{id}/key-auth","method":"post"},{"path":"/key-auth/{id}/rotate","method":"post"},{"path":"/consumers/{id}/portal-block","method":"post"},{"path":"/consumers/{id}/portal-block","method":"delete"},{"path":"/consumers/{id}/basic-auth","method":"get"},{"path":"/consumers/{id}/basic-auth","method":"post"},{"path":"/basic-auth/{id}","method":"patch"},{"path":"/basic-auth/{id}","method":"delete"},{"path":"/key-auth/{id}","method":"delete"},{"path":"/consumer_groups/{id}/consumers","method":"get"},{"path":"/consumer_groups/{id}/consumers","method":"post"},{"path":"/consumer_groups/{id}/consumers/{consumer}","method":"delete"},{"path":"/audit-events","method":"get"},{"path":"/config/pending","method":"get"},{"path":"/config/publish","method":"post"},{"path":"/config/versions","method":"get"},{"path":"/config/rollback","method":"post"},{"path":"/plugin-catalog","method":"get"},{"path":"/which-plugins","method":"get"},{"path":"/plugin-schemas/{name}","method":"get"},{"path":"/config/snapshots","method":"get"},{"path":"/tester","method":"post"},{"path":"/analytics/overview","method":"get"}]} showTitle showDescription />
+    </>
+  );
+}

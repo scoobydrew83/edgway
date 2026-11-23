@@ -1,0 +1,16 @@
+id: no-bare-fetch
+language: TypeScript
+severity: error
+message: Upstream calls go through the Upstream adapter (@edgway/adapters-cf), not bare fetch().
+rule:
+  kind: call_expression
+  has:
+    field: function
+    kind: identifier
+    regex: "^fetch$"
+files:
+  - "**/apps/gateway/**"
+  - "**/plugins/**"
+ignores:
+  # legacy-scaffold (docs/custom-code-register.yaml)
+  - "**/apps/gateway/src/gateway/upstream.ts"

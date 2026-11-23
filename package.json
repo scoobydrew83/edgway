@@ -1,0 +1,56 @@
+{
+  "name": "edgway-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source, Kong-compatible API gateway on Cloudflare Workers",
+  "license": "Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "deploy": "node tools/deploy.mjs",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome ci .",
+    "changeset": "changeset",
+    "vendor:kong": "tsx tools/vendor-kong-schemas.ts",
+    "drift": "pnpm --filter @edgway/docs generate && pnpm --filter @edgway/admin openapi && pnpm --filter @edgway/sdk run generate && pnpm --filter @edgway/gateway gen:plugins && pnpm --filter @edgway/admin gen:plugins && git status --short -- apps/docs/content apps/admin/openapi.json packages/sdk/src/generated apps/gateway/src/generated apps/admin/src/generated && test -z \"$(git status --porcelain -- apps/docs/content apps/admin/openapi.json packages/sdk/src/generated apps/gateway/src/generated apps/admin/src/generated)\"",
+    "gate": "tsx tools/gates/run.ts",
+    "gate:boundaries": "depcruise . --config .dependency-cruiser.cjs",
+    "gate:register": "tsx tools/gates/register-check.ts",
+    "gate:knip": "knip",
+    "gate:centralization": "ast-grep scan --config sgconfig.yml --globs '!tools/gates/fixtures/**'",
+    "gate:test": "tsx tools/gates/test.ts",
+    "gate:i18n": "pnpm --filter @edgway/i18n run verify && pnpm --filter @edgway/i18n run generate && git diff --exit-code -- packages/i18n/lang packages/i18n/src/generated && eslint .",
+    "gate:licences": "tsx tools/gates/licence-check.ts",
+    "licenses:notices": "tsx tools/licenses/notices.ts workers THIRD_PARTY_NOTICES.txt",
+    "gate:audit": "pnpm audit --prod --audit-level high",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@ast-grep/cli": "0.45.3",
+    "@biomejs/biome": "2.5.14",
+    "@changesets/cli": "^3.0.3",
+    "dependency-cruiser": "^18.4.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-formatjs": "^8.1.0",
+    "eslint-plugin-i18next": "^6.1.5",
+    "fast-glob": "^3.3.3",
+    "knip": "^6.38.0",
+    "tsx": "^4.23.15",
+    "turbo": "^2.11.5",
+    "typescript-eslint": "^8.71.0",
+    "yaml": "^2.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scoobydrew83/edgway"
+  }
+}

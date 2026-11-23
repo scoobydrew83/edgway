@@ -1,0 +1,22 @@
+# Copy to .dev.vars for local `wrangler dev` (gitignored). Values here
+# override the `vars` in wrangler.jsonc. The portal holds no secrets.
+
+# Your OpenID Connect provider: its issuer URL, and the audience it puts in
+# access tokens (often the client id). With either empty, every key request
+# answers 503 (EDG-ADM-016).
+OIDC_ISSUER=
+OIDC_AUDIENCE=
+# Optional: extra origins for the portal's Content-Security-Policy
+# connect-src, space- or comma-separated. Set your gateway's origin when the
+# portal has an API reference, so its playground can send requests. The
+# issuer's origins are added for you.
+PORTAL_CONNECT_SRC=
+
+# Optional: developers' usage on the API keys page. AE_API_TOKEN is
+# a secret: a Cloudflare API token with Account Analytics Read.
+CF_ACCOUNT_ID=
+AE_API_TOKEN=
+
+# The site itself is built with these in the environment, not .dev.vars:
+# ZUDOKU_PUBLIC_OIDC_ISSUER, ZUDOKU_PUBLIC_OIDC_CLIENT_ID and optionally
+# ZUDOKU_PUBLIC_PORTAL_OPENAPI (see the developer portal guide).

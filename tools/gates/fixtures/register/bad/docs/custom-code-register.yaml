@@ -1,0 +1,5 @@
+entries:
+  - name: claimed
+    paths: ["apps/web/src/**"]
+    reason: fixture
+wrappers: []

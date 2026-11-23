@@ -1,0 +1,22 @@
+id: no-status-literal
+language: TypeScript
+severity: error
+message: HTTP statuses and error bodies come from @edgway/errors; don't pass numeric status literals.
+rule:
+  any:
+    - pattern: $C.json($BODY, $STATUS)
+    - pattern: $C.json($BODY, $STATUS, $HEADERS)
+    - all:
+        - kind: pair
+        - has: { field: key, regex: "^[\"']?status[\"']?$" }
+        - has: { field: value, kind: number }
+        - inside:
+            stopBy: end
+            any:
+              - kind: new_expression
+                has: { field: constructor, regex: "^Response$" }
+              - pattern: Response.json($$$)
+constraints:
+  STATUS: { kind: number }
+ignores:
+  - "**/packages/errors/**"

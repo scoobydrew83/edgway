@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "index",
+    "---Guides---",
+    "guides/getting-started",
+    "guides/migrate-from-kong",
+    "guides/admin-ui",
+    "guides/developer-portal",
+    "guides/cli",
+    "guides/vault-references",
+    "guides/sandbox-plugins",
+    "---Operations---",
+    "operations/upgrades",
+    "operations/backup-restore",
+    "operations/compatibility",
+    "operations/privacy",
+    "operations/runbooks",
+    "---Reference---",
+    "plugins",
+    "errors",
+    "admin-api"
+  ]
+}

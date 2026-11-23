@@ -1,0 +1,9 @@
+{
+  "name": "@fixture/web",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@fixture/i18n": "*"
+  }
+}

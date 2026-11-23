@@ -1,0 +1,6 @@
+@import "@edgway/ui-kit/globals.css";
+
+@source "./";
+
+/* @rjsf/shadcn's form components carry their own Tailwind classes. */
+@source "../node_modules/@rjsf/shadcn/dist";

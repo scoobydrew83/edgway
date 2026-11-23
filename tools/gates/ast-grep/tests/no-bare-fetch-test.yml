@@ -1,0 +1,6 @@
+id: no-bare-fetch
+valid:
+  - "return upstream.fetch(request);"
+  - "return exports.default.fetch(req);"
+invalid:
+  - "return await fetch(target, init);"

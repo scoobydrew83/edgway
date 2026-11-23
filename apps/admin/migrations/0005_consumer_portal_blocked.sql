@@ -1,0 +1,1 @@
+ALTER TABLE `consumers` ADD `portal_blocked` integer DEFAULT false NOT NULL;

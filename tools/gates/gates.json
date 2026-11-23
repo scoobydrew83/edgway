@@ -1,0 +1,26 @@
+{
+  "$comment": "Gates run by `pnpm gate` (tools/gates/run.ts). Gates are never disabled (CLAUDE.md \u00a73). Each gate runs the root script `gate:<name>`.",
+  "gates": {
+    "boundaries": {
+      "enabled": true
+    },
+    "register": {
+      "enabled": true
+    },
+    "knip": {
+      "enabled": true
+    },
+    "i18n": {
+      "enabled": true
+    },
+    "centralization": {
+      "enabled": true
+    },
+    "licences": {
+      "enabled": true
+    },
+    "audit": {
+      "enabled": true
+    }
+  }
+}

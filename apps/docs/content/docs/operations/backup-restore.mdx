@@ -1,0 +1,71 @@
+---
+title: Backup and restore
+description: What Edgway stores, where, and how to back it up and restore it.
+---
+
+## What is stored where
+
+| Data | Where | Backed up by |
+| --- | --- | --- |
+| Your configuration: services, routes, upstreams, plugins, consumers and credentials (staged and published) | D1 `edgway-admin` | D1 Time Travel and `wrangler d1 export` |
+| Config history (`config_versions`) and the audit log (`audit_events`) | D1 | Same |
+| Published snapshots, signed (`config:v<n>`), and the live pointer | KV `edgway-config`, plus the ConfigVersion Durable Object | Rebuilt by publishing from D1 |
+| Signing keys | Worker secrets on the admin and gateway | Not needed: replace them (below) |
+| Settings such as `ACCESS_*`, `OIDC_*` and `ADMIN_ROLES` | The admin's Worker variables (`ACCESS_*`, `ADMIN_ROLES`), `wrangler.jsonc` (`OIDC_*`) and Worker secrets | Your own copy of your deploy settings |
+
+D1 is the source of truth. KV holds only signed copies of versions you have published, kept for rollback: the newest 100, every version from the last 7 days, and the live one.
+
+## Back up D1
+
+Cloudflare keeps D1's history for you with [Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/): you can restore to any minute in the retention window (30 days on the Workers Paid plan, 7 days on Free). Note the current bookmark before risky changes such as an upgrade:
+
+```bash
+npx wrangler d1 time-travel info edgway-admin
+```
+
+For a copy you keep yourself, export the whole database as SQL, for example nightly from CI:
+
+```bash
+npx wrangler d1 export edgway-admin --remote --output edgway-admin-$(date +%F).sql
+```
+
+The export holds credentials: key-auth hashes, basic-auth hashes and jwt secrets (or their vault references). Store it like a secret.
+
+## Restore D1 to a point in time
+
+```bash
+npx wrangler d1 time-travel restore edgway-admin --timestamp=2026-10-07T09:00:00Z
+# or: --bookmark=<bookmark from `time-travel info`>
+```
+
+Then make the gateway match the restored configuration: review it in the admin UI or with `edgway diff`, and publish. Until you publish, the gateway keeps serving the version that was live.
+
+## Restore into a new install
+
+Load the export into the database before the first deploy. The export already holds the migrations table, so the deploy then applies only migrations newer than your backup.
+
+1. Create the database, and load your export into it:
+
+   ```bash
+   npx wrangler d1 create edgway-admin
+   npx wrangler d1 execute edgway-admin --remote --file edgway-admin-2026-10-07.sql
+   ```
+
+2. Deploy with `pnpm run deploy` from a checkout whose `apps/admin/wrangler.jsonc` has no `database_id` (a fresh clone has none; a checkout you deployed from before has the old database's id). It finds `edgway-admin` by name, applies any newer migrations, and creates a KV namespace and new signing keys.
+3. Publish. The new keys sign the restored configuration, and the gateway serves it.
+
+The new install's KV holds no snapshots of your old versions, so the versions listed before the restore can't be rolled back to (`EDG-ADM-003`). History starts again from the first publish.
+
+## A decK dump is not a full backup
+
+`deck gateway dump` against the Kong-compatible Admin API exports your entities in decK's format, which is useful for review and for moving configuration around. It can't restore everything:
+
+- key-auth keys come back as the placeholder `edgway-hashed:<id>`, because Edgway keeps only a hash, and the placeholder can't be loaded back;
+- basic-auth passwords are hashed and don't round-trip;
+- a viewer token sees secrets masked.
+
+Use a D1 export to back up credentials.
+
+## Signing keys
+
+The snapshot and trace signing keys don't need a backup. If one is lost or leaks, generate a new pair and publish again; see "Rotating the signing keys" in `docs/deploy.md`. Until that publish, a gateway that restarts can't verify the old snapshot with the new public key, so rotate during a quiet period.

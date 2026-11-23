@@ -1,0 +1,13 @@
+// For Cloudflare's "Deploy to Cloudflare" button only (Drew). The
+// button needs a Wrangler config at the repository root to accept it. This
+// one names the admin Worker and declares no bindings, so the button
+// provisions nothing itself. The real deploy is the root package.json
+// `deploy` script (`pnpm run deploy`, tools/deploy.mjs), which the button
+// pre-fills as the Workers Builds deploy command: it provisions D1 and KV and
+// deploys the admin, gateway and portal from their own configs in apps/*,
+// without Workers Builds' name override.
+{
+  "name": "edgway-admin",
+  "main": "apps/admin/src/index.ts",
+  "compatibility_date": "2025-04-14"
+}

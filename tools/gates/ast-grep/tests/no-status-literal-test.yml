@@ -1,0 +1,10 @@
+id: no-status-literal
+valid:
+  - "return c.json(problem, ERR.RATE_LIMITED.status);"
+  - "return c.json({ ok: true });"
+  - "return new Response(body, { status: upstream.status });"
+invalid:
+  - 'return c.json({ error: "no_route" }, 404);'
+  - "return c.json(body, 429, headers);"
+  - "return new Response(JSON.stringify(x), { status: 502 });"
+  - "return Response.json(x, { status: 500 });"

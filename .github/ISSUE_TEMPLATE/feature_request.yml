@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest a capability, a Kong feature Edgway doesn't support yet, or a plugin.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What you're trying to do, and what stops you today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: How you'd like it to work. For a Kong feature, name the Kong plugin, entity or field.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Workarounds you've tried, or other ways to solve it.

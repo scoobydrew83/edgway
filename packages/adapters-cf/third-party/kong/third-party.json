@@ -1,0 +1,7 @@
+{
+  "name": "Kong/kong",
+  "version": "3.9.0",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Kong/kong",
+  "copied": "Rate-limiting window starts ported from kong/tools/timestamp.lua (src/rate-limit/windows.ts), modified"
+}

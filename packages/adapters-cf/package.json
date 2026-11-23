@@ -1,0 +1,77 @@
+{
+  "name": "@edgway/adapters-cf",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobydrew83/edgway.git",
+    "directory": "packages/adapters-cf"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Cloudflare implementations of Edgway's adapters: Upstream, ConfigStore, RateLimitStore and CacheStore",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./config": "./src/config/store.ts",
+    "./secrets": "./src/secrets/reference.ts"
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "LICENSE",
+    "NOTICE",
+    "third-party"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run",
+    "build": "tsc -b tsconfig.build.json",
+    "prepack": "pnpm run build && node ../../tools/release/prepack.mjs",
+    "postpack": "node ../../tools/release/postpack.mjs"
+  },
+  "dependencies": {
+    "@edgway/constants": "workspace:*",
+    "@edgway/core": "workspace:*",
+    "@edgway/errors": "workspace:*",
+    "@edgway/telemetry": "workspace:*",
+    "cockatiel": "^4.0.0",
+    "consistent-hash": "^1.2.2",
+    "jose": "^6.2.12"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "hono": "^4.13.10",
+    "hono-rate-limiter": "0.5.4",
+    "typescript": "^5.9.3",
+    "vitest": "4.1.11"
+  },
+  "peerDependencies": {
+    "hono": "^4.12.34"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./config": {
+        "types": "./dist/config/store.d.ts",
+        "import": "./dist/config/store.js",
+        "default": "./dist/config/store.js"
+      },
+      "./secrets": {
+        "types": "./dist/secrets/reference.d.ts",
+        "import": "./dist/secrets/reference.js",
+        "default": "./dist/secrets/reference.js"
+      }
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  }
+}

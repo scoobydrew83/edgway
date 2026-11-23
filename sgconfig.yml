@@ -1,0 +1,6 @@
+# `centralization` gate (CLAUDE.md §2): ast-grep rules that keep shared values
+# in their home packages. Rule tests: pnpm exec ast-grep test --config sgconfig.yml
+ruleDirs:
+  - tools/gates/ast-grep/rules
+testConfigs:
+  - testDir: tools/gates/ast-grep/tests

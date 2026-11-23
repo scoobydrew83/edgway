@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    "@edgway/plugin-rate-limiting",
+    "@edgway/plugin-cors",
+    "@edgway/plugin-cors"
+  ]
+}

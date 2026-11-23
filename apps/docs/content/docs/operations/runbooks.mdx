@@ -1,0 +1,78 @@
+---
+title: Runbooks
+description: What to check when the gateway, a publish, the admin or the portal fails.
+---
+
+Every Edgway error carries a code, such as `EDG-CFG-004`; the [error reference](/errors) has a page for each. Find the code in the response body (`code`) or in the admin UI, then follow the matching section below.
+
+## Is it up?
+
+```bash
+curl https://<gateway>/__edgway/health      # {"ok":true,"service":"edgway",...}
+curl -H "Kong-Admin-Token: $TOKEN" https://<admin>/status   # the Kong-compatible Admin API
+```
+
+The gateway keeps its own endpoints under `/__edgway/`. Every other path, including `/` and `/health`, goes to your routes.
+
+## The gateway answers 503 `EDG-CFG-004` for everything
+
+The gateway has no configuration it can verify. Check, in order:
+
+1. **Nothing has been published yet.** A new install serves nothing until the first publish. Publish from the admin UI, `edgway publish` or `POST /api/v1/config/publish`.
+2. **`CONFIG_PUBLIC_KEY` is missing or isn't the public half of the admin's `CONFIG_SIGNING_KEY`.** Check that it exists on both Workers:
+
+   ```bash
+   npx wrangler secret list --config apps/gateway/wrangler.jsonc
+   npx wrangler secret list --config apps/admin/wrangler.jsonc
+   ```
+
+   A gateway that already verified a snapshot keeps serving it, so a key mismatch shows first on new isolates, after a deploy or under new load. To fix a mismatch, rotate the pair (`docs/deploy.md`, "Rotating the signing keys") and publish again.
+3. **The admin Worker is unreachable.** The gateway asks the admin's ConfigVersion service (at most once a second per isolate) which version is live. A warm isolate keeps serving through an outage; a new one can't start. Check the admin's deployment and the `CONFIG_VERSION` Service Binding in `apps/gateway/wrangler.jsonc`.
+
+## Requests fail with `EDG-CFG-001`, `EDG-CFG-003` or `EDG-UP-*`
+
+- **`EDG-CFG-001` (no route matches):** the request's host, path or method matches no published route. Remember that staged changes aren't live until you publish. The admin UI's route tester shows which route a request matches in the published version.
+- **`EDG-CFG-003` (a plugin can't run):** usually a `{vault://env/...}` reference whose `VAULT_*` secret isn't set on the gateway. Set it with `wrangler secret put VAULT_<NAME> --config apps/gateway/wrangler.jsonc`.
+- **`EDG-UP-001` (502, upstream binding not configured):** a service's `edgway-binding:` or `edgway-tunnel:` tag names a binding the gateway doesn't have. Add the `UPSTREAM_*` Service Binding, or the Workers VPC binding, to `apps/gateway/wrangler.jsonc` and deploy.
+- **`404` with the body `error code: 1042`:** the service points at another Worker on the gateway's zone (any of your account's `*.workers.dev` Workers, for example) by URL, which Cloudflare refuses. Reach it through an `UPSTREAM_*` Service Binding and the `edgway-binding:` tag instead (`docs/deploy.md`, "Private upstreams").
+- **`EDG-UP-003` (502, upstream unreachable):** every attempt to reach the service failed, after its retries, or a load-balanced upstream has no healthy target left. Check the upstream itself and its targets' health.
+
+## A publish fails
+
+| Code | Meaning | What to do |
+| --- | --- | --- |
+| `EDG-ADM-015` (503) | `CONFIG_SIGNING_KEY` isn't set on the admin | Run `pnpm run deploy`, which creates the pair, or set it by hand |
+| `EDG-ADM-012` (409) | Another publish won the race, even after retries | Publish again |
+| `EDG-ADM-013` (409) | The live snapshot fails verification with the admin's key, usually after a key rotation | Run a full publish, which re-signs the configuration with the current key |
+| `EDG-ADM-004` (400) | The configuration is invalid, for example a route the gateway can't compile | Fix what the error's detail names |
+
+Adding a plugin fails with `EDG-ADM-008` (400) when the gateway doesn't bundle it. Add the package to `edgway.config.json`, deploy, then add the plugin again.
+
+Portal key changes and admin revocations publish only credential changes on top of the live version. While the live snapshot isn't yet in this location's KV, or after a key rotation, they can't. A portal change then waits for the next full publish. For a revocation through the admin API, the change is saved but the API call answers the error (`EDG-CFG-004` or `EDG-ADM-013`), so run a full publish to make it live.
+
+## Rolling back
+
+`edgway versions` lists versions; `edgway rollback <version>` (or the admin UI) makes one live again. The admin UI's confirmation first lists any revoked credentials the rollback would make work again.
+
+- `EDG-ADM-018` (410) means that version was pruned. Edgway keeps the newest 100 versions, every version from the last 7 days and the live one.
+- `EDG-ADM-003` (404) means the version doesn't exist, or its snapshot isn't in KV.
+
+## The admin answers 401 or 403
+
+- **`EDG-ADM-007` (401) on `/api/v1`:** no valid Cloudflare Access assertion. Check the admin Worker's `ACCESS_TEAM` and `ACCESS_AUD` variables (Settings, Variables and Secrets), and that the Access application covers `/api/v1` and `/ui`.
+- **`EDG-ADM-001` (403):** the caller has no role. Add their email or service-token client id to `ADMIN_ROLES`, which must be valid JSON.
+- **`EDG-ADM-006` (403):** their role is too low for the action. Roles from lowest to highest: viewer, editor, publisher, owner.
+- **401 on the Kong-compatible Admin API (decK, Terraform):** the `Kong-Admin-Token` header is missing, or its sha256 isn't in `KONG_ADMIN_TOKENS`. Keep the Kong-compatible paths outside the Access application. If the admin's root (`/`) redirects to `<team>.cloudflareaccess.com`, the application covers the whole hostname: limit its paths to `/api/v1` and `/ui`.
+
+## The portal fails
+
+- **`EDG-ADM-016` (503):** `OIDC_ISSUER` or `OIDC_AUDIENCE` is empty in `apps/portal/wrangler.jsonc`.
+- **`EDG-ADM-015` (503) with the detail `ADMIN`:** the portal's `ADMIN` Service Binding to the admin is missing. Deploy with `pnpm run deploy`, which deploys the admin first.
+- **`EDG-RL-001` (429):** a developer passed the portal's write limit (10 a minute). It clears by itself.
+- **`EDG-ADM-017` (403):** the install has as many portal developers as it allows.
+- **`EDG-ADM-014` (409):** the developer already has the most keys allowed (five); they must delete one first.
+- **Sign-in loops or fails:** check that the identity provider has `https://<portal>/oauth/callback` as a callback URL, and that the site was built with the right `ZUDOKU_PUBLIC_OIDC_ISSUER` and `ZUDOKU_PUBLIC_OIDC_CLIENT_ID`.
+
+## The overview shows no data
+
+The overview needs `CF_ACCOUNT_ID` (a variable) and `AE_API_TOKEN` (a secret with Account Analytics Read) on the admin, and the `ANALYTICS` binding on the gateway. `EDG-ADM-010` (502) means Analytics Engine didn't answer: check the token's permissions.

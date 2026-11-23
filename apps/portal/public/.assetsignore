@@ -1,0 +1,4 @@
+# Zudoku's build output that isn't a public asset.
+server
+.output
+.vite

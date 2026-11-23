@@ -1,0 +1,165 @@
+# Custom-code register (PRD v2 "Custom-code register").
+#
+# Every non-generated .ts/.tsx file under apps/*/src, packages/*/src and
+# plugins/*/src must match a glob in an `entries` item (custom code, with a
+# reason) or a `wrappers` item (a thin wrapper over the named library).
+# The `register` gate (tools/gates/register-check.ts) enforces this.
+#
+# Adding or widening an entry is a finding that needs Drew's approval
+# (CLAUDE.md §3).
+# `expires: T-xxx` makes the gate fail once that task is approved.
+
+entries:
+  - name: admin-ui
+    paths: ["apps/ui/src/**"]
+    reason: "The admin UI's pages and its ra-core dataProvider over @edgway/sdk (forms from the SDK's zod schemas); no OSS Edgway admin exists. Approved by Drew (Step 7, 2026-10-02)."
+
+  - name: design-tokens
+    paths: ["packages/tokens/src/**"]
+    reason: "Edgway's design tokens (colors, radii) as CSS variables and a Tailwind v4 theme; values from shadcn/ui's neutral theme. Approved by Drew (Step 7, 2026-10-02)."
+
+  - name: portal-app
+    paths: ["apps/portal/src/**"]
+    reason: "Portal Worker wiring: OIDC developer sign-in mapped to a consumer, self-serve key-auth through @edgway/admin-core with a credential-only publish, and the Zudoku ApiKeyService; no OSS equivalent. Approved by Drew."
+
+  - name: docs-generators
+    paths: ["tools/docs-gen/**"]
+    reason: "Writes the docs site's reference pages: error codes from @edgway/errors, plugins from their vendored Kong JSON Schemas, and the admin API through fumadocs-openapi's generator; nobody maintains those pages by hand (PRD \"Docs site\"). Named."
+
+  - name: edgway-cli
+    paths: ["apps/cli/src/**"]
+    reason: "CLI command wiring over citty, @clack/prompts, c12, yaml, diff, wrangler and @edgway/sdk; no OSS Edgway CLI exists. Approved by Drew."
+
+  - name: gateway-wiring
+    paths: ["apps/gateway/src/**"]
+    reason: "Worker wiring only: plugin registry, context stores, error logging; logic lives in packages (CLAUDE.md section 2). Approved by Drew."
+
+  - name: core-runner
+    paths: ["packages/core/src/index.ts", "packages/core/src/runner/**", "packages/core/src/router/**"]
+    reason: No OSS Hono phase/plugin runner exists; Kong route-priority rules have no JS implementation.
+
+  - name: kong-compat
+    paths: ["packages/kong-compat/src/**"]
+    reason: Kong's Admin API shape is the contract; no server-side library implements it.
+
+  - name: schema-codegen
+    paths: ["packages/schema/src/codegen/**"]
+    reason: Glue around zod's z.fromJSONSchema for the vendored Kong schemas.
+
+  - name: do-rate-limit-store
+    paths: ["packages/adapters-cf/src/rate-limit/durable-object*"]
+    reason: "@hono-rate-limiter/cloudflare is stale (Dec 2024) and marked legacy."
+
+  - name: small-kong-plugins
+    paths:
+      - "plugins/request-transformer/src/**"
+      - "plugins/response-transformer/src/**"
+      - "plugins/acl/src/**"
+      - "plugins/request-termination/src/**"
+      - "plugins/ai-prompt-guard/src/**"
+    reason: Kong's semantics are small, simple operations; no library matches them.
+
+  - name: weighted-round-robin
+    paths: ["packages/adapters-cf/src/balancer/**", "packages/adapters-cf/src/health/**"]
+    reason: The only npm option is unlicensed (2014); Cloudflare Load Balancing is paid and optional.
+
+  - name: adapters
+    paths: ["packages/core/src/adapters/**", "packages/adapters-cf/src/**"]
+    reason: The portability boundary (Upstream, RateLimitStore, CacheStore, PluginSandbox, SecretResolver, ConfigStore, AdminIdentity); each is thin.
+
+  - name: integration-points
+    paths: ["apps/portal/src/api-key-service*", "apps/ui/src/data-provider*"]
+    reason: Integration points Zudoku and ra-core expect us to supply.
+
+
+  - name: admin-core
+    paths: ["packages/admin-core/src/**"]
+    reason: "Admin service layer over drizzle-orm: workspace-scoped CRUD, audit events in the same D1 batch, staged snapshot and pending diff (microdiff), credential hashing. No OSS equivalent; approved by Drew (Step 5, 2026-09-30)."
+
+  - name: admin-app
+    paths: ["apps/admin/src/**"]
+    reason: "Control-plane Worker wiring: @hono/zod-openapi routes over admin-core, Access identity to admin roles, error and response shaping. No OSS equivalent; approved by Drew (Step 5, 2026-09-30)."
+
+  - name: plugin-sdk
+    paths: ["packages/plugin-sdk/src/**"]
+    reason: definePlugin glue, test kit on vitest-pool-workers, static registry codegen; no OSS plugin framework for Hono exists. Approved by Drew. Also bounded body rewriting for plugins that must see a whole body.
+  - name: sandbox-harness
+    paths: ["packages/adapters-cf/src/sandbox/**"]
+    reason: "The fixed entrypoint that wraps an uploaded plugin as a Dynamic Worker (Worker Loader) and the adapter calling it over RPC; no OSS equivalent. Approved by Drew."
+  - name: streaming-body-limit
+    paths: ["plugins/request-size-limiting/src/**"]
+    reason: hono/body-limit buffers chunked bodies and CLAUDE.md §4 forbids buffering; no library offers a non-buffering max-size stream limiter. Approved by Drew.
+  - name: constants
+    paths: ["packages/constants/src/**"]
+    reason: Pure data (header names, KV key formats, limits, defaults); nothing to reuse from npm.
+
+  - name: query-string-7-patch
+    paths: ["patches/query-string@7.1.3.patch"]
+    reason: "One-line pnpm patch so ra-core's query-string 7.1.3 reads decode-uri-component 0.5.1's default export: GHSA-qr28-fpjm-wq7f has no fixed CJS 0.2.x, 0.5.1 is ESM-only, and query-string 9 (default export only) breaks ra-core's named imports. Remove once ra-core depends on query-string 9. Approved by Drew."
+
+# Thin wrappers: files that only adapt an OSS library to Edgway's interfaces.
+# Filled in by the tasks that create them (each task names its wrapper paths).
+wrappers:
+  - library: "shadcn/ui + shadcn-admin-kit"
+    paths: ["packages/ui-kit/src/**"]
+    note: Components copied by the shadcn CLI (base-vega style) from shadcn/ui and marmelab's shadcn-admin-kit (on ra-core). Local edits are limited to import paths, the sidebar title, header and sidebar slots, and a catalog-free i18nProvider fallback. Approved by Drew (Step 7, 2026-10-02).
+  - library: "@hey-api/openapi-ts"
+    paths: ["packages/sdk/src/index.ts"]
+    note: The client, TanStack Query options and zod schemas are generated by @hey-api/openapi-ts from apps/admin/openapi.json (src/generated); the file only re-exports them and builds a client for one admin URL (standing rule, Drew 2026-09-30).
+  - library: hono-problem-details
+    paths: ["packages/errors/src/**"]
+    note: RFC 9457 responses come from hono-problem-details; the package adds only the ERR registry data and a Kong-shape switch.
+  - library: "@formatjs/intl"
+    paths: ["packages/i18n/src/**"]
+    note: Messages (defineMessage), formatting and ICU rendering come from FormatJS; locale detection and per-request context from Hono's languageDetector and contextStorage. The package adds only the catalog and a Vary header.
+  - library: "@logtape/logtape"
+    paths: ["packages/telemetry/src/**"]
+    note: Logging is LogTape (JSON lines sink), field names are OpenTelemetry semantic conventions, request ids are hono/request-id; the package adds only Edgway field names and wiring, and the Analytics Engine request-metrics layout (metrics.ts).
+  - library: "@hey-api/openapi-ts (zod plugin)"
+    paths: ["packages/schema/src/index.ts"]
+    note: Plugin zod schemas are generated by @hey-api/openapi-ts from Kong's own JSON Schemas (src/generated/plugins); the file adds only name lookup. Approved by Drew.
+  - library: drizzle-orm
+    paths: ["packages/schema/src/db/**"]
+    note: D1 tables declared with Drizzle's sqlite-core (Kong's entity and field names); zod from drizzle-zod, migrations from drizzle-kit, ids from uuidv7. The files are declarations only. Approved by Drew.
+  - library: hono/utils/crypto (WebCrypto)
+    paths: ["packages/core/src/crypto.ts"]
+    note: Hashing helpers over Hono's WebCrypto sha256 and sha1 (sha1 for Kong's basic-auth password format), the one place the no-raw-crypto rule allows hashing. Approved by Drew (sha1).
+  - library: hono/bearer-auth
+    paths: ["plugins/key-auth/src/**"]
+    note: Kong's key-auth on hono/bearer-auth (header name, no prefix, verifyToken); keys hashed with core sha256Hex and generated with nanoid. The file maps Kong's config (query keys, anonymous, hide_credentials, consumer headers) onto it (standing rule, Drew 2026-09-30).
+  - library: jose
+    paths: ["plugins/jwt/src/**"]
+    note: Kong's jwt on jose (decodeJwt, decodeProtectedHeader, importSPKI, compactVerify). The file maps Kong's config (token sources, key claim, credential algorithm, claims_to_verify, maximum_expiration, anonymous, consumer headers) onto it (standing rule, Drew 2026-09-30).
+  - library: hono/basic-auth
+    paths: ["plugins/basic-auth/src/**"]
+    note: Kong's basic-auth on hono/basic-auth (verifyUser) and Hono's basic-auth parser for Proxy-Authorization; passwords checked with core sha1Hex in Kong's sha1(password .. consumer_id) format and hono timingSafeEqual. The file maps Kong's config (realm, hide_credentials, anonymous) onto it (standing rule, Drew 2026-09-30).
+  - library: "openid-client + hono/jwk (Jwt.verifyWithJwks) + @hono/oidc-auth"
+    paths: ["plugins/openid-connect/src/**"]
+    note: Kong's openid-connect on openid-client (discovery), Hono's JWK verifier (bearer tokens) and @hono/oidc-auth (session login). The file maps Kong's config (token sources, issuers, audience, *_required claims, consumer mapping, upstream headers, anonymous, hide_credentials) onto them (standing rule, Drew 2026-09-30).
+  - library: hono/cors
+    paths: ["plugins/cors/src/**"]
+    note: Kong's cors on hono/cors (preflight in access, headers in header_filter so errors carry them). The file maps Kong's config (origin matching with plain and regex entries, credentials echo, preflight 200, private_network, preflight_continue) onto it (standing rule, Drew 2026-09-30).
+  - library: hono/ip-restriction
+    paths: ["plugins/ip-restriction/src/**"]
+    note: Kong's ip-restriction on hono/ip-restriction (deny then allow, IPv4/IPv6 CIDRs) with Cloudflare's CF-Connecting-IP. The file maps Kong's config (status, message) and error shape onto it (standing rule, Drew 2026-09-30).
+  - library: hono-rate-limiter
+    paths: ["plugins/rate-limiting/src/**"]
+    note: Kong's rate-limiting on hono-rate-limiter (one limiter per window) over the RateLimitStore the gateway supplies (Rate Limiting binding or DO counter). The file maps Kong's config (limit_by identifier with IP fallback, route/service scoping and hashing, Kong's headers, error_code/message, hide_client_headers, fault_tolerant) onto it (standing rule, Drew 2026-09-30).
+  - library: hono/body-limit
+    paths: ["plugins/request-size-limiting/src/**"]
+    note: Kong's request-size-limiting on hono/body-limit for requests with Content-Length (checked without reading); the file maps Kong's config (size units, require_content_length) and errors onto it. The chunked-body byte counter is the `streaming-body-limit` entry (standing rule, Drew 2026-09-30).
+  - library: "CacheStore (Workers Cache via @edgway/adapters-cf)"
+    paths: ["plugins/proxy-cache/src/**"]
+    note: Kong's proxy-cache on the CacheStore adapter; the file maps Kong's cache rules (cacheable methods, codes and exact content types, RFC 9111 Cache-Control, vary headers and query params, ignore_uri_case, X-Cache-Status/Key/Age, the upstream's Cache-Control restored on hits) onto it (standing rule, Drew 2026-09-30).
+  - library: hono/request-id
+    paths: ["plugins/correlation-id/src/**"]
+    note: Kong's correlation-id on hono/request-id with uuidv7's v4 generator; the file maps Kong's config (header_name, keeping incoming ids, uuid, uuid#counter and tracker generators, the id sent upstream, echo_downstream) onto it (standing rule, Drew 2026-09-30).
+  - library: "Vercel AI SDK providers (@ai-sdk/anthropic, workers-ai-provider) + gateway-supplied transport"
+    paths: ["plugins/ai-proxy/src/**"]
+    note: Kong's ai-proxy over the AI SDK's provider models (Anthropic, Workers AI on the gateway's AI binding) and a gateway-supplied fetch for OpenAI pass-through (plugins may not fetch); the files map Kong's config (route_type, model and options, auth, response_streaming, model_name_header) and OpenAI's chat/completions shapes onto them, plus the Workers AI fallback (standing rule, Drew 2026-09-30; providers and fallback, Drew 2026-10-02).
+  - library: "gateway-supplied token counters (Durable Object via @edgway/adapters-cf)"
+    paths: ["plugins/ai-rate-limiting-advanced/src/**"]
+    note: Kong's ai-rate-limiting-advanced over counters the gateway supplies; the file maps Kong's config (llm_providers limits and windows, identifier, tokens_count_strategy, requestPrompt, disable_penalty, error_code/message, headers) and reads token usage from ai-proxy's OpenAI-shaped answers (standing rule, Drew 2026-09-30).
+  - library: "gateway-supplied transport (fetch via @edgway/adapters-cf) + Cloudflare Queues (retry buffer)"
+    paths: ["plugins/http-log/src/**"]
+    note: Kong's http-log in the log phase (inside waitUntil) over a gateway-supplied transport (plugins may not fetch, per the no-bare-fetch gate), with failed deliveries handed to a gateway-bound Queue; the file maps Kong's config (endpoint with Basic credentials, method, headers, timeout) and the basic log serializer's entry shape onto it (standing rule, Drew 2026-09-30).

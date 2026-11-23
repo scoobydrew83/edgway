@@ -1,0 +1,42 @@
+---
+title: Compatibility
+description: The Kong, decK, Cloudflare, Node and Terraform versions this release is built and tested against.
+---
+
+## Versions
+
+| Component | Version | Where it is set |
+| --- | --- | --- |
+| Kong Admin API and plugin schemas | Kong **3.9** OSS. The Kong-compatible Admin API reports `3.9.0`. | `tools/vendor-kong-schemas.ts`, `vendor/kong-schemas` |
+| decK | **1.49.2** (tested end to end in CI) | `tools/kong-compat-e2e.sh` |
+| Workers `compatibility_date` | **2025-04-14**, with the `nodejs_compat` flag | each Worker's `wrangler.jsonc` |
+| wrangler | **4.124.0** in the repository. The `edgway` CLI needs `^4.124.0` installed alongside it. | `package.json` files |
+| Node.js | **22** | `.nvmrc`, `engines` |
+| pnpm | **10.33.0** | the root `packageManager` |
+| Terraform | **1.6** or later. CI uses 1.13.4. | `infra/terraform` |
+| Terraform providers | `Kong/kong-gateway` **1.4.0**, `Mastercard/restapi` **~> 3.0** | `infra/terraform` |
+| Zudoku (developer portal) | **0.88.0** | `apps/portal/package.json` |
+
+## What "Kong-compatible" covers
+
+The Kong-compatible Admin API serves Kong 3.9's entities and plugin schemas, so decK and Kong's Terraform provider work against it unchanged. It runs on the admin Worker's root and under `/default/` for workspace-prefixed clients. Kong's own clients are tested against it in CI: decK `sync`, `diff`, `dump` and `gateway validate`, the online validation that calls `/schemas/{entity}/validate` (including a corpus of Kong's own sample files), and Terraform `init`, `plan` and `apply` of the example module.
+
+Each first-party plugin implements its Kong namesake's configuration. Enterprise-named plugins (`openid-connect`, `ai-rate-limiting-advanced`) are independent implementations of that configuration, not Kong's code. [Migrating from Kong](/guides/migrate-from-kong) lists where behaviour differs, for example hashed key-auth keys and vault-only jwt secrets.
+
+## Runs differently
+
+- **least-connections runs as round-robin on Workers.** A gateway isolate doesn't see other isolates' open connections, so Edgway accepts `least-connections`, and Kong's `latency`, and balances them round-robin. They are never silent:
+  - every publish lists such upstreams under `warnings`, which the admin UI and `edgway publish` show;
+  - the gateway logs `gateway.upstream_algorithm_fallback` once per published config.
+- **key-sets and keys** are always empty and can't be written. Kong uses them for Enterprise plugins (jwt-signer, openid-connect's JWKs), not for the OSS jwt plugin, which verifies with jwt credentials as in Edgway. decK dumps none. A decK file with `key_sets` or `keys` fails to sync, naming the entity (404 from `/key-sets`). decK's `gateway validate` skips them.
+
+## Not supported yet
+
+These Kong features are not in this release:
+
+- active health checks; passive health checks work;
+- mTLS, certificates and SNI on the data plane;
+- a cache purge API;
+- Cloudflare's Rate Limiting binding for `policy: local`. Every rate-limiting policy counts exactly in a Durable Object instead.
+
+A configuration that uses something Edgway can't run is refused at publish, with the reason, rather than ignored. For example, routes matched by `sources`, `destinations`, `snis` or an `expression` are refused.

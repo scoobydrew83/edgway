@@ -1,0 +1,9 @@
+{
+  "name": "i18n-unused-fixture",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}

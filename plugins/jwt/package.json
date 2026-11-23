@@ -1,0 +1,66 @@
+{
+  "name": "@edgway/plugin-jwt",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobydrew83/edgway.git",
+    "directory": "plugins/jwt"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Kong's jwt plugin for Edgway, on jose; also plain Hono middleware",
+  "type": "module",
+  "sideEffects": false,
+  "keywords": [
+    "edgway-plugin"
+  ],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run",
+    "build": "tsc -b tsconfig.build.json",
+    "prepack": "pnpm run build && node ../../tools/release/prepack.mjs",
+    "postpack": "node ../../tools/release/postpack.mjs"
+  },
+  "dependencies": {
+    "@edgway/constants": "workspace:*",
+    "@edgway/core": "workspace:*",
+    "@edgway/errors": "workspace:*",
+    "@edgway/plugin-sdk": "workspace:*",
+    "@edgway/schema": "workspace:*",
+    "jose": "^6.2.12",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "hono": "^4.13.10",
+    "typescript": "^5.9.3",
+    "vitest": "4.1.11"
+  },
+  "peerDependencies": {
+    "hono": "^4.12.34"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      }
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  }
+}

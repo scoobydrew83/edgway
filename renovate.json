@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Edgway dependency updates (audit R5). Keeps npm dependencies and SHA-pinned GitHub Actions current, and respects the exact pins in CLAUDE.md §4.",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "timezone": "UTC",
+  "schedule": ["before 6am on monday"],
+  "minimumReleaseAge": "3 days",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on the first day of the month"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "minimumReleaseAge": null,
+    "schedule": ["at any time"]
+  },
+  "packageRules": [
+    {
+      "description": "Pre-1.0 dependencies (Zudoku, @hey-api/openapi-ts, citty and the rest) stay pinned to an exact version (CLAUDE.md §4).",
+      "matchManagers": ["npm"],
+      "matchCurrentVersion": "<1.0.0",
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "vitest stays on 4.x, pinned exactly: the Workers pool does not support 5 yet (CLAUDE.md §4).",
+      "matchPackageNames": ["vitest", "@vitest/**"],
+      "allowedVersions": "<5",
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "One pull request for GitHub Actions digest and version bumps.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "One pull request for the Cloudflare toolchain, which moves together.",
+      "matchPackageNames": [
+        "wrangler",
+        "@cloudflare/vitest-pool-workers",
+        "@cloudflare/workers-types",
+        "workerd"
+      ],
+      "groupName": "Cloudflare toolchain"
+    }
+  ]
+}

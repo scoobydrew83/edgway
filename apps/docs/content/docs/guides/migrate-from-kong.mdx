@@ -1,0 +1,53 @@
+---
+title: Migrating from Kong
+description: Move a Kong configuration to Edgway with decK.
+---
+
+Edgway serves the Kong 3.9 Admin API that decK calls, so you migrate with the real `deck` CLI: no conversion step.
+
+## 1. Get a token for decK
+
+The Kong-compatible API at the admin's root authenticates the `Kong-Admin-Token` header against the `KONG_ADMIN_TOKENS` secret, a JSON map of `sha256(token)` to a role:
+
+```sh
+TOKEN=$(openssl rand -hex 32)
+HASH=$(printf '%s' "$TOKEN" | sha256sum | cut -d' ' -f1)
+echo "{\"$HASH\":\"publisher\"}" | pnpm --filter @edgway/admin exec wrangler secret put KONG_ADMIN_TOKENS
+```
+
+Leave that path outside your Access application, which covers only `/api/v1` and `/ui`: the mount authenticates every request itself with `Kong-Admin-Token`.
+
+## 2. Export from Kong
+
+Against your Kong cluster, as usual:
+
+```sh
+deck gateway dump -o kong.yaml
+```
+
+## 3. Sync to Edgway
+
+```sh
+deck gateway diff kong.yaml --kong-addr https://<admin> --headers "Kong-Admin-Token:$TOKEN"
+deck gateway sync kong.yaml --kong-addr https://<admin> --headers "Kong-Admin-Token:$TOKEN"
+```
+
+Edgway reports itself as Kong `3.9.0`, so decK uses the same endpoints it uses with Kong. A sync **stages** the changes: nothing reaches the gateway yet.
+
+## 4. Publish
+
+```sh
+curl -X POST -H "Kong-Admin-Token: $TOKEN" https://<admin>/edgway/publish
+```
+
+Or publish from the admin UI's Publish page, where you can review the staged diff first. A later `deck gateway diff` against Edgway shows no changes.
+
+Offline, `edgway import-deck kong.yaml` writes the same file into a local admin database, and `edgway diff` and `edgway publish` finish the job.
+
+## What differs from Kong
+
+- **key-auth keys** are stored only as a SHA-256 hash and never returned. Reads carry a placeholder, so decK plans a delete and create for every key-auth credential on each diff; syncing still converges to the file's keys.
+- **basic-auth passwords** are never returned (decK warns that they don't round-trip, even against Kong).
+- **JWT secrets** must be `{vault://…}` references: secrets never go in Edgway's database.
+- **Plugins Edgway doesn't ship** (for example `hmac-auth` or `prometheus`) answer Kong's `plugin not enabled`. The [plugin reference](/plugins/key-auth) lists the supported ones.
+- **Enterprise-only collections** (workspaces, RBAC) aren't served.

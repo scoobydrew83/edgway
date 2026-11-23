@@ -1,0 +1,64 @@
+{
+  "name": "@edgway/errors",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobydrew83/edgway.git",
+    "directory": "packages/errors"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Edgway error catalog and RFC 9457 problem+json responses (hono-problem-details)",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./docs": "./src/docs.ts"
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run",
+    "build": "tsc -b tsconfig.build.json",
+    "prepack": "pnpm run build && node ../../tools/release/prepack.mjs",
+    "postpack": "node ../../tools/release/postpack.mjs"
+  },
+  "peerDependencies": {
+    "hono": "^4.12.34"
+  },
+  "dependencies": {
+    "@edgway/constants": "workspace:*",
+    "@edgway/i18n": "workspace:*",
+    "@formatjs/intl": "^6.1.2",
+    "hono-problem-details": "0.11.0"
+  },
+  "devDependencies": {
+    "hono": "^4.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "4.1.11"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./docs": {
+        "types": "./dist/docs.d.ts",
+        "import": "./dist/docs.js",
+        "default": "./dist/docs.js"
+      }
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  }
+}

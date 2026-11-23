@@ -1,0 +1,21 @@
+{
+  "lines": [
+    "// Edgway's sandbox harness: the fixed entrypoint of every Dynamic",
+    "// Worker. It calls one phase of the uploaded plugin (./plugin.js) and returns",
+    "// only a Request or a Response; `this.env` holds the allow-listed bindings.",
+    "import { WorkerEntrypoint } from \"cloudflare:workers\";",
+    "import * as plugin from \"./plugin.js\";",
+    "",
+    "export default class Harness extends WorkerEntrypoint {",
+    "  async invoke(phase, config, message) {",
+    "    const run = plugin[phase];",
+    "    if (typeof run !== \"function\") return {};",
+    "    const result = await run(message, config, this.env);",
+    "    return {",
+    "      request: result?.request instanceof Request ? result.request : undefined,",
+    "      response: result?.response instanceof Response ? result.response : undefined,",
+    "    };",
+    "  }",
+    "}"
+  ]
+}

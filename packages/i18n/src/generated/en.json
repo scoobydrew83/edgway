@@ -1,0 +1,7869 @@
+{
+  "admin.routes.path": [
+    {
+      "type": 0,
+      "value": "must start with \"/\", or \"~\" for a regular expression"
+    }
+  ],
+  "admin.sandbox.limit": [
+    {
+      "type": 0,
+      "value": "must be between 1 and "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    }
+  ],
+  "cli.deploy.bound": [
+    {
+      "type": 0,
+      "value": "Set "
+    },
+    {
+      "type": 1,
+      "value": "binding"
+    },
+    {
+      "type": 0,
+      "value": "."
+    },
+    {
+      "type": 1,
+      "value": "field"
+    },
+    {
+      "type": 0,
+      "value": " to "
+    },
+    {
+      "type": 1,
+      "value": "id"
+    },
+    {
+      "type": 0,
+      "value": " in "
+    },
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.deploy.checked": [
+    {
+      "type": 0,
+      "value": "Dry run: the three Workers bundle. Not run: provisioning, migrations, deploys, secrets."
+    }
+  ],
+  "cli.deploy.description": [
+    {
+      "type": 0,
+      "value": "Provision, migrate and deploy the admin, gateway and portal Workers, as pnpm run deploy does."
+    }
+  ],
+  "cli.deploy.done": [
+    {
+      "type": 0,
+      "value": "Deployed. Next: put the admin behind Cloudflare Access and set its vars (docs/deploy.md)."
+    }
+  ],
+  "cli.deploy.failed": [
+    {
+      "type": 1,
+      "value": "command"
+    },
+    {
+      "type": 0,
+      "value": " failed (exit "
+    },
+    {
+      "type": 1,
+      "value": "code"
+    },
+    {
+      "type": 0,
+      "value": ")."
+    }
+  ],
+  "cli.deploy.keysPartial": [
+    {
+      "type": 0,
+      "value": "Keys are only partly set (missing: "
+    },
+    {
+      "type": 1,
+      "value": "missing"
+    },
+    {
+      "type": 0,
+      "value": "). Copy the existing key pair to the missing secrets (docs/deploy.md); generating a new pair would invalidate what the old one signed."
+    }
+  ],
+  "cli.deploy.noBinding": [
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": " has no "
+    },
+    {
+      "type": 1,
+      "value": "binding"
+    },
+    {
+      "type": 0,
+      "value": " binding."
+    }
+  ],
+  "cli.deploy.option.dryRun": [
+    {
+      "type": 0,
+      "value": "Bundle and check the three Workers without provisioning, migrating or deploying"
+    }
+  ],
+  "cli.deploy.step": [
+    {
+      "type": 0,
+      "value": "Running "
+    },
+    {
+      "type": 1,
+      "value": "command"
+    }
+  ],
+  "cli.description": [
+    {
+      "type": 0,
+      "value": "Set up, deploy and manage an Edgway gateway."
+    }
+  ],
+  "cli.diff.description": [
+    {
+      "type": 0,
+      "value": "Show the staged changes the next publish would make."
+    }
+  ],
+  "cli.diff.none": [
+    {
+      "type": 0,
+      "value": "No pending changes."
+    }
+  ],
+  "cli.diff.option.exitCode": [
+    {
+      "type": 0,
+      "value": "Exit with 1 when there are pending changes (for CI)"
+    }
+  ],
+  "cli.diff.summary": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " pending change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " pending changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " (published version: "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": ")."
+    }
+  ],
+  "cli.error.debugHint": [
+    {
+      "type": 0,
+      "value": "Run again with --debug to see the stack trace."
+    }
+  ],
+  "cli.error.noAdminUrl": [
+    {
+      "type": 0,
+      "value": "No admin URL: set adminUrl in edgway.config.ts, set EDGWAY_ADMIN_URL or pass --admin-url."
+    }
+  ],
+  "cli.error.noKongToken": [
+    {
+      "type": 0,
+      "value": "No Kong admin token: pass --kong-token or set EDGWAY_KONG_TOKEN."
+    }
+  ],
+  "cli.error.request": [
+    {
+      "type": 0,
+      "value": "The admin answered "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": ": "
+    },
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "cli.import.notKong": [
+    {
+      "type": 0,
+      "value": "The admin answered "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " without JSON. Give its Kong-compatible mount a Cloudflare Access bypass or service-token policy, or send a service token (docs/deploy.md)."
+    }
+  ],
+  "cli.import.option.kongToken": [
+    {
+      "type": 0,
+      "value": "A Kong-Admin-Token for the admin's Kong-compatible API (or EDGWAY_KONG_TOKEN)"
+    }
+  ],
+  "cli.import.option.remote": [
+    {
+      "type": 0,
+      "value": "Write to the admin at --admin-url through its Kong-compatible API, instead of the local D1"
+    }
+  ],
+  "cli.importDeck.description": [
+    {
+      "type": 0,
+      "value": "Import a decK file into the admin's local D1, offline. Review it with edgway diff."
+    }
+  ],
+  "cli.importDeck.done": [
+    {
+      "type": 0,
+      "value": "Imported "
+    },
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " entity"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " entities"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " from "
+    },
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.importDeck.failed": [
+    {
+      "type": 1,
+      "value": "entity"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": ": "
+    },
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "cli.importDeck.invalid": [
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": " is not a valid decK file:"
+    }
+  ],
+  "cli.importDeck.option.file": [
+    {
+      "type": 0,
+      "value": "decK file (YAML or JSON)"
+    }
+  ],
+  "cli.importDeck.option.persist": [
+    {
+      "type": 0,
+      "value": "Local state directory, as wrangler's --persist-to"
+    }
+  ],
+  "cli.importDeck.partial": [
+    {
+      "type": 6,
+      "value": "failed",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " entity was"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " entities were"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " not imported."
+    }
+  ],
+  "cli.init.adminConfig": [
+    {
+      "type": 0,
+      "value": "Path to the admin Worker's wrangler config"
+    }
+  ],
+  "cli.init.adminUrl": [
+    {
+      "type": 0,
+      "value": "Admin Worker URL"
+    }
+  ],
+  "cli.init.cancelled": [
+    {
+      "type": 0,
+      "value": "Cancelled."
+    }
+  ],
+  "cli.init.description": [
+    {
+      "type": 0,
+      "value": "Create edgway.config.ts for this project."
+    }
+  ],
+  "cli.init.exists": [
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": " already exists. Pass --force to overwrite it."
+    }
+  ],
+  "cli.init.gatewayConfig": [
+    {
+      "type": 0,
+      "value": "Path to the gateway Worker's wrangler config"
+    }
+  ],
+  "cli.init.option.force": [
+    {
+      "type": 0,
+      "value": "Overwrite an existing config file"
+    }
+  ],
+  "cli.init.option.yes": [
+    {
+      "type": 0,
+      "value": "Accept the defaults without prompting"
+    }
+  ],
+  "cli.init.portalConfig": [
+    {
+      "type": 0,
+      "value": "Path to the developer portal Worker's wrangler config"
+    }
+  ],
+  "cli.init.written": [
+    {
+      "type": 0,
+      "value": "Wrote "
+    },
+    {
+      "type": 1,
+      "value": "file"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.option.adminUrl": [
+    {
+      "type": 0,
+      "value": "Admin Worker URL (overrides edgway.config.ts)"
+    }
+  ],
+  "cli.option.cwd": [
+    {
+      "type": 0,
+      "value": "Project directory (defaults to the current one)"
+    }
+  ],
+  "cli.option.debug": [
+    {
+      "type": 0,
+      "value": "Print an error's stack trace"
+    }
+  ],
+  "cli.option.json": [
+    {
+      "type": 0,
+      "value": "Print the result as JSON"
+    }
+  ],
+  "cli.option.token": [
+    {
+      "type": 0,
+      "value": "A Cloudflare Access token (cloudflared access token); a local admin gets it as the assertion header"
+    }
+  ],
+  "cli.plugin.description": [
+    {
+      "type": 0,
+      "value": "Work with Edgway plugins."
+    }
+  ],
+  "cli.plugin.new.description": [
+    {
+      "type": 0,
+      "value": "Scaffold a new Edgway plugin package."
+    }
+  ],
+  "cli.plugin.new.done": [
+    {
+      "type": 0,
+      "value": "Created "
+    },
+    {
+      "type": 1,
+      "value": "dir"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.plugin.new.exists": [
+    {
+      "type": 1,
+      "value": "dir"
+    },
+    {
+      "type": 0,
+      "value": " already exists."
+    }
+  ],
+  "cli.plugin.new.invalidName": [
+    {
+      "type": 0,
+      "value": "Plugin names use lowercase letters, digits and dashes, starting with a letter."
+    }
+  ],
+  "cli.plugin.new.option.dir": [
+    {
+      "type": 0,
+      "value": "Directory to create the package in"
+    }
+  ],
+  "cli.plugin.new.option.name": [
+    {
+      "type": 0,
+      "value": "Plugin name (lowercase letters, digits and dashes)"
+    }
+  ],
+  "cli.publish.description": [
+    {
+      "type": 0,
+      "value": "Publish the staged configuration to the gateway."
+    }
+  ],
+  "cli.publish.done": [
+    {
+      "type": 0,
+      "value": "Published version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.publish.option.note": [
+    {
+      "type": 0,
+      "value": "A note for the version history"
+    }
+  ],
+  "cli.publish.warning.algorithm": [
+    {
+      "type": 0,
+      "value": "Warning: upstream "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " uses "
+    },
+    {
+      "type": 1,
+      "value": "algorithm"
+    },
+    {
+      "type": 0,
+      "value": ", which runs as "
+    },
+    {
+      "type": 1,
+      "value": "runsAs"
+    },
+    {
+      "type": 0,
+      "value": " on Workers."
+    }
+  ],
+  "cli.publish.warning.rawSecret": [
+    {
+      "type": 0,
+      "value": "Warning: plugin "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " keeps "
+    },
+    {
+      "type": 1,
+      "value": "fields"
+    },
+    {
+      "type": 0,
+      "value": " as plain text. Store it as a vault reference, such as {vault://env/vault-name}, to keep it out of the database."
+    }
+  ],
+  "cli.rollback.description": [
+    {
+      "type": 0,
+      "value": "Make an earlier published version live again."
+    }
+  ],
+  "cli.rollback.done": [
+    {
+      "type": 0,
+      "value": "Version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": " is live."
+    }
+  ],
+  "cli.rollback.invalidVersion": [
+    {
+      "type": 0,
+      "value": "The version must be a positive whole number."
+    }
+  ],
+  "cli.rollback.option.version": [
+    {
+      "type": 0,
+      "value": "The version to make live"
+    }
+  ],
+  "cli.versions.description": [
+    {
+      "type": 0,
+      "value": "List the published config versions, newest first."
+    }
+  ],
+  "cli.versions.line": [
+    {
+      "type": 0,
+      "value": "Version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": ", published "
+    },
+    {
+      "type": 1,
+      "value": "publishedAt"
+    },
+    {
+      "type": 0,
+      "value": " by "
+    },
+    {
+      "type": 1,
+      "value": "actor"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.versions.liveLine": [
+    {
+      "type": 0,
+      "value": "Version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": " (live), published "
+    },
+    {
+      "type": 1,
+      "value": "publishedAt"
+    },
+    {
+      "type": 0,
+      "value": " by "
+    },
+    {
+      "type": 1,
+      "value": "actor"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "cli.versions.none": [
+    {
+      "type": 0,
+      "value": "No versions published yet."
+    }
+  ],
+  "cli.versions.note": [
+    {
+      "type": 0,
+      "value": "Note: "
+    },
+    {
+      "type": 1,
+      "value": "note"
+    }
+  ],
+  "errors.admin.analyticsFailed": [
+    {
+      "type": 0,
+      "value": "Analytics Engine did not answer the overview query"
+    }
+  ],
+  "errors.admin.conflict": [
+    {
+      "type": 0,
+      "value": "An entity with these unique fields already exists"
+    }
+  ],
+  "errors.admin.disabled": [
+    {
+      "type": 0,
+      "value": "Admin API is disabled"
+    }
+  ],
+  "errors.admin.forbidden": [
+    {
+      "type": 0,
+      "value": "You aren't allowed to do this"
+    }
+  ],
+  "errors.admin.invalidRequest": [
+    {
+      "type": 0,
+      "value": "Invalid request"
+    }
+  ],
+  "errors.admin.keyLimit": [
+    {
+      "type": 0,
+      "value": "This consumer already has the most API keys allowed"
+    }
+  ],
+  "errors.admin.notFound": [
+    {
+      "type": 0,
+      "value": "Entity not found"
+    }
+  ],
+  "errors.admin.pluginNotEnabled": [
+    {
+      "type": 0,
+      "value": "schema violation (name: plugin not enabled; add it to the 'plugins' configuration property)"
+    }
+  ],
+  "errors.admin.publishConflict": [
+    {
+      "type": 0,
+      "value": "Another publish happened at the same time; try again"
+    }
+  ],
+  "errors.admin.publishDisabled": [
+    {
+      "type": 0,
+      "value": "Publishing is not configured"
+    }
+  ],
+  "errors.admin.publishedInvalid": [
+    {
+      "type": 0,
+      "value": "The live configuration failed its signature check"
+    }
+  ],
+  "errors.admin.roleRequired": [
+    {
+      "type": 0,
+      "value": "Your admin role does not allow this action"
+    }
+  ],
+  "errors.admin.testerBadRequest": [
+    {
+      "type": 0,
+      "value": "The route tester only sends requests to the gateway"
+    }
+  ],
+  "errors.admin.testerUnconfigured": [
+    {
+      "type": 0,
+      "value": "The route tester has no gateway to call: set GATEWAY_URL"
+    }
+  ],
+  "errors.admin.unauthenticated": [
+    {
+      "type": 0,
+      "value": "Admin sign-in required"
+    }
+  ],
+  "errors.admin.versionPruned": [
+    {
+      "type": 0,
+      "value": "That config version is too old to roll back to"
+    }
+  ],
+  "errors.ai.promptBlocked": [
+    {
+      "type": 0,
+      "value": "The prompt is not allowed"
+    }
+  ],
+  "errors.ai.providerFailed": [
+    {
+      "type": 0,
+      "value": "The LLM provider failed"
+    }
+  ],
+  "errors.ai.rateLimited": [
+    {
+      "type": 0,
+      "value": "AI token rate limit exceeded"
+    }
+  ],
+  "errors.ai.requestInvalid": [
+    {
+      "type": 0,
+      "value": "The request is not a valid LLM request"
+    }
+  ],
+  "errors.ai.streamingDenied": [
+    {
+      "type": 0,
+      "value": "Streaming is not allowed on this route"
+    }
+  ],
+  "errors.auth.aclForbidden": [
+    {
+      "type": 0,
+      "value": "You cannot consume this service"
+    }
+  ],
+  "errors.auth.forbidden": [
+    {
+      "type": 0,
+      "value": "Forbidden"
+    }
+  ],
+  "errors.auth.invalidCredentials": [
+    {
+      "type": 0,
+      "value": "Unauthorized"
+    }
+  ],
+  "errors.auth.ipNotAllowed": [
+    {
+      "type": 0,
+      "value": "Your IP address is not allowed"
+    }
+  ],
+  "errors.auth.ipUnknown": [
+    {
+      "type": 0,
+      "value": "Cannot identify the client IP address"
+    }
+  ],
+  "errors.auth.keyDuplicate": [
+    {
+      "type": 0,
+      "value": "Duplicate API key found"
+    }
+  ],
+  "errors.auth.keyMissing": [
+    {
+      "type": 0,
+      "value": "No API key found in request"
+    }
+  ],
+  "errors.auth.required": [
+    {
+      "type": 0,
+      "value": "Valid API key or JWT required"
+    }
+  ],
+  "errors.auth.tokenBad": [
+    {
+      "type": 0,
+      "value": "Bad token"
+    }
+  ],
+  "errors.auth.tokenClaimNotNumber": [
+    {
+      "type": 0,
+      "value": "Token claim must be a number"
+    }
+  ],
+  "errors.auth.tokenConsumerNotFound": [
+    {
+      "type": 0,
+      "value": "Could not find consumer for the token's key claim"
+    }
+  ],
+  "errors.auth.tokenExpirationTooLong": [
+    {
+      "type": 0,
+      "value": "Token exceeds maximum allowed expiration"
+    }
+  ],
+  "errors.auth.tokenExpired": [
+    {
+      "type": 0,
+      "value": "Token expired"
+    }
+  ],
+  "errors.auth.tokenInvalidAlgorithm": [
+    {
+      "type": 0,
+      "value": "Invalid algorithm"
+    }
+  ],
+  "errors.auth.tokenInvalidSecret": [
+    {
+      "type": 0,
+      "value": "Invalid key/secret"
+    }
+  ],
+  "errors.auth.tokenInvalidSignature": [
+    {
+      "type": 0,
+      "value": "Invalid signature"
+    }
+  ],
+  "errors.auth.tokenKeyClaimInvalid": [
+    {
+      "type": 0,
+      "value": "Invalid key claim in token"
+    }
+  ],
+  "errors.auth.tokenKeyClaimMissing": [
+    {
+      "type": 0,
+      "value": "No mandatory key claim in token"
+    }
+  ],
+  "errors.auth.tokenMultiple": [
+    {
+      "type": 0,
+      "value": "Multiple tokens provided"
+    }
+  ],
+  "errors.auth.tokenNoCredentials": [
+    {
+      "type": 0,
+      "value": "No credentials found for given key claim"
+    }
+  ],
+  "errors.auth.tokenNotYetValid": [
+    {
+      "type": 0,
+      "value": "Token not valid yet"
+    }
+  ],
+  "errors.config.httpsRequired": [
+    {
+      "type": 0,
+      "value": "Please use HTTPS protocol"
+    }
+  ],
+  "errors.config.internal": [
+    {
+      "type": 0,
+      "value": "Unexpected gateway error"
+    }
+  ],
+  "errors.config.noRoute": [
+    {
+      "type": 0,
+      "value": "No route matches this request"
+    }
+  ],
+  "errors.config.pluginUnavailable": [
+    {
+      "type": 0,
+      "value": "A plugin on this route can't run"
+    }
+  ],
+  "errors.config.unavailable": [
+    {
+      "type": 0,
+      "value": "The gateway has no published configuration yet"
+    }
+  ],
+  "errors.config.unknownUpstreamType": [
+    {
+      "type": 0,
+      "value": "Route has an unknown upstream type"
+    }
+  ],
+  "errors.plugin.bodyUntransformable": [
+    {
+      "type": 0,
+      "value": "The request body can't be transformed"
+    }
+  ],
+  "errors.plugin.contentLengthRequired": [
+    {
+      "type": 0,
+      "value": "A valid Content-Length header is required"
+    }
+  ],
+  "errors.plugin.headerInvalid": [
+    {
+      "type": 0,
+      "value": "A header built from the request is not a valid header value"
+    }
+  ],
+  "errors.plugin.requestTerminated": [
+    {
+      "type": 0,
+      "value": "Request terminated"
+    }
+  ],
+  "errors.plugin.requestTooLarge": [
+    {
+      "type": 0,
+      "value": "Request size limit exceeded"
+    }
+  ],
+  "errors.portal.developerLimit": [
+    {
+      "type": 0,
+      "value": "The developer portal has the most developers this install allows"
+    }
+  ],
+  "errors.portal.signInDisabled": [
+    {
+      "type": 0,
+      "value": "Portal sign-in is not configured"
+    }
+  ],
+  "errors.rateLimit.exceeded": [
+    {
+      "type": 0,
+      "value": "Rate limit exceeded"
+    }
+  ],
+  "errors.upstream.bindingMissing": [
+    {
+      "type": 0,
+      "value": "Upstream service binding is not configured"
+    }
+  ],
+  "errors.upstream.unreachable": [
+    {
+      "type": 0,
+      "value": "Upstream is unreachable"
+    }
+  ],
+  "kong.validate.pluginNotEnabled": [
+    {
+      "type": 0,
+      "value": "plugin '"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "' is not enabled in this gateway"
+    }
+  ],
+  "kong.validate.unknownEntity": [
+    {
+      "type": 0,
+      "value": "No entity named '"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "'"
+    }
+  ],
+  "kong.validate.vaultOnly": [
+    {
+      "type": 0,
+      "value": "must be a vault reference ({vault://...}): Edgway never stores this secret"
+    }
+  ],
+  "kong.validate.violations": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "schema violation"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " schema violations"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " ("
+    },
+    {
+      "type": 1,
+      "value": "details"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "portal.key.startsWith": [
+    {
+      "type": 0,
+      "value": "Starts with "
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    },
+    {
+      "type": 0,
+      "value": ". The full key was shown once, when it was created or rotated."
+    }
+  ],
+  "portal.key.unnamed": [
+    {
+      "type": 0,
+      "value": "Key "
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    }
+  ],
+  "portal.keys.help": [
+    {
+      "type": 0,
+      "value": "A key is shown in full only when you create or rotate it, so copy it then. Rotating a key replaces that key alone: its old value stops working within a few seconds, and your other keys keep working."
+    }
+  ],
+  "portal.landing.curl": [
+    {
+      "type": 0,
+      "value": "curl -H \"apikey: "
+    },
+    {
+      "type": 1,
+      "value": "key"
+    },
+    {
+      "type": 0,
+      "value": "\" "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    }
+  ],
+  "portal.landing.firstRequest": [
+    {
+      "type": 0,
+      "value": "Your first request"
+    }
+  ],
+  "portal.landing.gatewayPlaceholder": [
+    {
+      "type": 0,
+      "value": "https://api.example.com/"
+    }
+  ],
+  "portal.landing.intro": [
+    {
+      "type": 0,
+      "value": "Sign in to create API keys, then call the APIs with one. Each request carries your key."
+    }
+  ],
+  "portal.landing.keyPlaceholder": [
+    {
+      "type": 0,
+      "value": "$API_KEY"
+    }
+  ],
+  "portal.landing.keys": [
+    {
+      "type": 0,
+      "value": "Manage your API keys"
+    }
+  ],
+  "portal.landing.reference": [
+    {
+      "type": 0,
+      "value": "Read the API reference"
+    }
+  ],
+  "portal.landing.start.title": [
+    {
+      "type": 0,
+      "value": "Get going"
+    }
+  ],
+  "portal.landing.step.key": [
+    {
+      "type": 0,
+      "value": "2. Create a key"
+    }
+  ],
+  "portal.landing.step.keyText": [
+    {
+      "type": 0,
+      "value": "Create an API key and copy it: it is shown in full only once."
+    }
+  ],
+  "portal.landing.step.request": [
+    {
+      "type": 0,
+      "value": "3. Make a request"
+    }
+  ],
+  "portal.landing.step.requestText": [
+    {
+      "type": 0,
+      "value": "Send your key in the apikey header of every request."
+    }
+  ],
+  "portal.landing.step.signIn": [
+    {
+      "type": 0,
+      "value": "1. Sign in"
+    }
+  ],
+  "portal.landing.step.signInText": [
+    {
+      "type": 0,
+      "value": "Sign in with the account your organization gave you."
+    }
+  ],
+  "portal.landing.title": [
+    {
+      "type": 0,
+      "value": "APIs for developers"
+    }
+  ],
+  "portal.refusal.blocked": [
+    {
+      "type": 0,
+      "value": "An admin has turned off your API keys. Ask them to turn your access back on."
+    }
+  ],
+  "portal.refusal.keyLimit": [
+    {
+      "type": 0,
+      "value": "You already have "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    },
+    {
+      "type": 0,
+      "value": " API keys, the most you can hold. Delete one, or rotate an existing key, to make room."
+    }
+  ],
+  "portal.refusal.notAllowed": [
+    {
+      "type": 0,
+      "value": "This portal is for developers at approved organizations. Sign in with your work account, or ask an admin for access."
+    }
+  ],
+  "portal.refusal.unverified": [
+    {
+      "type": 0,
+      "value": "Your sign-in provider hasn't verified your email address. Verify it there, then sign in again."
+    }
+  ],
+  "portal.usage.chart": [
+    {
+      "type": 0,
+      "value": "Requests and server errors per day"
+    }
+  ],
+  "portal.usage.day": [
+    {
+      "type": 0,
+      "value": "Day"
+    }
+  ],
+  "portal.usage.errors": [
+    {
+      "type": 0,
+      "value": "Server errors"
+    }
+  ],
+  "portal.usage.none": [
+    {
+      "type": 0,
+      "value": "No requests with your keys in the last "
+    },
+    {
+      "type": 1,
+      "value": "days"
+    },
+    {
+      "type": 0,
+      "value": " days."
+    }
+  ],
+  "portal.usage.requests": [
+    {
+      "type": 0,
+      "value": "Requests"
+    }
+  ],
+  "portal.usage.showTable": [
+    {
+      "type": 0,
+      "value": "Show as a table"
+    }
+  ],
+  "portal.usage.title": [
+    {
+      "type": 0,
+      "value": "Your usage, last "
+    },
+    {
+      "type": 1,
+      "value": "days"
+    },
+    {
+      "type": 0,
+      "value": " days"
+    }
+  ],
+  "ra.action.add": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "ra.action.add_filter": [
+    {
+      "type": 0,
+      "value": "Add filter"
+    }
+  ],
+  "ra.action.back": [
+    {
+      "type": 0,
+      "value": "Go Back"
+    }
+  ],
+  "ra.action.bulk_actions": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item selected"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items selected"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.action.cancel": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
+  "ra.action.clear_array_input": [
+    {
+      "type": 0,
+      "value": "Clear the list"
+    }
+  ],
+  "ra.action.clear_input_value": [
+    {
+      "type": 0,
+      "value": "Clear value"
+    }
+  ],
+  "ra.action.clone": [
+    {
+      "type": 0,
+      "value": "Clone"
+    }
+  ],
+  "ra.action.close": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "ra.action.close_menu": [
+    {
+      "type": 0,
+      "value": "Close menu"
+    }
+  ],
+  "ra.action.confirm": [
+    {
+      "type": 0,
+      "value": "Confirm"
+    }
+  ],
+  "ra.action.create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "ra.action.create_item": [
+    {
+      "type": 0,
+      "value": "Create "
+    },
+    {
+      "type": 1,
+      "value": "item"
+    }
+  ],
+  "ra.action.delete": [
+    {
+      "type": 0,
+      "value": "Delete"
+    }
+  ],
+  "ra.action.edit": [
+    {
+      "type": 0,
+      "value": "Edit"
+    }
+  ],
+  "ra.action.expand": [
+    {
+      "type": 0,
+      "value": "Expand"
+    }
+  ],
+  "ra.action.export": [
+    {
+      "type": 0,
+      "value": "Export"
+    }
+  ],
+  "ra.action.list": [
+    {
+      "type": 0,
+      "value": "List"
+    }
+  ],
+  "ra.action.move_down": [
+    {
+      "type": 0,
+      "value": "Move down"
+    }
+  ],
+  "ra.action.move_up": [
+    {
+      "type": 0,
+      "value": "Move up"
+    }
+  ],
+  "ra.action.open": [
+    {
+      "type": 0,
+      "value": "Open"
+    }
+  ],
+  "ra.action.open_menu": [
+    {
+      "type": 0,
+      "value": "Open menu"
+    }
+  ],
+  "ra.action.refresh": [
+    {
+      "type": 0,
+      "value": "Refresh"
+    }
+  ],
+  "ra.action.remove": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
+  "ra.action.remove_all_filters": [
+    {
+      "type": 0,
+      "value": "Remove all filters"
+    }
+  ],
+  "ra.action.remove_filter": [
+    {
+      "type": 0,
+      "value": "Remove this filter"
+    }
+  ],
+  "ra.action.reset": [
+    {
+      "type": 0,
+      "value": "Reset"
+    }
+  ],
+  "ra.action.save": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "ra.action.search": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ],
+  "ra.action.search_columns": [
+    {
+      "type": 0,
+      "value": "Search columns"
+    }
+  ],
+  "ra.action.select_all": [
+    {
+      "type": 0,
+      "value": "Select all"
+    }
+  ],
+  "ra.action.select_all_button": [
+    {
+      "type": 0,
+      "value": "Select all"
+    }
+  ],
+  "ra.action.select_columns": [
+    {
+      "type": 0,
+      "value": "Columns"
+    }
+  ],
+  "ra.action.select_row": [
+    {
+      "type": 0,
+      "value": "Select this row"
+    }
+  ],
+  "ra.action.show": [
+    {
+      "type": 0,
+      "value": "Show"
+    }
+  ],
+  "ra.action.sort": [
+    {
+      "type": 0,
+      "value": "Sort"
+    }
+  ],
+  "ra.action.toggle_theme": [
+    {
+      "type": 0,
+      "value": "Toggle light/dark mode"
+    }
+  ],
+  "ra.action.undo": [
+    {
+      "type": 0,
+      "value": "Undo"
+    }
+  ],
+  "ra.action.unselect": [
+    {
+      "type": 0,
+      "value": "Unselect"
+    }
+  ],
+  "ra.action.update": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "ra.action.update_application": [
+    {
+      "type": 0,
+      "value": "Reload Application"
+    }
+  ],
+  "ra.auth.auth_check_error": [
+    {
+      "type": 0,
+      "value": "Please login to continue"
+    }
+  ],
+  "ra.auth.email": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "ra.auth.logout": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
+  "ra.auth.password": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "ra.auth.sign_in": [
+    {
+      "type": 0,
+      "value": "Sign in"
+    }
+  ],
+  "ra.auth.sign_in_error": [
+    {
+      "type": 0,
+      "value": "Authentication failed, please retry"
+    }
+  ],
+  "ra.auth.user_menu": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "ra.auth.username": [
+    {
+      "type": 0,
+      "value": "Username"
+    }
+  ],
+  "ra.boolean.false": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "ra.boolean.true": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "ra.configurable.Datagrid.title": [
+    {
+      "type": 0,
+      "value": "Datagrid"
+    }
+  ],
+  "ra.configurable.Datagrid.unlabeled": [
+    {
+      "type": 0,
+      "value": "Unlabeled column #"
+    },
+    {
+      "type": 1,
+      "value": "column"
+    }
+  ],
+  "ra.configurable.SimpleForm.title": [
+    {
+      "type": 0,
+      "value": "Form"
+    }
+  ],
+  "ra.configurable.SimpleForm.unlabeled": [
+    {
+      "type": 0,
+      "value": "Unlabeled input #"
+    },
+    {
+      "type": 1,
+      "value": "input"
+    }
+  ],
+  "ra.configurable.SimpleList.primaryText": [
+    {
+      "type": 0,
+      "value": "Primary text"
+    }
+  ],
+  "ra.configurable.SimpleList.secondaryText": [
+    {
+      "type": 0,
+      "value": "Secondary text"
+    }
+  ],
+  "ra.configurable.SimpleList.tertiaryText": [
+    {
+      "type": 0,
+      "value": "Tertiary text"
+    }
+  ],
+  "ra.configurable.SimpleList.title": [
+    {
+      "type": 0,
+      "value": "List"
+    }
+  ],
+  "ra.configurable.configureMode": [
+    {
+      "type": 0,
+      "value": "Configure this page"
+    }
+  ],
+  "ra.configurable.customize": [
+    {
+      "type": 0,
+      "value": "Customize"
+    }
+  ],
+  "ra.configurable.inspector.content": [
+    {
+      "type": 0,
+      "value": "Hover the application UI elements to configure them"
+    }
+  ],
+  "ra.configurable.inspector.hideAll": [
+    {
+      "type": 0,
+      "value": "Hide All"
+    }
+  ],
+  "ra.configurable.inspector.reset": [
+    {
+      "type": 0,
+      "value": "Reset Settings"
+    }
+  ],
+  "ra.configurable.inspector.showAll": [
+    {
+      "type": 0,
+      "value": "Show All"
+    }
+  ],
+  "ra.configurable.inspector.title": [
+    {
+      "type": 0,
+      "value": "Inspector"
+    }
+  ],
+  "ra.guesser.empty.message": [
+    {
+      "type": 0,
+      "value": "Please check your data provider"
+    }
+  ],
+  "ra.guesser.empty.title": [
+    {
+      "type": 0,
+      "value": "No data to display"
+    }
+  ],
+  "ra.input.file.upload_several": [
+    {
+      "type": 0,
+      "value": "Drop some files to upload, or click to select one."
+    }
+  ],
+  "ra.input.file.upload_single": [
+    {
+      "type": 0,
+      "value": "Drop a file to upload, or click to select it."
+    }
+  ],
+  "ra.input.image.upload_several": [
+    {
+      "type": 0,
+      "value": "Drop some pictures to upload, or click to select one."
+    }
+  ],
+  "ra.input.image.upload_single": [
+    {
+      "type": 0,
+      "value": "Drop a picture to upload, or click to select it."
+    }
+  ],
+  "ra.input.password.toggle_hidden": [
+    {
+      "type": 0,
+      "value": "Show password"
+    }
+  ],
+  "ra.input.password.toggle_visible": [
+    {
+      "type": 0,
+      "value": "Hide password"
+    }
+  ],
+  "ra.input.references.all_missing": [
+    {
+      "type": 0,
+      "value": "Unable to find references data."
+    }
+  ],
+  "ra.input.references.many_missing": [
+    {
+      "type": 0,
+      "value": "At least one of the associated references no longer appears to be available."
+    }
+  ],
+  "ra.input.references.single_missing": [
+    {
+      "type": 0,
+      "value": "Associated reference no longer appears to be available."
+    }
+  ],
+  "ra.message.about": [
+    {
+      "type": 0,
+      "value": "About"
+    }
+  ],
+  "ra.message.access_denied": [
+    {
+      "type": 0,
+      "value": "You don’t have the right permissions to access this page"
+    }
+  ],
+  "ra.message.are_you_sure": [
+    {
+      "type": 0,
+      "value": "Are you sure?"
+    }
+  ],
+  "ra.message.auth_error": [
+    {
+      "type": 0,
+      "value": "An error occurred while validating the authentication token."
+    }
+  ],
+  "ra.message.authentication_error": [
+    {
+      "type": 0,
+      "value": "The authentication server returned an error and your credentials could not be checked."
+    }
+  ],
+  "ra.message.bulk_delete_content": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Are you sure you want to delete this "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            },
+            {
+              "type": 0,
+              "value": "?"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Are you sure you want to delete these "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items?"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.message.bulk_delete_title": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Delete "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Delete "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.message.bulk_update_content": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Are you sure you want to update "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            },
+            {
+              "type": 0,
+              "value": " "
+            },
+            {
+              "type": 1,
+              "value": "recordRepresentation"
+            },
+            {
+              "type": 0,
+              "value": "?"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Are you sure you want to update these "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items?"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.message.bulk_update_title": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Update "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            },
+            {
+              "type": 0,
+              "value": " "
+            },
+            {
+              "type": 1,
+              "value": "recordRepresentation"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Update "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " "
+            },
+            {
+              "type": 1,
+              "value": "name"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.message.clear_array_input": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to clear the whole list?"
+    }
+  ],
+  "ra.message.delete_content": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to delete this "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "?"
+    }
+  ],
+  "ra.message.delete_title": [
+    {
+      "type": 0,
+      "value": "Delete "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "recordRepresentation"
+    }
+  ],
+  "ra.message.details": [
+    {
+      "type": 0,
+      "value": "Details"
+    }
+  ],
+  "ra.message.error": [
+    {
+      "type": 0,
+      "value": "A client error occurred and your request couldn’t be completed."
+    }
+  ],
+  "ra.message.invalid_form": [
+    {
+      "type": 0,
+      "value": "The form is not valid. Please check for errors"
+    }
+  ],
+  "ra.message.loading": [
+    {
+      "type": 0,
+      "value": "Please wait"
+    }
+  ],
+  "ra.message.no": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "ra.message.not_found": [
+    {
+      "type": 0,
+      "value": "Either you typed a wrong URL, or you followed a bad link."
+    }
+  ],
+  "ra.message.placeholder_data_warning": [
+    {
+      "type": 0,
+      "value": "Network issue: Data refresh failed."
+    }
+  ],
+  "ra.message.select_all_limit_reached": [
+    {
+      "type": 0,
+      "value": "There are too many elements to select them all. Only the first "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    },
+    {
+      "type": 0,
+      "value": " elements were selected."
+    }
+  ],
+  "ra.message.unsaved_changes": [
+    {
+      "type": 0,
+      "value": "Some of your changes weren’t saved. Are you sure you want to ignore them?"
+    }
+  ],
+  "ra.message.yes": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "ra.navigation.clear_filters": [
+    {
+      "type": 0,
+      "value": "Clear filters"
+    }
+  ],
+  "ra.navigation.current_page": [
+    {
+      "type": 0,
+      "value": "Page "
+    },
+    {
+      "type": 1,
+      "value": "page"
+    }
+  ],
+  "ra.navigation.first": [
+    {
+      "type": 0,
+      "value": "Go to first page"
+    }
+  ],
+  "ra.navigation.last": [
+    {
+      "type": 0,
+      "value": "Go to last page"
+    }
+  ],
+  "ra.navigation.next": [
+    {
+      "type": 0,
+      "value": "Go to next page"
+    }
+  ],
+  "ra.navigation.no_filtered_results": [
+    {
+      "type": 0,
+      "value": "No "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " found using the current filters."
+    }
+  ],
+  "ra.navigation.no_more_results": [
+    {
+      "type": 0,
+      "value": "The page number "
+    },
+    {
+      "type": 1,
+      "value": "page"
+    },
+    {
+      "type": 0,
+      "value": " is out of boundaries. Try the previous page."
+    }
+  ],
+  "ra.navigation.no_results": [
+    {
+      "type": 0,
+      "value": "No "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " found"
+    }
+  ],
+  "ra.navigation.page": [
+    {
+      "type": 0,
+      "value": "Go to page "
+    },
+    {
+      "type": 1,
+      "value": "page"
+    }
+  ],
+  "ra.navigation.page_out_from_begin": [
+    {
+      "type": 0,
+      "value": "Cannot go before page 1"
+    }
+  ],
+  "ra.navigation.page_out_from_end": [
+    {
+      "type": 0,
+      "value": "Cannot go after last page"
+    }
+  ],
+  "ra.navigation.page_out_of_boundaries": [
+    {
+      "type": 0,
+      "value": "Page number "
+    },
+    {
+      "type": 1,
+      "value": "page"
+    },
+    {
+      "type": 0,
+      "value": " out of boundaries"
+    }
+  ],
+  "ra.navigation.page_range_info": [
+    {
+      "type": 1,
+      "value": "offsetBegin"
+    },
+    {
+      "type": 0,
+      "value": "-"
+    },
+    {
+      "type": 1,
+      "value": "offsetEnd"
+    },
+    {
+      "type": 0,
+      "value": " of "
+    },
+    {
+      "type": 1,
+      "value": "total"
+    }
+  ],
+  "ra.navigation.page_rows_per_page": [
+    {
+      "type": 0,
+      "value": "Rows per page:"
+    }
+  ],
+  "ra.navigation.partial_page_range_info": [
+    {
+      "type": 1,
+      "value": "offsetBegin"
+    },
+    {
+      "type": 0,
+      "value": "-"
+    },
+    {
+      "type": 1,
+      "value": "offsetEnd"
+    },
+    {
+      "type": 0,
+      "value": " of more than "
+    },
+    {
+      "type": 1,
+      "value": "offsetEnd"
+    }
+  ],
+  "ra.navigation.previous": [
+    {
+      "type": 0,
+      "value": "Go to previous page"
+    }
+  ],
+  "ra.navigation.skip_nav": [
+    {
+      "type": 0,
+      "value": "Skip to content"
+    }
+  ],
+  "ra.notification.application_update_available": [
+    {
+      "type": 0,
+      "value": "A new version is available."
+    }
+  ],
+  "ra.notification.bad_item": [
+    {
+      "type": 0,
+      "value": "Incorrect element"
+    }
+  ],
+  "ra.notification.canceled": [
+    {
+      "type": 0,
+      "value": "Action cancelled"
+    }
+  ],
+  "ra.notification.created": [
+    {
+      "type": 0,
+      "value": "Element created"
+    }
+  ],
+  "ra.notification.data_provider_error": [
+    {
+      "type": 0,
+      "value": "dataProvider error. Check the console for details."
+    }
+  ],
+  "ra.notification.deleted": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Element deleted"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " elements deleted"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.notification.http_error": [
+    {
+      "type": 0,
+      "value": "Server communication error"
+    }
+  ],
+  "ra.notification.i18n_error": [
+    {
+      "type": 0,
+      "value": "Cannot load the translations for the specified language"
+    }
+  ],
+  "ra.notification.item_doesnt_exist": [
+    {
+      "type": 0,
+      "value": "Element does not exist"
+    }
+  ],
+  "ra.notification.logged_out": [
+    {
+      "type": 0,
+      "value": "Your session has ended, please reconnect."
+    }
+  ],
+  "ra.notification.not_authorized": [
+    {
+      "type": 0,
+      "value": "You’re not authorized to access this resource."
+    }
+  ],
+  "ra.notification.offline": [
+    {
+      "type": 0,
+      "value": "No connectivity. Could not fetch data."
+    }
+  ],
+  "ra.notification.updated": [
+    {
+      "type": 6,
+      "value": "smart_count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Element updated"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " elements updated"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ra.page.access_denied": [
+    {
+      "type": 0,
+      "value": "Access denied"
+    }
+  ],
+  "ra.page.authentication_error": [
+    {
+      "type": 0,
+      "value": "Authentication error"
+    }
+  ],
+  "ra.page.create": [
+    {
+      "type": 0,
+      "value": "Create "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ra.page.dashboard": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "ra.page.edit": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "recordRepresentation"
+    }
+  ],
+  "ra.page.empty": [
+    {
+      "type": 0,
+      "value": "No "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " yet."
+    }
+  ],
+  "ra.page.error": [
+    {
+      "type": 0,
+      "value": "Something went wrong"
+    }
+  ],
+  "ra.page.invite": [
+    {
+      "type": 0,
+      "value": "Do you want to add one?"
+    }
+  ],
+  "ra.page.loading": [
+    {
+      "type": 0,
+      "value": "Loading"
+    }
+  ],
+  "ra.page.not_found": [
+    {
+      "type": 0,
+      "value": "Not Found"
+    }
+  ],
+  "ra.page.show": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "recordRepresentation"
+    }
+  ],
+  "ra.saved_queries.help": [
+    {
+      "type": 0,
+      "value": "Filter the list and save this query for later"
+    }
+  ],
+  "ra.saved_queries.label": [
+    {
+      "type": 0,
+      "value": "Saved queries"
+    }
+  ],
+  "ra.saved_queries.new_dialog_title": [
+    {
+      "type": 0,
+      "value": "Save current query as"
+    }
+  ],
+  "ra.saved_queries.new_label": [
+    {
+      "type": 0,
+      "value": "Save current query..."
+    }
+  ],
+  "ra.saved_queries.query_name": [
+    {
+      "type": 0,
+      "value": "Query name"
+    }
+  ],
+  "ra.saved_queries.remove_dialog_title": [
+    {
+      "type": 0,
+      "value": "Remove saved query?"
+    }
+  ],
+  "ra.saved_queries.remove_label": [
+    {
+      "type": 0,
+      "value": "Remove saved query"
+    }
+  ],
+  "ra.saved_queries.remove_label_with_name": [
+    {
+      "type": 0,
+      "value": "Remove query \""
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "\""
+    }
+  ],
+  "ra.saved_queries.remove_message": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to remove that item from your list of saved queries?"
+    }
+  ],
+  "ra.sort.ASC": [
+    {
+      "type": 0,
+      "value": "ascending"
+    }
+  ],
+  "ra.sort.DESC": [
+    {
+      "type": 0,
+      "value": "descending"
+    }
+  ],
+  "ra.sort.sort_by": [
+    {
+      "type": 0,
+      "value": "Sort by "
+    },
+    {
+      "type": 1,
+      "value": "field_lower_first"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "order"
+    }
+  ],
+  "ra.validation.email": [
+    {
+      "type": 0,
+      "value": "Must be a valid email"
+    }
+  ],
+  "ra.validation.maxLength": [
+    {
+      "type": 0,
+      "value": "Must be "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    },
+    {
+      "type": 0,
+      "value": " characters or less"
+    }
+  ],
+  "ra.validation.maxValue": [
+    {
+      "type": 0,
+      "value": "Must be "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    },
+    {
+      "type": 0,
+      "value": " or less"
+    }
+  ],
+  "ra.validation.minLength": [
+    {
+      "type": 0,
+      "value": "Must be "
+    },
+    {
+      "type": 1,
+      "value": "min"
+    },
+    {
+      "type": 0,
+      "value": " characters at least"
+    }
+  ],
+  "ra.validation.minValue": [
+    {
+      "type": 0,
+      "value": "Must be at least "
+    },
+    {
+      "type": 1,
+      "value": "min"
+    }
+  ],
+  "ra.validation.number": [
+    {
+      "type": 0,
+      "value": "Must be a number"
+    }
+  ],
+  "ra.validation.oneOf": [
+    {
+      "type": 0,
+      "value": "Must be one of: "
+    },
+    {
+      "type": 1,
+      "value": "options"
+    }
+  ],
+  "ra.validation.regex": [
+    {
+      "type": 0,
+      "value": "Must match a specific format (regexp): "
+    },
+    {
+      "type": 1,
+      "value": "pattern"
+    }
+  ],
+  "ra.validation.required": [
+    {
+      "type": 0,
+      "value": "Required"
+    }
+  ],
+  "ra.validation.unique": [
+    {
+      "type": 0,
+      "value": "Must be unique"
+    }
+  ],
+  "registry.messageId": [
+    {
+      "type": 0,
+      "value": "The plugin "
+    },
+    {
+      "type": 1,
+      "value": "plugin"
+    },
+    {
+      "type": 0,
+      "value": " has a message with id \""
+    },
+    {
+      "type": 1,
+      "value": "id"
+    },
+    {
+      "type": 0,
+      "value": "\": a plugin's message ids must start with \""
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    },
+    {
+      "type": 0,
+      "value": "\"."
+    }
+  ],
+  "rjsf.AddButton": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "rjsf.AddItemButton": [
+    {
+      "type": 0,
+      "value": "Add Item"
+    }
+  ],
+  "rjsf.AriaDateLabel": [
+    {
+      "type": 0,
+      "value": "Select a date"
+    }
+  ],
+  "rjsf.ArrayItemTitle": [
+    {
+      "type": 0,
+      "value": "Item"
+    }
+  ],
+  "rjsf.ClearButton": [
+    {
+      "type": 0,
+      "value": "clear input"
+    }
+  ],
+  "rjsf.ClearLabel": [
+    {
+      "type": 0,
+      "value": "Clear"
+    }
+  ],
+  "rjsf.CloseLabel": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "rjsf.CopyButton": [
+    {
+      "type": 0,
+      "value": "Copy"
+    }
+  ],
+  "rjsf.CycleDetected": [
+    {
+      "type": 0,
+      "value": "Circular reference ($ref cycle) detected for field \""
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "\". You may choose to expand to the next cycle break"
+    }
+  ],
+  "rjsf.DecrementAriaLabel": [
+    {
+      "type": 0,
+      "value": "Decrease value by 1"
+    }
+  ],
+  "rjsf.DeprecatedLabel": [
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": " (deprecated)"
+    }
+  ],
+  "rjsf.EmptyArray": [
+    {
+      "type": 0,
+      "value": "No items yet. Use the button below to add some."
+    }
+  ],
+  "rjsf.ErrorsLabel": [
+    {
+      "type": 0,
+      "value": "Errors"
+    }
+  ],
+  "rjsf.ExpandButton": [
+    {
+      "type": 0,
+      "value": "Expand Cycle"
+    }
+  ],
+  "rjsf.FilesInfo": [
+    {
+      "type": 0,
+      "value": "**"
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "** ("
+    },
+    {
+      "type": 1,
+      "value": "p2"
+    },
+    {
+      "type": 0,
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "p3"
+    },
+    {
+      "type": 0,
+      "value": " bytes)"
+    }
+  ],
+  "rjsf.IncrementAriaLabel": [
+    {
+      "type": 0,
+      "value": "Increase value by 1"
+    }
+  ],
+  "rjsf.InvalidObjectField": [
+    {
+      "type": 0,
+      "value": "Invalid \""
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "\" object field configuration: _"
+    },
+    {
+      "type": 1,
+      "value": "p2"
+    },
+    {
+      "type": 0,
+      "value": "_."
+    }
+  ],
+  "rjsf.KeyLabel": [
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": " Key"
+    }
+  ],
+  "rjsf.MissingItems": [
+    {
+      "type": 0,
+      "value": "Missing items definition"
+    }
+  ],
+  "rjsf.MoveDownButton": [
+    {
+      "type": 0,
+      "value": "Move down"
+    }
+  ],
+  "rjsf.MoveUpButton": [
+    {
+      "type": 0,
+      "value": "Move up"
+    }
+  ],
+  "rjsf.NewStringDefault": [
+    {
+      "type": 0,
+      "value": "New Value"
+    }
+  ],
+  "rjsf.NoLabel": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "rjsf.NowLabel": [
+    {
+      "type": 0,
+      "value": "Now"
+    }
+  ],
+  "rjsf.OptionPrefix": [
+    {
+      "type": 0,
+      "value": "Option "
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    }
+  ],
+  "rjsf.OptionalObjectAdd": [
+    {
+      "type": 0,
+      "value": "Add data for optional field"
+    }
+  ],
+  "rjsf.OptionalObjectEmptyMsg": [
+    {
+      "type": 0,
+      "value": "No data for optional field"
+    }
+  ],
+  "rjsf.OptionalObjectRemove": [
+    {
+      "type": 0,
+      "value": "Remove data for optional field"
+    }
+  ],
+  "rjsf.PreviewLabel": [
+    {
+      "type": 0,
+      "value": "Preview"
+    }
+  ],
+  "rjsf.RemoveButton": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
+  "rjsf.TitleOptionPrefix": [
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": " option "
+    },
+    {
+      "type": 1,
+      "value": "p2"
+    }
+  ],
+  "rjsf.Type": [
+    {
+      "type": 0,
+      "value": "Type"
+    }
+  ],
+  "rjsf.UnknownFieldType": [
+    {
+      "type": 0,
+      "value": "Unknown field type "
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    }
+  ],
+  "rjsf.UnsupportedField": [
+    {
+      "type": 0,
+      "value": "Unsupported field schema."
+    }
+  ],
+  "rjsf.UnsupportedFieldWithId": [
+    {
+      "type": 0,
+      "value": "Unsupported field schema for field `"
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "`."
+    }
+  ],
+  "rjsf.UnsupportedFieldWithIdAndReason": [
+    {
+      "type": 0,
+      "value": "Unsupported field schema for field `"
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "`: _"
+    },
+    {
+      "type": 1,
+      "value": "p2"
+    },
+    {
+      "type": 0,
+      "value": "_."
+    }
+  ],
+  "rjsf.UnsupportedFieldWithReason": [
+    {
+      "type": 0,
+      "value": "Unsupported field schema: _"
+    },
+    {
+      "type": 1,
+      "value": "p1"
+    },
+    {
+      "type": 0,
+      "value": "_."
+    }
+  ],
+  "rjsf.Value": [
+    {
+      "type": 0,
+      "value": "Value"
+    }
+  ],
+  "rjsf.YesLabel": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "ui.audit.action": [
+    {
+      "type": 0,
+      "value": "Action"
+    }
+  ],
+  "ui.audit.actionCreate": [
+    {
+      "type": 0,
+      "value": "Created"
+    }
+  ],
+  "ui.audit.actionDelete": [
+    {
+      "type": 0,
+      "value": "Removed"
+    }
+  ],
+  "ui.audit.actionPublish": [
+    {
+      "type": 0,
+      "value": "Published"
+    }
+  ],
+  "ui.audit.actionRollback": [
+    {
+      "type": 0,
+      "value": "Rolled back"
+    }
+  ],
+  "ui.audit.actionUpdate": [
+    {
+      "type": 0,
+      "value": "Changed"
+    }
+  ],
+  "ui.audit.all": [
+    {
+      "type": 0,
+      "value": "All actions"
+    }
+  ],
+  "ui.audit.anyEntity": [
+    {
+      "type": 0,
+      "value": "Any entity"
+    }
+  ],
+  "ui.audit.details": [
+    {
+      "type": 0,
+      "value": "Details"
+    }
+  ],
+  "ui.audit.empty": [
+    {
+      "type": 0,
+      "value": "No changes recorded yet."
+    }
+  ],
+  "ui.audit.entity": [
+    {
+      "type": 0,
+      "value": "Entity"
+    }
+  ],
+  "ui.audit.intro": [
+    {
+      "type": 0,
+      "value": "Every change, publish and rollback, newest first."
+    }
+  ],
+  "ui.audit.more": [
+    {
+      "type": 0,
+      "value": "Load more"
+    }
+  ],
+  "ui.audit.named": [
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.audit.namedOn": [
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " on "
+    },
+    {
+      "type": 1,
+      "value": "scopeType"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "scope"
+    }
+  ],
+  "ui.audit.open": [
+    {
+      "type": 0,
+      "value": "Open "
+    },
+    {
+      "type": 1,
+      "value": "entity"
+    }
+  ],
+  "ui.audit.requestId": [
+    {
+      "type": 0,
+      "value": "Request "
+    },
+    {
+      "type": 1,
+      "value": "id"
+    }
+  ],
+  "ui.audit.scoped": [
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": " on "
+    },
+    {
+      "type": 1,
+      "value": "scopeType"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "scope"
+    }
+  ],
+  "ui.audit.title": [
+    {
+      "type": 0,
+      "value": "Audit log"
+    }
+  ],
+  "ui.audit.version": [
+    {
+      "type": 0,
+      "value": "Version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.audit.what": [
+    {
+      "type": 0,
+      "value": "What"
+    }
+  ],
+  "ui.audit.when": [
+    {
+      "type": 0,
+      "value": "When"
+    }
+  ],
+  "ui.audit.who": [
+    {
+      "type": 0,
+      "value": "Who"
+    }
+  ],
+  "ui.audit.whoHint": [
+    {
+      "type": 0,
+      "value": "Email or token name"
+    }
+  ],
+  "ui.category.ai": [
+    {
+      "type": 0,
+      "value": "AI"
+    }
+  ],
+  "ui.category.authentication": [
+    {
+      "type": 0,
+      "value": "Authentication"
+    }
+  ],
+  "ui.category.logging": [
+    {
+      "type": 0,
+      "value": "Logging"
+    }
+  ],
+  "ui.category.other": [
+    {
+      "type": 0,
+      "value": "Other"
+    }
+  ],
+  "ui.category.security": [
+    {
+      "type": 0,
+      "value": "Security"
+    }
+  ],
+  "ui.category.trafficControl": [
+    {
+      "type": 0,
+      "value": "Traffic control"
+    }
+  ],
+  "ui.category.transformations": [
+    {
+      "type": 0,
+      "value": "Transformations"
+    }
+  ],
+  "ui.cert.banner": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " certificate has expired or expires within "
+            },
+            {
+              "type": 1,
+              "value": "days"
+            },
+            {
+              "type": 0,
+              "value": " days."
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " certificates have expired or expire within "
+            },
+            {
+              "type": 1,
+              "value": "days"
+            },
+            {
+              "type": 0,
+              "value": " days."
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " Renew them, or the gateway serves an expired certificate."
+    }
+  ],
+  "ui.cert.expired": [
+    {
+      "type": 0,
+      "value": "Expired"
+    }
+  ],
+  "ui.cert.expires": [
+    {
+      "type": 0,
+      "value": "Expires"
+    }
+  ],
+  "ui.cert.issuer": [
+    {
+      "type": 0,
+      "value": "Issuer "
+    },
+    {
+      "type": 1,
+      "value": "issuer"
+    }
+  ],
+  "ui.cert.keyHint": [
+    {
+      "type": 0,
+      "value": "A vault reference such as "
+    },
+    {
+      "type": 1,
+      "value": "example"
+    },
+    {
+      "type": 0,
+      "value": ", not the key itself: Edgway never stores a private key. Put the key in a Worker secret or Secrets Store named "
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    },
+    {
+      "type": 0,
+      "value": "…, and reference it here."
+    }
+  ],
+  "ui.cert.keyInvalid": [
+    {
+      "type": 0,
+      "value": "Must be a vault reference, such as "
+    },
+    {
+      "type": 1,
+      "value": "example"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.cert.keyType": [
+    {
+      "type": 0,
+      "value": "Key type"
+    }
+  ],
+  "ui.cert.privateKey": [
+    {
+      "type": 0,
+      "value": "Private key (vault reference)"
+    }
+  ],
+  "ui.cert.read": [
+    {
+      "type": 0,
+      "value": "Read: "
+    },
+    {
+      "type": 1,
+      "value": "subject"
+    },
+    {
+      "type": 0,
+      "value": ", expires "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    },
+    {
+      "type": 0,
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "keyType"
+    }
+  ],
+  "ui.cert.replace": [
+    {
+      "type": 0,
+      "value": "Replace"
+    }
+  ],
+  "ui.cert.soon": [
+    {
+      "type": 0,
+      "value": "Expires soon"
+    }
+  ],
+  "ui.cert.stage": [
+    {
+      "type": 0,
+      "value": "Stage certificate"
+    }
+  ],
+  "ui.cert.subject": [
+    {
+      "type": 0,
+      "value": "Subject"
+    }
+  ],
+  "ui.cert.unreadable": [
+    {
+      "type": 0,
+      "value": "Can't read this certificate"
+    }
+  ],
+  "ui.cert.view": [
+    {
+      "type": 0,
+      "value": "View"
+    }
+  ],
+  "ui.config.actions": [
+    {
+      "type": 0,
+      "value": "Actions"
+    }
+  ],
+  "ui.config.byAuthor": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " by "
+    },
+    {
+      "type": 1,
+      "value": "actor"
+    }
+  ],
+  "ui.config.current": [
+    {
+      "type": 0,
+      "value": "live"
+    }
+  ],
+  "ui.config.groupCounts": [
+    {
+      "type": 1,
+      "value": "added"
+    },
+    {
+      "type": 0,
+      "value": " added, "
+    },
+    {
+      "type": 1,
+      "value": "changed"
+    },
+    {
+      "type": 0,
+      "value": " changed, "
+    },
+    {
+      "type": 1,
+      "value": "removed"
+    },
+    {
+      "type": 0,
+      "value": " removed"
+    }
+  ],
+  "ui.config.history": [
+    {
+      "type": 0,
+      "value": "History"
+    }
+  ],
+  "ui.config.kindAdded": [
+    {
+      "type": 0,
+      "value": "Added"
+    }
+  ],
+  "ui.config.kindChanged": [
+    {
+      "type": 0,
+      "value": "Changed"
+    }
+  ],
+  "ui.config.kindRemoved": [
+    {
+      "type": 0,
+      "value": "Removed"
+    }
+  ],
+  "ui.config.noChanges": [
+    {
+      "type": 0,
+      "value": "Nothing to publish: the staged configuration is the live one."
+    }
+  ],
+  "ui.config.noMatch": [
+    {
+      "type": 0,
+      "value": "No change matches the search."
+    }
+  ],
+  "ui.config.note": [
+    {
+      "type": 0,
+      "value": "Note"
+    }
+  ],
+  "ui.config.nothingPublished": [
+    {
+      "type": 0,
+      "value": "Nothing published yet"
+    }
+  ],
+  "ui.config.publish": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
+  "ui.config.publishConfirm": [
+    {
+      "type": 0,
+      "value": "Publish "
+    },
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": "?"
+    }
+  ],
+  "ui.config.publishConfirmBody": [
+    {
+      "type": 0,
+      "value": "The gateways serve the new version within about a second."
+    }
+  ],
+  "ui.config.publishCount": [
+    {
+      "type": 0,
+      "value": "Publish "
+    },
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ui.config.publishDone": [
+    {
+      "type": 0,
+      "value": "Published version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.config.publishVersion": [
+    {
+      "type": 0,
+      "value": "Publish version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.config.published": [
+    {
+      "type": 0,
+      "value": "Published (version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "ui.config.publishedAt": [
+    {
+      "type": 0,
+      "value": "Published at"
+    }
+  ],
+  "ui.config.publishedBy": [
+    {
+      "type": 0,
+      "value": "Published by"
+    }
+  ],
+  "ui.config.rollback": [
+    {
+      "type": 0,
+      "value": "Roll back"
+    }
+  ],
+  "ui.config.rollbackConfirm": [
+    {
+      "type": 0,
+      "value": "Make version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": " live again?"
+    }
+  ],
+  "ui.config.rollbackConfirmBody": [
+    {
+      "type": 0,
+      "value": "The gateways switch to it within about a second. Staged changes stay staged."
+    }
+  ],
+  "ui.config.rollbackPreviewFailed": [
+    {
+      "type": 0,
+      "value": "Couldn't check which revoked or rotated credentials this rollback makes work again. If it does, you'll be told after it's done."
+    }
+  ],
+  "ui.config.rollbackRevived": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " credential"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " credentials"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " revoked or rotated since version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": " will work again:"
+    }
+  ],
+  "ui.config.rollbackRevivedDone": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " credential"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " credentials"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " revoked or rotated since version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": " work again: revoke them again if they should not."
+    }
+  ],
+  "ui.config.rollbackRevivedItem": [
+    {
+      "type": 1,
+      "value": "entity"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "id"
+    },
+    {
+      "type": 0,
+      "value": " (consumer "
+    },
+    {
+      "type": 1,
+      "value": "consumer"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "ui.config.rolledBack": [
+    {
+      "type": 0,
+      "value": "Rolled back to version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.config.search": [
+    {
+      "type": 0,
+      "value": "Search changes"
+    }
+  ],
+  "ui.config.showDiff": [
+    {
+      "type": 0,
+      "value": "Show the diff: the changed entities, as published and as staged"
+    }
+  ],
+  "ui.config.staged": [
+    {
+      "type": 0,
+      "value": "Staged"
+    }
+  ],
+  "ui.config.stagedAgainst": [
+    {
+      "type": 0,
+      "value": "Staged against version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.config.stagedFirst": [
+    {
+      "type": 0,
+      "value": "Staged, not yet published"
+    }
+  ],
+  "ui.config.takesAll": [
+    {
+      "type": 0,
+      "value": "Publishing takes every staged change: "
+    },
+    {
+      "type": 1,
+      "value": "authors"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.config.title": [
+    {
+      "type": 0,
+      "value": "Publish staged changes"
+    }
+  ],
+  "ui.config.unknownAuthor": [
+    {
+      "type": 0,
+      "value": "an unknown author"
+    }
+  ],
+  "ui.config.version": [
+    {
+      "type": 0,
+      "value": "Version"
+    }
+  ],
+  "ui.config.viewDeck": [
+    {
+      "type": 0,
+      "value": "decK / YAML"
+    }
+  ],
+  "ui.config.viewJson": [
+    {
+      "type": 0,
+      "value": "JSON"
+    }
+  ],
+  "ui.config.warning.algorithm": [
+    {
+      "type": 0,
+      "value": "Upstream "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " uses "
+    },
+    {
+      "type": 1,
+      "value": "algorithm"
+    },
+    {
+      "type": 0,
+      "value": ", which runs as "
+    },
+    {
+      "type": 1,
+      "value": "runsAs"
+    },
+    {
+      "type": 0,
+      "value": " on Workers."
+    }
+  ],
+  "ui.config.warning.rawSecret": [
+    {
+      "type": 0,
+      "value": "Plugin "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " keeps "
+    },
+    {
+      "type": 1,
+      "value": "fields"
+    },
+    {
+      "type": 0,
+      "value": " as plain text. Store it as a vault reference, such as {vault://env/vault-name}, to keep it out of the database."
+    }
+  ],
+  "ui.config.warningsAhead": [
+    {
+      "type": 0,
+      "value": "Publish goes ahead with these warnings:"
+    }
+  ],
+  "ui.consumer.addToGroup": [
+    {
+      "type": 0,
+      "value": "Add to group"
+    }
+  ],
+  "ui.consumer.allowed": [
+    {
+      "type": 0,
+      "value": "Portal access allowed"
+    }
+  ],
+  "ui.consumer.block": [
+    {
+      "type": 0,
+      "value": "Block portal access"
+    }
+  ],
+  "ui.consumer.blockConfirm": [
+    {
+      "type": 0,
+      "value": "Block "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " from the portal? Their API keys are deleted and the gateways stop accepting them within about a second."
+    }
+  ],
+  "ui.consumer.blocked": [
+    {
+      "type": 0,
+      "value": "Portal access blocked"
+    }
+  ],
+  "ui.consumer.developer": [
+    {
+      "type": 0,
+      "value": "Portal developer"
+    }
+  ],
+  "ui.consumer.jwtKey": [
+    {
+      "type": 0,
+      "value": "Key (iss)"
+    }
+  ],
+  "ui.consumer.leaveGroup": [
+    {
+      "type": 0,
+      "value": "Remove from "
+    },
+    {
+      "type": 1,
+      "value": "group"
+    }
+  ],
+  "ui.consumer.noGroups": [
+    {
+      "type": 0,
+      "value": "In no ACL group."
+    }
+  ],
+  "ui.consumer.noPlugins": [
+    {
+      "type": 0,
+      "value": "No plugin is set on this consumer."
+    }
+  ],
+  "ui.consumer.plugins": [
+    {
+      "type": 0,
+      "value": "Plugins on this consumer"
+    }
+  ],
+  "ui.consumer.unblock": [
+    {
+      "type": 0,
+      "value": "Unblock portal access"
+    }
+  ],
+  "ui.consumer.unblockConfirm": [
+    {
+      "type": 0,
+      "value": "Let "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " sign in to the portal again? Their old keys stay deleted; they can make new ones."
+    }
+  ],
+  "ui.credentials.add": [
+    {
+      "type": 0,
+      "value": "Add "
+    },
+    {
+      "type": 1,
+      "value": "resource"
+    }
+  ],
+  "ui.credentials.addBasic": [
+    {
+      "type": 0,
+      "value": "Add a basic-auth user"
+    }
+  ],
+  "ui.credentials.addKey": [
+    {
+      "type": 0,
+      "value": "Add an API key"
+    }
+  ],
+  "ui.credentials.changePassword": [
+    {
+      "type": 0,
+      "value": "Change password"
+    }
+  ],
+  "ui.credentials.delete": [
+    {
+      "type": 0,
+      "value": "Delete"
+    }
+  ],
+  "ui.credentials.deleteConfirm": [
+    {
+      "type": 0,
+      "value": "Delete this credential? Clients using it stop working at the next publish."
+    }
+  ],
+  "ui.credentials.keyPrefix": [
+    {
+      "type": 0,
+      "value": "Key prefix"
+    }
+  ],
+  "ui.credentials.none": [
+    {
+      "type": 0,
+      "value": "None yet."
+    }
+  ],
+  "ui.credentials.password": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "ui.credentials.rotate": [
+    {
+      "type": 0,
+      "value": "Rotate"
+    }
+  ],
+  "ui.credentials.rotateConfirm": [
+    {
+      "type": 0,
+      "value": "Rotate this key? Clients using it stop working until they get the new one."
+    }
+  ],
+  "ui.credentials.save": [
+    {
+      "type": 0,
+      "value": "Save"
+    }
+  ],
+  "ui.credentials.ttl": [
+    {
+      "type": 0,
+      "value": "Lifetime (seconds)"
+    }
+  ],
+  "ui.credentials.username": [
+    {
+      "type": 0,
+      "value": "Username"
+    }
+  ],
+  "ui.entity.acls": [
+    {
+      "type": 0,
+      "value": "ACL group"
+    }
+  ],
+  "ui.entity.basicAuth": [
+    {
+      "type": 0,
+      "value": "basic auth credential"
+    }
+  ],
+  "ui.entity.caCertificates": [
+    {
+      "type": 0,
+      "value": "CA certificate"
+    }
+  ],
+  "ui.entity.certificates": [
+    {
+      "type": 0,
+      "value": "certificate"
+    }
+  ],
+  "ui.entity.consumerGroupConsumers": [
+    {
+      "type": 0,
+      "value": "group membership"
+    }
+  ],
+  "ui.entity.consumerGroups": [
+    {
+      "type": 0,
+      "value": "consumer group"
+    }
+  ],
+  "ui.entity.consumers": [
+    {
+      "type": 0,
+      "value": "consumer"
+    }
+  ],
+  "ui.entity.jwtSecrets": [
+    {
+      "type": 0,
+      "value": "JWT credential"
+    }
+  ],
+  "ui.entity.keyAuth": [
+    {
+      "type": 0,
+      "value": "API key"
+    }
+  ],
+  "ui.entity.plugins": [
+    {
+      "type": 0,
+      "value": "plugin"
+    }
+  ],
+  "ui.entity.routes": [
+    {
+      "type": 0,
+      "value": "route"
+    }
+  ],
+  "ui.entity.sandboxPlugins": [
+    {
+      "type": 0,
+      "value": "uploaded plugin"
+    }
+  ],
+  "ui.entity.services": [
+    {
+      "type": 0,
+      "value": "service"
+    }
+  ],
+  "ui.entity.snis": [
+    {
+      "type": 0,
+      "value": "SNI"
+    }
+  ],
+  "ui.entity.targets": [
+    {
+      "type": 0,
+      "value": "target"
+    }
+  ],
+  "ui.entity.upstreams": [
+    {
+      "type": 0,
+      "value": "upstream"
+    }
+  ],
+  "ui.entity.vaults": [
+    {
+      "type": 0,
+      "value": "vault"
+    }
+  ],
+  "ui.error.docs": [
+    {
+      "type": 0,
+      "value": "What "
+    },
+    {
+      "type": 1,
+      "value": "code"
+    },
+    {
+      "type": 0,
+      "value": " means"
+    }
+  ],
+  "ui.error.retry": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
+  "ui.error.status": [
+    {
+      "type": 0,
+      "value": "The admin answered "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.error.title": [
+    {
+      "type": 0,
+      "value": "This page couldn't load."
+    }
+  ],
+  "ui.field.algorithm": [
+    {
+      "type": 0,
+      "value": "Algorithm"
+    }
+  ],
+  "ui.field.bindings": [
+    {
+      "type": 0,
+      "value": "Bindings"
+    }
+  ],
+  "ui.field.caCertificates": [
+    {
+      "type": 0,
+      "value": "CA certificates"
+    }
+  ],
+  "ui.field.cert": [
+    {
+      "type": 0,
+      "value": "Certificate (PEM)"
+    }
+  ],
+  "ui.field.certAlt": [
+    {
+      "type": 0,
+      "value": "Alternate certificate (PEM)"
+    }
+  ],
+  "ui.field.certDigest": [
+    {
+      "type": 0,
+      "value": "Certificate digest"
+    }
+  ],
+  "ui.field.certificateId": [
+    {
+      "type": 0,
+      "value": "Certificate"
+    }
+  ],
+  "ui.field.clientCertificateId": [
+    {
+      "type": 0,
+      "value": "Client certificate"
+    }
+  ],
+  "ui.field.code": [
+    {
+      "type": 0,
+      "value": "Plugin code"
+    }
+  ],
+  "ui.field.config": [
+    {
+      "type": 0,
+      "value": "Configuration"
+    }
+  ],
+  "ui.field.connectTimeout": [
+    {
+      "type": 0,
+      "value": "Connect timeout (ms)"
+    }
+  ],
+  "ui.field.consumerGroupId": [
+    {
+      "type": 0,
+      "value": "Consumer group"
+    }
+  ],
+  "ui.field.consumerId": [
+    {
+      "type": 0,
+      "value": "Consumer"
+    }
+  ],
+  "ui.field.cpuMs": [
+    {
+      "type": 0,
+      "value": "CPU time (ms)"
+    }
+  ],
+  "ui.field.customId": [
+    {
+      "type": 0,
+      "value": "Custom ID"
+    }
+  ],
+  "ui.field.description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "ui.field.destinations": [
+    {
+      "type": 0,
+      "value": "Destinations"
+    }
+  ],
+  "ui.field.displayName": [
+    {
+      "type": 0,
+      "value": "Display name"
+    }
+  ],
+  "ui.field.enabled": [
+    {
+      "type": 0,
+      "value": "Enabled"
+    }
+  ],
+  "ui.field.expression": [
+    {
+      "type": 0,
+      "value": "Expression"
+    }
+  ],
+  "ui.field.failover": [
+    {
+      "type": 0,
+      "value": "Failover"
+    }
+  ],
+  "ui.field.group": [
+    {
+      "type": 0,
+      "value": "Group"
+    }
+  ],
+  "ui.field.hashFallback": [
+    {
+      "type": 0,
+      "value": "Hash fallback"
+    }
+  ],
+  "ui.field.hashFallbackHeader": [
+    {
+      "type": 0,
+      "value": "Hash fallback header"
+    }
+  ],
+  "ui.field.hashFallbackQueryArg": [
+    {
+      "type": 0,
+      "value": "Hash fallback query argument"
+    }
+  ],
+  "ui.field.hashFallbackUriCapture": [
+    {
+      "type": 0,
+      "value": "Hash fallback URI capture"
+    }
+  ],
+  "ui.field.hashOn": [
+    {
+      "type": 0,
+      "value": "Hash on"
+    }
+  ],
+  "ui.field.hashOnCookie": [
+    {
+      "type": 0,
+      "value": "Hash on cookie"
+    }
+  ],
+  "ui.field.hashOnCookiePath": [
+    {
+      "type": 0,
+      "value": "Hash cookie path"
+    }
+  ],
+  "ui.field.hashOnHeader": [
+    {
+      "type": 0,
+      "value": "Hash on header"
+    }
+  ],
+  "ui.field.hashOnQueryArg": [
+    {
+      "type": 0,
+      "value": "Hash on query argument"
+    }
+  ],
+  "ui.field.hashOnUriCapture": [
+    {
+      "type": 0,
+      "value": "Hash on URI capture"
+    }
+  ],
+  "ui.field.headers": [
+    {
+      "type": 0,
+      "value": "Headers"
+    }
+  ],
+  "ui.field.healthchecks": [
+    {
+      "type": 0,
+      "value": "Health checks"
+    }
+  ],
+  "ui.field.host": [
+    {
+      "type": 0,
+      "value": "Host"
+    }
+  ],
+  "ui.field.hostHeader": [
+    {
+      "type": 0,
+      "value": "Host header"
+    }
+  ],
+  "ui.field.hosts": [
+    {
+      "type": 0,
+      "value": "Hosts"
+    }
+  ],
+  "ui.field.httpsRedirectStatusCode": [
+    {
+      "type": 0,
+      "value": "HTTPS redirect status"
+    }
+  ],
+  "ui.field.id": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "ui.field.instanceName": [
+    {
+      "type": 0,
+      "value": "Instance name"
+    }
+  ],
+  "ui.field.key": [
+    {
+      "type": 0,
+      "value": "Private key"
+    }
+  ],
+  "ui.field.keyAlt": [
+    {
+      "type": 0,
+      "value": "Alternate private key"
+    }
+  ],
+  "ui.field.methods": [
+    {
+      "type": 0,
+      "value": "Methods"
+    }
+  ],
+  "ui.field.name": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "ui.field.onError": [
+    {
+      "type": 0,
+      "value": "On error"
+    }
+  ],
+  "ui.field.ordering": [
+    {
+      "type": 0,
+      "value": "Ordering"
+    }
+  ],
+  "ui.field.password": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "ui.field.path": [
+    {
+      "type": 0,
+      "value": "Path"
+    }
+  ],
+  "ui.field.pathHandling": [
+    {
+      "type": 0,
+      "value": "Path handling"
+    }
+  ],
+  "ui.field.paths": [
+    {
+      "type": 0,
+      "value": "Paths"
+    }
+  ],
+  "ui.field.port": [
+    {
+      "type": 0,
+      "value": "Port"
+    }
+  ],
+  "ui.field.prefix": [
+    {
+      "type": 0,
+      "value": "Prefix"
+    }
+  ],
+  "ui.field.preserveHost": [
+    {
+      "type": 0,
+      "value": "Preserve host"
+    }
+  ],
+  "ui.field.priority": [
+    {
+      "type": 0,
+      "value": "Priority"
+    }
+  ],
+  "ui.field.protocol": [
+    {
+      "type": 0,
+      "value": "Protocol"
+    }
+  ],
+  "ui.field.protocols": [
+    {
+      "type": 0,
+      "value": "Protocols"
+    }
+  ],
+  "ui.field.readTimeout": [
+    {
+      "type": 0,
+      "value": "Read timeout (ms)"
+    }
+  ],
+  "ui.field.regexPriority": [
+    {
+      "type": 0,
+      "value": "Regex priority"
+    }
+  ],
+  "ui.field.requestBuffering": [
+    {
+      "type": 0,
+      "value": "Request buffering"
+    }
+  ],
+  "ui.field.responseBuffering": [
+    {
+      "type": 0,
+      "value": "Response buffering"
+    }
+  ],
+  "ui.field.retries": [
+    {
+      "type": 0,
+      "value": "Retries"
+    }
+  ],
+  "ui.field.routeId": [
+    {
+      "type": 0,
+      "value": "Route"
+    }
+  ],
+  "ui.field.rsaPublicKey": [
+    {
+      "type": 0,
+      "value": "RSA public key"
+    }
+  ],
+  "ui.field.secret": [
+    {
+      "type": 0,
+      "value": "Secret"
+    }
+  ],
+  "ui.field.serviceId": [
+    {
+      "type": 0,
+      "value": "Service"
+    }
+  ],
+  "ui.field.slots": [
+    {
+      "type": 0,
+      "value": "Slots"
+    }
+  ],
+  "ui.field.snis": [
+    {
+      "type": 0,
+      "value": "SNIs"
+    }
+  ],
+  "ui.field.sources": [
+    {
+      "type": 0,
+      "value": "Sources"
+    }
+  ],
+  "ui.field.stickySessionsCookie": [
+    {
+      "type": 0,
+      "value": "Sticky sessions cookie"
+    }
+  ],
+  "ui.field.stickySessionsCookiePath": [
+    {
+      "type": 0,
+      "value": "Sticky sessions cookie path"
+    }
+  ],
+  "ui.field.stripPath": [
+    {
+      "type": 0,
+      "value": "Strip path"
+    }
+  ],
+  "ui.field.subRequests": [
+    {
+      "type": 0,
+      "value": "Subrequests"
+    }
+  ],
+  "ui.field.tags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "ui.field.target": [
+    {
+      "type": 0,
+      "value": "Target"
+    }
+  ],
+  "ui.field.tlsVerify": [
+    {
+      "type": 0,
+      "value": "Verify TLS"
+    }
+  ],
+  "ui.field.tlsVerifyDepth": [
+    {
+      "type": 0,
+      "value": "TLS verify depth"
+    }
+  ],
+  "ui.field.ttl": [
+    {
+      "type": 0,
+      "value": "Time to live (s)"
+    }
+  ],
+  "ui.field.upstreamId": [
+    {
+      "type": 0,
+      "value": "Upstream"
+    }
+  ],
+  "ui.field.useSrvName": [
+    {
+      "type": 0,
+      "value": "Use SRV name"
+    }
+  ],
+  "ui.field.username": [
+    {
+      "type": 0,
+      "value": "Username"
+    }
+  ],
+  "ui.field.version": [
+    {
+      "type": 0,
+      "value": "Version"
+    }
+  ],
+  "ui.field.weight": [
+    {
+      "type": 0,
+      "value": "Weight"
+    }
+  ],
+  "ui.field.writeTimeout": [
+    {
+      "type": 0,
+      "value": "Write timeout (ms)"
+    }
+  ],
+  "ui.filter.methodAny": [
+    {
+      "type": 0,
+      "value": "Method: any"
+    }
+  ],
+  "ui.filter.serviceAny": [
+    {
+      "type": 0,
+      "value": "Service: any"
+    }
+  ],
+  "ui.filter.tags": [
+    {
+      "type": 0,
+      "value": "Tags (comma: all, slash: any)"
+    }
+  ],
+  "ui.form.advanced": [
+    {
+      "type": 0,
+      "value": "Advanced"
+    }
+  ],
+  "ui.form.basics": [
+    {
+      "type": 0,
+      "value": "Basics"
+    }
+  ],
+  "ui.form.copy": [
+    {
+      "type": 0,
+      "value": "Copy"
+    }
+  ],
+  "ui.form.createService": [
+    {
+      "type": 0,
+      "value": "Create a service"
+    }
+  ],
+  "ui.form.destination": [
+    {
+      "type": 0,
+      "value": "Where it sends requests"
+    }
+  ],
+  "ui.form.matches": [
+    {
+      "type": 0,
+      "value": "What it matches"
+    }
+  ],
+  "ui.form.matchesHint": [
+    {
+      "type": 0,
+      "value": "Set at least one of paths, hosts or methods."
+    }
+  ],
+  "ui.form.methodsHint": [
+    {
+      "type": 0,
+      "value": "None checked matches every method."
+    }
+  ],
+  "ui.form.nameHint": [
+    {
+      "type": 0,
+      "value": "Letters, digits, dots, dashes and underscores."
+    }
+  ],
+  "ui.form.pathInvalid": [
+    {
+      "type": 0,
+      "value": "A path starts with \"/\". Regex paths start with \"~/\"."
+    }
+  ],
+  "ui.form.preview": [
+    {
+      "type": 0,
+      "value": "decK preview"
+    }
+  ],
+  "ui.form.routeAdvanced": [
+    {
+      "type": 0,
+      "value": "Advanced: protocols, strip path, preserve host, regex priority"
+    }
+  ],
+  "ui.form.stageNote": [
+    {
+      "type": 0,
+      "value": "It goes live when you publish."
+    }
+  ],
+  "ui.form.stagePlugin": [
+    {
+      "type": 0,
+      "value": "Stage plugin"
+    }
+  ],
+  "ui.form.stagePluginNote": [
+    {
+      "type": 0,
+      "value": "Then add it to a route or service like any plugin, and publish."
+    }
+  ],
+  "ui.form.stageRoute": [
+    {
+      "type": 0,
+      "value": "Stage route"
+    }
+  ],
+  "ui.form.stageRouteNote": [
+    {
+      "type": 0,
+      "value": "Staged routes go live when you publish."
+    }
+  ],
+  "ui.form.stageService": [
+    {
+      "type": 0,
+      "value": "Stage service"
+    }
+  ],
+  "ui.keyAuth.copied": [
+    {
+      "type": 0,
+      "value": "The key is on your clipboard."
+    }
+  ],
+  "ui.keyAuth.copy": [
+    {
+      "type": 0,
+      "value": "Copy"
+    }
+  ],
+  "ui.keyAuth.copyFailed": [
+    {
+      "type": 0,
+      "value": "The browser didn't allow copying. Select the key and copy it yourself."
+    }
+  ],
+  "ui.keyAuth.dialogTitle": [
+    {
+      "type": 0,
+      "value": "Your new API key"
+    }
+  ],
+  "ui.keyAuth.done": [
+    {
+      "type": 0,
+      "value": "I’ve saved it"
+    }
+  ],
+  "ui.keyAuth.shownOnce": [
+    {
+      "type": 0,
+      "value": "Copy this key now: it is not shown again."
+    }
+  ],
+  "ui.list.filter": [
+    {
+      "type": 0,
+      "value": "Filter this page"
+    }
+  ],
+  "ui.list.next": [
+    {
+      "type": 0,
+      "value": "Next page"
+    }
+  ],
+  "ui.list.previous": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
+  "ui.list.search": [
+    {
+      "type": 0,
+      "value": "Filter by name, path or host"
+    }
+  ],
+  "ui.nav.acls": [
+    {
+      "type": 0,
+      "value": "ACL groups"
+    }
+  ],
+  "ui.nav.audit": [
+    {
+      "type": 0,
+      "value": "Audit log"
+    }
+  ],
+  "ui.nav.basicAuth": [
+    {
+      "type": 0,
+      "value": "Basic auth"
+    }
+  ],
+  "ui.nav.caCertificates": [
+    {
+      "type": 0,
+      "value": "CA certificates"
+    }
+  ],
+  "ui.nav.certificates": [
+    {
+      "type": 0,
+      "value": "Certificates"
+    }
+  ],
+  "ui.nav.config": [
+    {
+      "type": 0,
+      "value": "Publish"
+    }
+  ],
+  "ui.nav.consumerGroups": [
+    {
+      "type": 0,
+      "value": "Consumer groups"
+    }
+  ],
+  "ui.nav.consumers": [
+    {
+      "type": 0,
+      "value": "Consumers"
+    }
+  ],
+  "ui.nav.group.console": [
+    {
+      "type": 0,
+      "value": "Console"
+    }
+  ],
+  "ui.nav.group.consumers": [
+    {
+      "type": 0,
+      "value": "Consumers"
+    }
+  ],
+  "ui.nav.group.gateway": [
+    {
+      "type": 0,
+      "value": "Gateway"
+    }
+  ],
+  "ui.nav.group.tls": [
+    {
+      "type": 0,
+      "value": "Certificates and vaults"
+    }
+  ],
+  "ui.nav.jwtSecrets": [
+    {
+      "type": 0,
+      "value": "JWT credentials"
+    }
+  ],
+  "ui.nav.keyAuth": [
+    {
+      "type": 0,
+      "value": "API keys"
+    }
+  ],
+  "ui.nav.overview": [
+    {
+      "type": 0,
+      "value": "Overview"
+    }
+  ],
+  "ui.nav.pluginCatalog": [
+    {
+      "type": 0,
+      "value": "Plugin catalog"
+    }
+  ],
+  "ui.nav.plugins": [
+    {
+      "type": 0,
+      "value": "Plugins"
+    }
+  ],
+  "ui.nav.routes": [
+    {
+      "type": 0,
+      "value": "Routes"
+    }
+  ],
+  "ui.nav.sandboxPlugins": [
+    {
+      "type": 0,
+      "value": "Uploaded plugins"
+    }
+  ],
+  "ui.nav.services": [
+    {
+      "type": 0,
+      "value": "Services"
+    }
+  ],
+  "ui.nav.snis": [
+    {
+      "type": 0,
+      "value": "SNIs"
+    }
+  ],
+  "ui.nav.targets": [
+    {
+      "type": 0,
+      "value": "Targets"
+    }
+  ],
+  "ui.nav.tester": [
+    {
+      "type": 0,
+      "value": "Route tester"
+    }
+  ],
+  "ui.nav.unpublished": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ui.nav.upstreams": [
+    {
+      "type": 0,
+      "value": "Upstreams"
+    }
+  ],
+  "ui.nav.vaults": [
+    {
+      "type": 0,
+      "value": "Vaults"
+    }
+  ],
+  "ui.overview.consumer": [
+    {
+      "type": 0,
+      "value": "Consumer"
+    }
+  ],
+  "ui.overview.empty": [
+    {
+      "type": 0,
+      "value": "No traffic data yet. Bind Analytics Engine to the gateway, then set CF_ACCOUNT_ID and the AE_API_TOKEN secret on the admin."
+    }
+  ],
+  "ui.overview.errorRate": [
+    {
+      "type": 0,
+      "value": "Error rate"
+    }
+  ],
+  "ui.overview.errors": [
+    {
+      "type": 0,
+      "value": "Server errors"
+    }
+  ],
+  "ui.overview.lastPublish": [
+    {
+      "type": 0,
+      "value": "Last publish: version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "when"
+    },
+    {
+      "type": 0,
+      "value": ", by "
+    },
+    {
+      "type": 1,
+      "value": "who"
+    }
+  ],
+  "ui.overview.latency": [
+    {
+      "type": 0,
+      "value": "Mean latency (ms)"
+    }
+  ],
+  "ui.overview.liveConfig": [
+    {
+      "type": 0,
+      "value": "Live config"
+    }
+  ],
+  "ui.overview.ms": [
+    {
+      "type": 2,
+      "value": "ms",
+      "style": {
+        "type": 0,
+        "tokens": [
+          {
+            "stem": ".#",
+            "options": []
+          }
+        ],
+        "parsedOptions": {
+          "maximumFractionDigits": 1
+        }
+      }
+    },
+    {
+      "type": 0,
+      "value": " ms"
+    }
+  ],
+  "ui.overview.noTraffic": [
+    {
+      "type": 0,
+      "value": "Analytics is set up, but no requests came in over the last "
+    },
+    {
+      "type": 6,
+      "value": "hours",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "hour"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " hours"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.overview.noValue": [
+    {
+      "type": 0,
+      "value": "No data"
+    }
+  ],
+  "ui.overview.nothingLive": [
+    {
+      "type": 0,
+      "value": "Nothing published yet"
+    }
+  ],
+  "ui.overview.p50": [
+    {
+      "type": 0,
+      "value": "p50 latency"
+    }
+  ],
+  "ui.overview.p99": [
+    {
+      "type": 0,
+      "value": "p99 latency"
+    }
+  ],
+  "ui.overview.range": [
+    {
+      "type": 0,
+      "value": "Time range"
+    }
+  ],
+  "ui.overview.rangeDay": [
+    {
+      "type": 0,
+      "value": "Last 24 hours"
+    }
+  ],
+  "ui.overview.rangeHour": [
+    {
+      "type": 0,
+      "value": "Last hour"
+    }
+  ],
+  "ui.overview.rangeWeek": [
+    {
+      "type": 0,
+      "value": "Last 7 days"
+    }
+  ],
+  "ui.overview.requests": [
+    {
+      "type": 0,
+      "value": "Requests"
+    }
+  ],
+  "ui.overview.route": [
+    {
+      "type": 0,
+      "value": "Route"
+    }
+  ],
+  "ui.overview.title": [
+    {
+      "type": 6,
+      "value": "hours",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Traffic, last hour"
+            }
+          ]
+        },
+        "=168": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Traffic, last 7 days"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Traffic, last "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " hours"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ui.overview.topConsumers": [
+    {
+      "type": 0,
+      "value": "Busiest consumers"
+    }
+  ],
+  "ui.overview.topRoutes": [
+    {
+      "type": 0,
+      "value": "Busiest routes"
+    }
+  ],
+  "ui.overview.version": [
+    {
+      "type": 0,
+      "value": "Version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    }
+  ],
+  "ui.page.create": [
+    {
+      "type": 0,
+      "value": "Create "
+    },
+    {
+      "type": 1,
+      "value": "entity"
+    }
+  ],
+  "ui.page.edit": [
+    {
+      "type": 0,
+      "value": "Edit "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.page.editEntity": [
+    {
+      "type": 0,
+      "value": "Edit "
+    },
+    {
+      "type": 1,
+      "value": "entity"
+    }
+  ],
+  "ui.page.upload": [
+    {
+      "type": 0,
+      "value": "Upload a plugin"
+    }
+  ],
+  "ui.palette.create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "ui.palette.createItem": [
+    {
+      "type": 0,
+      "value": "New: "
+    },
+    {
+      "type": 1,
+      "value": "resource"
+    }
+  ],
+  "ui.palette.empty": [
+    {
+      "type": 0,
+      "value": "Nothing matches."
+    }
+  ],
+  "ui.palette.goTo": [
+    {
+      "type": 0,
+      "value": "Go to"
+    }
+  ],
+  "ui.palette.hint": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ],
+  "ui.palette.jump": [
+    {
+      "type": 0,
+      "value": "Jump to…"
+    }
+  ],
+  "ui.palette.placeholder": [
+    {
+      "type": 0,
+      "value": "Go to a page or create an entity…"
+    }
+  ],
+  "ui.palette.shortcut": [
+    {
+      "type": 0,
+      "value": "⌘K"
+    }
+  ],
+  "ui.plugin.disabled": [
+    {
+      "type": 0,
+      "value": "disabled"
+    }
+  ],
+  "ui.plugin.enabled": [
+    {
+      "type": 0,
+      "value": "enabled"
+    }
+  ],
+  "ui.pluginField.add": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "ui.pluginField.allow": [
+    {
+      "type": 0,
+      "value": "Allow"
+    }
+  ],
+  "ui.pluginField.allow_patterns": [
+    {
+      "type": 0,
+      "value": "Allow patterns"
+    }
+  ],
+  "ui.pluginField.allowed_payload_size": [
+    {
+      "type": 0,
+      "value": "Largest body"
+    }
+  ],
+  "ui.pluginField.anonymous": [
+    {
+      "type": 0,
+      "value": "Anonymous consumer"
+    }
+  ],
+  "ui.pluginField.append": [
+    {
+      "type": 0,
+      "value": "Append"
+    }
+  ],
+  "ui.pluginField.auth": [
+    {
+      "type": 0,
+      "value": "Provider credentials"
+    }
+  ],
+  "ui.pluginField.auth_methods": [
+    {
+      "type": 0,
+      "value": "Sign-in methods"
+    }
+  ],
+  "ui.pluginField.body": [
+    {
+      "type": 0,
+      "value": "Body"
+    }
+  ],
+  "ui.pluginField.cache_ttl": [
+    {
+      "type": 0,
+      "value": "Cache TTL (s)"
+    }
+  ],
+  "ui.pluginField.claims_to_verify": [
+    {
+      "type": 0,
+      "value": "Claims to verify"
+    }
+  ],
+  "ui.pluginField.client_id": [
+    {
+      "type": 0,
+      "value": "Client ID"
+    }
+  ],
+  "ui.pluginField.client_secret": [
+    {
+      "type": 0,
+      "value": "Client secret"
+    }
+  ],
+  "ui.pluginField.content_type": [
+    {
+      "type": 0,
+      "value": "Content type"
+    }
+  ],
+  "ui.pluginField.credentials": [
+    {
+      "type": 0,
+      "value": "Allow credentials"
+    }
+  ],
+  "ui.pluginField.day": [
+    {
+      "type": 0,
+      "value": "Per day"
+    }
+  ],
+  "ui.pluginField.deny": [
+    {
+      "type": 0,
+      "value": "Deny"
+    }
+  ],
+  "ui.pluginField.deny_patterns": [
+    {
+      "type": 0,
+      "value": "Deny patterns"
+    }
+  ],
+  "ui.pluginField.echo_downstream": [
+    {
+      "type": 0,
+      "value": "Echo it back to the client"
+    }
+  ],
+  "ui.pluginField.fault_tolerant": [
+    {
+      "type": 0,
+      "value": "Keep serving if the counter store fails"
+    }
+  ],
+  "ui.pluginField.generator": [
+    {
+      "type": 0,
+      "value": "Generator"
+    }
+  ],
+  "ui.pluginField.header_name": [
+    {
+      "type": 0,
+      "value": "Header"
+    }
+  ],
+  "ui.pluginField.header_names": [
+    {
+      "type": 0,
+      "value": "Header names"
+    }
+  ],
+  "ui.pluginField.headers": [
+    {
+      "type": 0,
+      "value": "Headers"
+    }
+  ],
+  "ui.pluginField.hide_client_headers": [
+    {
+      "type": 0,
+      "value": "Hide rate-limit headers from clients"
+    }
+  ],
+  "ui.pluginField.hide_credentials": [
+    {
+      "type": 0,
+      "value": "Hide credentials from the upstream"
+    }
+  ],
+  "ui.pluginField.hide_groups_header": [
+    {
+      "type": 0,
+      "value": "Hide the groups header from the upstream"
+    }
+  ],
+  "ui.pluginField.hour": [
+    {
+      "type": 0,
+      "value": "Per hour"
+    }
+  ],
+  "ui.pluginField.http_endpoint": [
+    {
+      "type": 0,
+      "value": "Endpoint"
+    }
+  ],
+  "ui.pluginField.issuer": [
+    {
+      "type": 0,
+      "value": "Issuer"
+    }
+  ],
+  "ui.pluginField.key_claim_name": [
+    {
+      "type": 0,
+      "value": "Key claim"
+    }
+  ],
+  "ui.pluginField.key_in_body": [
+    {
+      "type": 0,
+      "value": "Read keys from the body"
+    }
+  ],
+  "ui.pluginField.key_in_header": [
+    {
+      "type": 0,
+      "value": "Read keys from headers"
+    }
+  ],
+  "ui.pluginField.key_in_query": [
+    {
+      "type": 0,
+      "value": "Read keys from the query"
+    }
+  ],
+  "ui.pluginField.key_names": [
+    {
+      "type": 0,
+      "value": "Key names"
+    }
+  ],
+  "ui.pluginField.limit_by": [
+    {
+      "type": 0,
+      "value": "Count requests by"
+    }
+  ],
+  "ui.pluginField.llm_providers": [
+    {
+      "type": 0,
+      "value": "Providers and limits"
+    }
+  ],
+  "ui.pluginField.max_age": [
+    {
+      "type": 0,
+      "value": "Max age (s)"
+    }
+  ],
+  "ui.pluginField.message": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "ui.pluginField.method": [
+    {
+      "type": 0,
+      "value": "Method"
+    }
+  ],
+  "ui.pluginField.methods": [
+    {
+      "type": 0,
+      "value": "Methods"
+    }
+  ],
+  "ui.pluginField.minute": [
+    {
+      "type": 0,
+      "value": "Per minute"
+    }
+  ],
+  "ui.pluginField.model": [
+    {
+      "type": 0,
+      "value": "Model"
+    }
+  ],
+  "ui.pluginField.origins": [
+    {
+      "type": 0,
+      "value": "Origins"
+    }
+  ],
+  "ui.pluginField.policy": [
+    {
+      "type": 0,
+      "value": "Counter store"
+    }
+  ],
+  "ui.pluginField.realm": [
+    {
+      "type": 0,
+      "value": "Realm"
+    }
+  ],
+  "ui.pluginField.remove": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
+  "ui.pluginField.rename": [
+    {
+      "type": 0,
+      "value": "Rename"
+    }
+  ],
+  "ui.pluginField.replace": [
+    {
+      "type": 0,
+      "value": "Replace"
+    }
+  ],
+  "ui.pluginField.request_method": [
+    {
+      "type": 0,
+      "value": "Request methods"
+    }
+  ],
+  "ui.pluginField.require_content_length": [
+    {
+      "type": 0,
+      "value": "Require a Content-Length"
+    }
+  ],
+  "ui.pluginField.response_code": [
+    {
+      "type": 0,
+      "value": "Response codes"
+    }
+  ],
+  "ui.pluginField.route_type": [
+    {
+      "type": 0,
+      "value": "Route type"
+    }
+  ],
+  "ui.pluginField.scopes": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
+  "ui.pluginField.second": [
+    {
+      "type": 0,
+      "value": "Per second"
+    }
+  ],
+  "ui.pluginField.size_unit": [
+    {
+      "type": 0,
+      "value": "Unit"
+    }
+  ],
+  "ui.pluginField.status": [
+    {
+      "type": 0,
+      "value": "Status code"
+    }
+  ],
+  "ui.pluginField.status_code": [
+    {
+      "type": 0,
+      "value": "Status code"
+    }
+  ],
+  "ui.pluginField.strategy": [
+    {
+      "type": 0,
+      "value": "Strategy"
+    }
+  ],
+  "ui.pluginField.uri_param_names": [
+    {
+      "type": 0,
+      "value": "Query parameters"
+    }
+  ],
+  "ui.pluginField.window_type": [
+    {
+      "type": 0,
+      "value": "Window"
+    }
+  ],
+  "ui.pluginGroup.addresses": [
+    {
+      "type": 0,
+      "value": "Addresses"
+    }
+  ],
+  "ui.pluginGroup.caching": [
+    {
+      "type": 0,
+      "value": "Caching"
+    }
+  ],
+  "ui.pluginGroup.changes": [
+    {
+      "type": 0,
+      "value": "Changes"
+    }
+  ],
+  "ui.pluginGroup.credentials": [
+    {
+      "type": 0,
+      "value": "Credentials"
+    }
+  ],
+  "ui.pluginGroup.destination": [
+    {
+      "type": 0,
+      "value": "Where logs go"
+    }
+  ],
+  "ui.pluginGroup.groups": [
+    {
+      "type": 0,
+      "value": "Groups"
+    }
+  ],
+  "ui.pluginGroup.keys": [
+    {
+      "type": 0,
+      "value": "Keys"
+    }
+  ],
+  "ui.pluginGroup.limits": [
+    {
+      "type": 0,
+      "value": "Limits"
+    }
+  ],
+  "ui.pluginGroup.model": [
+    {
+      "type": 0,
+      "value": "Model"
+    }
+  ],
+  "ui.pluginGroup.origins": [
+    {
+      "type": 0,
+      "value": "Origins"
+    }
+  ],
+  "ui.pluginGroup.patterns": [
+    {
+      "type": 0,
+      "value": "Patterns"
+    }
+  ],
+  "ui.pluginGroup.provider": [
+    {
+      "type": 0,
+      "value": "Identity provider"
+    }
+  ],
+  "ui.pluginGroup.requestId": [
+    {
+      "type": 0,
+      "value": "Request ID"
+    }
+  ],
+  "ui.pluginGroup.response": [
+    {
+      "type": 0,
+      "value": "Response"
+    }
+  ],
+  "ui.pluginGroup.size": [
+    {
+      "type": 0,
+      "value": "Size"
+    }
+  ],
+  "ui.pluginGroup.tokens": [
+    {
+      "type": 0,
+      "value": "Tokens"
+    }
+  ],
+  "ui.plugins.add": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "ui.plugins.addTitle": [
+    {
+      "type": 0,
+      "value": "Add "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.plugins.added": [
+    {
+      "type": 0,
+      "value": "Plugin added. Publish to apply it."
+    }
+  ],
+  "ui.plugins.advanced": [
+    {
+      "type": 0,
+      "value": "Advanced ("
+    },
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " more field"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " more fields"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "ui.plugins.callers": [
+    {
+      "type": 0,
+      "value": "What callers see"
+    }
+  ],
+  "ui.plugins.callersRateLimited": [
+    {
+      "type": 0,
+      "value": "Over the limit, the gateway answers "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " with code "
+    },
+    {
+      "type": 1,
+      "value": "code"
+    },
+    {
+      "type": 0,
+      "value": " and a Retry-After header."
+    }
+  ],
+  "ui.plugins.callersRefused": [
+    {
+      "type": 0,
+      "value": "A caller it refuses gets "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " with code "
+    },
+    {
+      "type": 1,
+      "value": "code"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.plugins.description.acl": [
+    {
+      "type": 0,
+      "value": "Allow or deny consumers by their ACL groups."
+    }
+  ],
+  "ui.plugins.description.ai-prompt-guard": [
+    {
+      "type": 0,
+      "value": "Block AI prompts that match deny patterns, or that miss allow patterns."
+    }
+  ],
+  "ui.plugins.description.ai-proxy": [
+    {
+      "type": 0,
+      "value": "Send requests to an LLM provider, or Workers AI, with one request format."
+    }
+  ],
+  "ui.plugins.description.ai-rate-limiting-advanced": [
+    {
+      "type": 0,
+      "value": "Limit AI usage by tokens per consumer, per provider and per window."
+    }
+  ],
+  "ui.plugins.description.basic-auth": [
+    {
+      "type": 0,
+      "value": "Authenticate consumers with a username and password."
+    }
+  ],
+  "ui.plugins.description.correlation-id": [
+    {
+      "type": 0,
+      "value": "Add an id header to each request and response so calls can be traced."
+    }
+  ],
+  "ui.plugins.description.cors": [
+    {
+      "type": 0,
+      "value": "Answer browsers' cross-origin checks and add CORS headers."
+    }
+  ],
+  "ui.plugins.description.http-log": [
+    {
+      "type": 0,
+      "value": "Send a log of each request to an HTTP endpoint."
+    }
+  ],
+  "ui.plugins.description.ip-restriction": [
+    {
+      "type": 0,
+      "value": "Allow or deny clients by IP address or CIDR range."
+    }
+  ],
+  "ui.plugins.description.jwt": [
+    {
+      "type": 0,
+      "value": "Authenticate consumers with signed JSON Web Tokens."
+    }
+  ],
+  "ui.plugins.description.key-auth": [
+    {
+      "type": 0,
+      "value": "Authenticate consumers with an API key in a header or query parameter."
+    }
+  ],
+  "ui.plugins.description.openid-connect": [
+    {
+      "type": 0,
+      "value": "Sign users in with an OpenID Connect provider, or verify its tokens."
+    }
+  ],
+  "ui.plugins.description.proxy-cache": [
+    {
+      "type": 0,
+      "value": "Cache upstream responses at the edge."
+    }
+  ],
+  "ui.plugins.description.rate-limiting": [
+    {
+      "type": 0,
+      "value": "Limit requests per second, minute, hour or day."
+    }
+  ],
+  "ui.plugins.description.request-size-limiting": [
+    {
+      "type": 0,
+      "value": "Refuse request bodies over a size limit."
+    }
+  ],
+  "ui.plugins.description.request-termination": [
+    {
+      "type": 0,
+      "value": "Answer requests with a fixed status and body, without calling the upstream."
+    }
+  ],
+  "ui.plugins.description.request-transformer": [
+    {
+      "type": 0,
+      "value": "Add, rename, replace or remove request headers, query parameters and body fields."
+    }
+  ],
+  "ui.plugins.description.response-transformer": [
+    {
+      "type": 0,
+      "value": "Add, rename, replace or remove response headers and JSON body fields."
+    }
+  ],
+  "ui.plugins.editTitle": [
+    {
+      "type": 0,
+      "value": "Edit "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.plugins.filter": [
+    {
+      "type": 0,
+      "value": "Category"
+    }
+  ],
+  "ui.plugins.filterAll": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "ui.plugins.hintConsumer": [
+    {
+      "type": 0,
+      "value": "One caller"
+    }
+  ],
+  "ui.plugins.hintGlobal": [
+    {
+      "type": 0,
+      "value": "Every request"
+    }
+  ],
+  "ui.plugins.hintRoute": [
+    {
+      "type": 0,
+      "value": "One route"
+    }
+  ],
+  "ui.plugins.hintService": [
+    {
+      "type": 0,
+      "value": "All its routes"
+    }
+  ],
+  "ui.plugins.inUse": [
+    {
+      "type": 0,
+      "value": "In use"
+    }
+  ],
+  "ui.plugins.limitsHint": [
+    {
+      "type": 0,
+      "value": "Set at least one. Empty means no limit for that window."
+    }
+  ],
+  "ui.plugins.policyHint": [
+    {
+      "type": 0,
+      "value": "local counts per isolate; cluster and redis share one count."
+    }
+  ],
+  "ui.plugins.saved": [
+    {
+      "type": 0,
+      "value": "Plugin saved. Publish to make the change live."
+    }
+  ],
+  "ui.plugins.schemaNote": [
+    {
+      "type": 0,
+      "value": "Fields come from Kong's schema for this plugin."
+    }
+  ],
+  "ui.plugins.scope": [
+    {
+      "type": 0,
+      "value": "Apply to"
+    }
+  ],
+  "ui.plugins.settings": [
+    {
+      "type": 0,
+      "value": "Settings"
+    }
+  ],
+  "ui.plugins.stageNote": [
+    {
+      "type": 0,
+      "value": "Staged plugins go live when you publish."
+    }
+  ],
+  "ui.plugins.staged": [
+    {
+      "type": 0,
+      "value": "Staged"
+    }
+  ],
+  "ui.plugins.targetRequired": [
+    {
+      "type": 0,
+      "value": "Pick which service, route or consumer the plugin applies to."
+    }
+  ],
+  "ui.plugins.title": [
+    {
+      "type": 0,
+      "value": "Plugin catalog"
+    }
+  ],
+  "ui.plugins.where": [
+    {
+      "type": 0,
+      "value": "Where it applies"
+    }
+  ],
+  "ui.role.editor": [
+    {
+      "type": 0,
+      "value": "Editor"
+    }
+  ],
+  "ui.role.editorNeedPublisher": [
+    {
+      "type": 0,
+      "value": "You're an editor: you can stage changes and see history. A publisher or owner can publish and roll back."
+    }
+  ],
+  "ui.role.needEditor": [
+    {
+      "type": 0,
+      "value": "You're a viewer: you can see the configuration and its history. An editor, publisher or owner can stage changes."
+    }
+  ],
+  "ui.role.owner": [
+    {
+      "type": 0,
+      "value": "Owner"
+    }
+  ],
+  "ui.role.publisher": [
+    {
+      "type": 0,
+      "value": "Publisher"
+    }
+  ],
+  "ui.role.signedIn": [
+    {
+      "type": 0,
+      "value": "Signed in as "
+    },
+    {
+      "type": 1,
+      "value": "id"
+    }
+  ],
+  "ui.role.signedInWith": [
+    {
+      "type": 0,
+      "value": "Signed in with Cloudflare Access"
+    }
+  ],
+  "ui.role.viewer": [
+    {
+      "type": 0,
+      "value": "Viewer"
+    }
+  ],
+  "ui.role.viewerNeedPublisher": [
+    {
+      "type": 0,
+      "value": "You're a viewer: you can see changes and history. A publisher or owner can publish and roll back."
+    }
+  ],
+  "ui.routes.anyHost": [
+    {
+      "type": 0,
+      "value": "Any host"
+    }
+  ],
+  "ui.routes.anyMethod": [
+    {
+      "type": 0,
+      "value": "ANY"
+    }
+  ],
+  "ui.routes.noPlugins": [
+    {
+      "type": 0,
+      "value": "None"
+    }
+  ],
+  "ui.routes.plugins": [
+    {
+      "type": 0,
+      "value": "Plugins"
+    }
+  ],
+  "ui.sandbox.addBinding": [
+    {
+      "type": 0,
+      "value": "Add a binding"
+    }
+  ],
+  "ui.sandbox.bindings": [
+    {
+      "type": 0,
+      "value": "Bindings it may use"
+    }
+  ],
+  "ui.sandbox.bindingsAllow": [
+    {
+      "type": 0,
+      "value": "The plugin gets a checked binding only if the gateway allows it."
+    }
+  ],
+  "ui.sandbox.bindingsNone": [
+    {
+      "type": 0,
+      "value": "None checked: the plugin can only read and change the request and response."
+    }
+  ],
+  "ui.sandbox.code": [
+    {
+      "type": 0,
+      "value": "Code"
+    }
+  ],
+  "ui.sandbox.default": [
+    {
+      "type": 0,
+      "value": "Default "
+    },
+    {
+      "type": 1,
+      "value": "value"
+    }
+  ],
+  "ui.sandbox.drop": [
+    {
+      "type": 0,
+      "value": "Drop an ES module here, or choose a file"
+    }
+  ],
+  "ui.sandbox.dropHint": [
+    {
+      "type": 0,
+      "value": "One .js file, up to "
+    },
+    {
+      "type": 1,
+      "value": "kib"
+    },
+    {
+      "type": 0,
+      "value": " KB"
+    }
+  ],
+  "ui.sandbox.file": [
+    {
+      "type": 1,
+      "value": "kib"
+    },
+    {
+      "type": 0,
+      "value": " KB"
+    }
+  ],
+  "ui.sandbox.hideSource": [
+    {
+      "type": 0,
+      "value": "Hide source"
+    }
+  ],
+  "ui.sandbox.limits": [
+    {
+      "type": 0,
+      "value": "Each run gets "
+    },
+    {
+      "type": 1,
+      "value": "cpu"
+    },
+    {
+      "type": 0,
+      "value": " ms of CPU and "
+    },
+    {
+      "type": 1,
+      "value": "sub"
+    },
+    {
+      "type": 0,
+      "value": " subrequests unless the plugin asks for more, up to "
+    },
+    {
+      "type": 1,
+      "value": "maxCpu"
+    },
+    {
+      "type": 0,
+      "value": " ms and "
+    },
+    {
+      "type": 1,
+      "value": "maxSub"
+    },
+    {
+      "type": 0,
+      "value": ". The code can be up to "
+    },
+    {
+      "type": 1,
+      "value": "maxKb"
+    },
+    {
+      "type": 0,
+      "value": " KB."
+    }
+  ],
+  "ui.sandbox.limitsTitle": [
+    {
+      "type": 0,
+      "value": "Limits, per request"
+    }
+  ],
+  "ui.sandbox.most": [
+    {
+      "type": 0,
+      "value": "Most "
+    },
+    {
+      "type": 1,
+      "value": "value"
+    }
+  ],
+  "ui.sandbox.ms": [
+    {
+      "type": 1,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": " ms"
+    }
+  ],
+  "ui.sandbox.noFile": [
+    {
+      "type": 0,
+      "value": "No code yet: choose a file, or write it in the editor."
+    }
+  ],
+  "ui.sandbox.priorityHint": [
+    {
+      "type": 0,
+      "value": "Higher runs earlier, as in Kong."
+    }
+  ],
+  "ui.sandbox.trust": [
+    {
+      "type": 0,
+      "value": "Uploaded plugins run in an isolated Worker with no network access: they can only change the request and response they're given."
+    }
+  ],
+  "ui.sandbox.viewSource": [
+    {
+      "type": 0,
+      "value": "View source"
+    }
+  ],
+  "ui.secret.masked": [
+    {
+      "type": 0,
+      "value": "Hidden"
+    }
+  ],
+  "ui.service.algorithm": [
+    {
+      "type": 0,
+      "value": "· "
+    },
+    {
+      "type": 1,
+      "value": "algorithm"
+    }
+  ],
+  "ui.service.box": [
+    {
+      "type": 0,
+      "value": "Service"
+    }
+  ],
+  "ui.service.direct": [
+    {
+      "type": 0,
+      "value": "Calls "
+    },
+    {
+      "type": 1,
+      "value": "host"
+    },
+    {
+      "type": 0,
+      "value": " directly."
+    }
+  ],
+  "ui.service.flow": [
+    {
+      "type": 0,
+      "value": "How requests reach it"
+    }
+  ],
+  "ui.service.plugins": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No plugins attached"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " plugin attached"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " plugins attached"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ui.service.routes": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No routes"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " route"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " routes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "ui.service.settings": [
+    {
+      "type": 0,
+      "value": "Timeouts "
+    },
+    {
+      "type": 1,
+      "value": "seconds"
+    },
+    {
+      "type": 0,
+      "value": " s · retries "
+    },
+    {
+      "type": 1,
+      "value": "retries"
+    }
+  ],
+  "ui.service.share": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "ui.service.target": [
+    {
+      "type": 0,
+      "value": "Target"
+    }
+  ],
+  "ui.service.targetWeight": [
+    {
+      "type": 0,
+      "value": "weight "
+    },
+    {
+      "type": 1,
+      "value": "weight"
+    }
+  ],
+  "ui.service.upstream": [
+    {
+      "type": 0,
+      "value": "Upstream "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.service.weight": [
+    {
+      "type": 0,
+      "value": "Weight"
+    }
+  ],
+  "ui.staged.banner": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": ". The gateways still serve version "
+    },
+    {
+      "type": 1,
+      "value": "version"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.staged.bannerNoVersion": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished change"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " unpublished changes"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": ". Nothing is published yet."
+    }
+  ],
+  "ui.staged.review": [
+    {
+      "type": 0,
+      "value": "Review and publish"
+    }
+  ],
+  "ui.staged.toPublish": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " to publish"
+    }
+  ],
+  "ui.tester.body": [
+    {
+      "type": 0,
+      "value": "Body"
+    }
+  ],
+  "ui.tester.duration": [
+    {
+      "type": 0,
+      "value": "Time (ms)"
+    }
+  ],
+  "ui.tester.headers": [
+    {
+      "type": 0,
+      "value": "Headers (JSON object)"
+    }
+  ],
+  "ui.tester.method": [
+    {
+      "type": 0,
+      "value": "Method"
+    }
+  ],
+  "ui.tester.noPlugins": [
+    {
+      "type": 0,
+      "value": "No plugin ran for this request."
+    }
+  ],
+  "ui.tester.order": [
+    {
+      "type": 0,
+      "value": "Plugins, in the order they ran"
+    }
+  ],
+  "ui.tester.outcome": [
+    {
+      "type": 0,
+      "value": "Decision"
+    }
+  ],
+  "ui.tester.path": [
+    {
+      "type": 0,
+      "value": "Path"
+    }
+  ],
+  "ui.tester.phase": [
+    {
+      "type": 0,
+      "value": "Phase"
+    }
+  ],
+  "ui.tester.plugin": [
+    {
+      "type": 0,
+      "value": "Plugin"
+    }
+  ],
+  "ui.tester.publishedOnly": [
+    {
+      "type": 0,
+      "value": "The tester sends requests through the live gateway, which serves the published version. Publish staged changes to test them."
+    }
+  ],
+  "ui.tester.responseBody": [
+    {
+      "type": 0,
+      "value": "Response body"
+    }
+  ],
+  "ui.tester.responseHeaders": [
+    {
+      "type": 0,
+      "value": "Response headers"
+    }
+  ],
+  "ui.tester.route": [
+    {
+      "type": 0,
+      "value": "Matched route: "
+    },
+    {
+      "type": 1,
+      "value": "route"
+    }
+  ],
+  "ui.tester.send": [
+    {
+      "type": 0,
+      "value": "Send"
+    }
+  ],
+  "ui.tester.status": [
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " in "
+    },
+    {
+      "type": 1,
+      "value": "ms"
+    },
+    {
+      "type": 0,
+      "value": " ms"
+    }
+  ],
+  "ui.tester.title": [
+    {
+      "type": 0,
+      "value": "Route tester"
+    }
+  ],
+  "ui.tester.truncated": [
+    {
+      "type": 0,
+      "value": "The body was cut off at "
+    },
+    {
+      "type": 1,
+      "value": "kib"
+    },
+    {
+      "type": 0,
+      "value": " KiB."
+    }
+  ],
+  "ui.tester.upstream": [
+    {
+      "type": 0,
+      "value": "Upstream"
+    }
+  ],
+  "ui.title": [
+    {
+      "type": 0,
+      "value": "Edgway"
+    }
+  ],
+  "ui.upstream.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "ui.upstream.activeOff": [
+    {
+      "type": 0,
+      "value": "Probes each target on a schedule, even with no traffic. Set a path and an interval to turn it on."
+    }
+  ],
+  "ui.upstream.activeOn": [
+    {
+      "type": 0,
+      "value": "Probes "
+    },
+    {
+      "type": 1,
+      "value": "path"
+    },
+    {
+      "type": 0,
+      "value": " on each target every "
+    },
+    {
+      "type": 1,
+      "value": "interval"
+    },
+    {
+      "type": 0,
+      "value": " s, even with no traffic."
+    }
+  ],
+  "ui.upstream.fallback": [
+    {
+      "type": 1,
+      "value": "algorithm"
+    },
+    {
+      "type": 0,
+      "value": " runs as "
+    },
+    {
+      "type": 1,
+      "value": "fallback"
+    },
+    {
+      "type": 0,
+      "value": " on Workers. The upstream is accepted, and every publish says so."
+    }
+  ],
+  "ui.upstream.fromTarget": [
+    {
+      "type": 0,
+      "value": "From the target"
+    }
+  ],
+  "ui.upstream.health": [
+    {
+      "type": 0,
+      "value": "Health checks"
+    }
+  ],
+  "ui.upstream.healthNote": [
+    {
+      "type": 0,
+      "value": "These are the settings. Each gateway checks health on its own, so there is no live health to show here."
+    }
+  ],
+  "ui.upstream.newTarget": [
+    {
+      "type": 0,
+      "value": "New target"
+    }
+  ],
+  "ui.upstream.none": [
+    {
+      "type": 0,
+      "value": "None"
+    }
+  ],
+  "ui.upstream.off": [
+    {
+      "type": 0,
+      "value": "off"
+    }
+  ],
+  "ui.upstream.on": [
+    {
+      "type": 0,
+      "value": "on"
+    }
+  ],
+  "ui.upstream.out": [
+    {
+      "type": 0,
+      "value": "Out of rotation"
+    }
+  ],
+  "ui.upstream.passive": [
+    {
+      "type": 0,
+      "value": "Passive"
+    }
+  ],
+  "ui.upstream.passiveOff": [
+    {
+      "type": 0,
+      "value": "Watches real traffic. Set a failure count to turn it on."
+    }
+  ],
+  "ui.upstream.passiveOn": [
+    {
+      "type": 0,
+      "value": "Watches real traffic. After "
+    },
+    {
+      "type": 1,
+      "value": "failures"
+    },
+    {
+      "type": 0,
+      "value": " failures in a row, a gateway instance stops sending requests to that target for a while."
+    }
+  ],
+  "ui.upstream.runsAs": [
+    {
+      "type": 0,
+      "value": "(runs as "
+    },
+    {
+      "type": 1,
+      "value": "fallback"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "ui.upstream.stageTarget": [
+    {
+      "type": 0,
+      "value": "Stage target"
+    }
+  ],
+  "ui.upstream.targetHint": [
+    {
+      "type": 0,
+      "value": "host:port"
+    }
+  ],
+  "ui.upstream.targets": [
+    {
+      "type": 0,
+      "value": "Targets"
+    }
+  ],
+  "ui.upstream.targetsNote": [
+    {
+      "type": 0,
+      "value": "Traffic share follows weight. Weight 0 takes a target out."
+    }
+  ],
+  "ui.upstream.unused": [
+    {
+      "type": 0,
+      "value": "No service uses it yet: a service uses an upstream by naming it as its host."
+    }
+  ],
+  "ui.upstream.usedBy": [
+    {
+      "type": 0,
+      "value": "Used by service "
+    },
+    {
+      "type": 1,
+      "value": "services"
+    }
+  ],
+  "ui.validation.json": [
+    {
+      "type": 0,
+      "value": "Must be valid JSON"
+    }
+  ],
+  "ui.vault.hint": [
+    {
+      "type": 0,
+      "value": "Enter a vault reference such as "
+    },
+    {
+      "type": 1,
+      "value": "example"
+    },
+    {
+      "type": 0,
+      "value": ", never the secret itself."
+    }
+  ],
+  "ui.vaults.builtIn": [
+    {
+      "type": 0,
+      "value": "built in"
+    }
+  ],
+  "ui.vaults.entities": [
+    {
+      "type": 0,
+      "value": "Your vault entities"
+    }
+  ],
+  "ui.vaults.entitiesHint": [
+    {
+      "type": 0,
+      "value": "Kong-style vaults: your own prefix over a built-in vault."
+    }
+  ],
+  "ui.vaults.entityPrefix": [
+    {
+      "type": 0,
+      "value": "prefix "
+    },
+    {
+      "type": 1,
+      "value": "reference"
+    }
+  ],
+  "ui.vaults.envCard": [
+    {
+      "type": 0,
+      "value": "Reads a Worker secret on the gateway."
+    }
+  ],
+  "ui.vaults.intro": [
+    {
+      "type": 0,
+      "value": "Secrets stay in Cloudflare. Config holds only a reference, and the gateway reads the secret when a request needs it."
+    }
+  ],
+  "ui.vaults.make": [
+    {
+      "type": 0,
+      "value": "Make a reference"
+    }
+  ],
+  "ui.vaults.name": [
+    {
+      "type": 0,
+      "value": "Secret name"
+    }
+  ],
+  "ui.vaults.needsPrefix": [
+    {
+      "type": 0,
+      "value": "The name must start with "
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.vaults.noRaw": [
+    {
+      "type": 0,
+      "value": "No plugin holds a secret as plain text."
+    }
+  ],
+  "ui.vaults.none": [
+    {
+      "type": 0,
+      "value": "No vault entities yet: the built-in vaults need none."
+    }
+  ],
+  "ui.vaults.prefix": [
+    {
+      "type": 0,
+      "value": "Only names starting with "
+    },
+    {
+      "type": 1,
+      "value": "prefix"
+    },
+    {
+      "type": 0,
+      "value": " can be read, so a reference never reaches the gateway's own secrets."
+    }
+  ],
+  "ui.vaults.rawFields": [
+    {
+      "type": 6,
+      "value": "count",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "field"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "fields"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "fields"
+    }
+  ],
+  "ui.vaults.rawHint": [
+    {
+      "type": 0,
+      "value": "The same fields publish warns about. Move each one to a vault."
+    }
+  ],
+  "ui.vaults.rawTitle": [
+    {
+      "type": 0,
+      "value": "Secrets kept as plain text"
+    }
+  ],
+  "ui.vaults.storeCard": [
+    {
+      "type": 0,
+      "value": "Reads a Secrets Store binding on the gateway."
+    }
+  ],
+  "ui.vaults.unchecked": [
+    {
+      "type": 0,
+      "value": "The admin can't see the gateway's secrets, so it doesn't check that this one exists. A request that needs a missing secret fails."
+    }
+  ],
+  "ui.vaults.vault": [
+    {
+      "type": 0,
+      "value": "Vault"
+    }
+  ],
+  "ui.which.caller": [
+    {
+      "type": 0,
+      "value": "Caller"
+    }
+  ],
+  "ui.which.consumer": [
+    {
+      "type": 0,
+      "value": "Consumer "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.which.effect": [
+    {
+      "type": 0,
+      "value": "Effect"
+    }
+  ],
+  "ui.which.group": [
+    {
+      "type": 0,
+      "value": "Consumer group "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "ui.which.intro": [
+    {
+      "type": 0,
+      "value": "Pick a route and a caller. When a plugin is set at several levels, the most specific one wins: consumer, then consumer group, then route, then service, as in Kong."
+    }
+  ],
+  "ui.which.levelConsumer": [
+    {
+      "type": 0,
+      "value": "Consumer"
+    }
+  ],
+  "ui.which.levelGlobal": [
+    {
+      "type": 0,
+      "value": "Global"
+    }
+  ],
+  "ui.which.levelGroup": [
+    {
+      "type": 0,
+      "value": "Consumer group"
+    }
+  ],
+  "ui.which.levelRoute": [
+    {
+      "type": 0,
+      "value": "Route"
+    }
+  ],
+  "ui.which.levelService": [
+    {
+      "type": 0,
+      "value": "Service"
+    }
+  ],
+  "ui.which.noRoutes": [
+    {
+      "type": 0,
+      "value": "This service has no routes yet."
+    }
+  ],
+  "ui.which.nobody": [
+    {
+      "type": 0,
+      "value": "Anyone (no consumer)"
+    }
+  ],
+  "ui.which.none": [
+    {
+      "type": 0,
+      "value": "No plugin runs for this route and caller."
+    }
+  ],
+  "ui.which.number": [
+    {
+      "type": 0,
+      "value": "#"
+    }
+  ],
+  "ui.which.order": [
+    {
+      "type": 0,
+      "value": "Run order follows each plugin's priority, as in Kong."
+    }
+  ],
+  "ui.which.plugin": [
+    {
+      "type": 0,
+      "value": "Plugin"
+    }
+  ],
+  "ui.which.replaced": [
+    {
+      "type": 0,
+      "value": "replaced by a more specific one"
+    }
+  ],
+  "ui.which.route": [
+    {
+      "type": 0,
+      "value": "Route"
+    }
+  ],
+  "ui.which.setOn": [
+    {
+      "type": 0,
+      "value": "Set on"
+    }
+  ],
+  "ui.which.test": [
+    {
+      "type": 0,
+      "value": "Send a test request"
+    }
+  ],
+  "ui.which.title": [
+    {
+      "type": 0,
+      "value": "Which plugins run"
+    }
+  ],
+  "validation.enum": [
+    {
+      "type": 0,
+      "value": "Choose one of the allowed values."
+    }
+  ],
+  "validation.format": [
+    {
+      "type": 0,
+      "value": "This isn't a valid "
+    },
+    {
+      "type": 1,
+      "value": "format"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "validation.maxItems": [
+    {
+      "type": 6,
+      "value": "limit",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Keep at most "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item."
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Keep at most "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items."
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "validation.maxLength": [
+    {
+      "type": 6,
+      "value": "limit",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "This takes at most "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " character."
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "This takes at most "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " characters."
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "validation.maximum": [
+    {
+      "type": 0,
+      "value": "This must be at most "
+    },
+    {
+      "type": 1,
+      "value": "limit"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "validation.minItems": [
+    {
+      "type": 6,
+      "value": "limit",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Add at least "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item."
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Add at least "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items."
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "validation.minLength": [
+    {
+      "type": 6,
+      "value": "limit",
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "This needs at least "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " character."
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "This needs at least "
+            },
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " characters."
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "validation.minimum": [
+    {
+      "type": 0,
+      "value": "This must be at least "
+    },
+    {
+      "type": 1,
+      "value": "limit"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "validation.pattern": [
+    {
+      "type": 0,
+      "value": "This doesn't match the expected pattern "
+    },
+    {
+      "type": 1,
+      "value": "pattern"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "validation.required": [
+    {
+      "type": 0,
+      "value": "This field is required."
+    }
+  ],
+  "validation.type": [
+    {
+      "type": 0,
+      "value": "This must be a "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "validation.unknownField": [
+    {
+      "type": 1,
+      "value": "property"
+    },
+    {
+      "type": 0,
+      "value": " isn't a field of this form."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@edgway/docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Edgway's documentation site: Fumadocs on a Next.js static export, with generated error, plugin and admin API references",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "generate": "pnpm --filter @edgway/docs-gen generate",
+    "build": "next build && pnpm run check-links",
+    "check-links": "node scripts/check-links.mjs",
+    "dev": "next dev",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "@edgway/constants": "workspace:*",
+    "fumadocs-core": "16.15.18",
+    "fumadocs-mdx": "15.4.6",
+    "fumadocs-openapi": "12.1.1",
+    "fumadocs-ui": "16.15.18",
+    "lucide-react": "^1.49.0",
+    "next": "^16.4.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^22.20.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "next-validate-link": "1.6.7",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
+  }
+}

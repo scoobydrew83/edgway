@@ -1,0 +1,66 @@
+Edgway
+Copyright 2026 Drew Kennedy and the Edgway contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Edgway is an independent open-source project. It is not affiliated with,
+sponsored by, or endorsed by Kong Inc. "Kong" is a trademark of Kong Inc.;
+references to Kong describe compatibility only ("Kong-compatible").
+
+This product includes JSON Schemas vendored from third-party projects
+(see vendor/kong-schemas/SOURCE.md; their licence texts are in
+vendor/kong-schemas/ and packages/schema/third-party/):
+  - Kong/developer.konghq.com (plugin configuration schemas), MIT License,
+    Copyright (c) Kong Inc.
+  - Kong/go-database-reconciler (decK file schema), Apache License 2.0,
+    Copyright Kong Inc.
+
+This product includes test data derived from Kong/kong
+(spec/fixtures/router_path_handling_tests.lua at tag 3.9.0, see
+packages/core/test/fixtures/kong-path-handling.json), Apache License 2.0,
+Copyright Kong Inc.
+
+This product includes code derived from Kong/kong 3.9.0
+(https://github.com/Kong/kong), Apache License 2.0, Copyright Kong Inc.,
+ported to TypeScript and modified (licence text in each package's
+third-party/kong/):
+  - packages/core/src/router/priority.ts (kong/router/transform.lua)
+  - packages/core/src/router/paths.ts (kong/router/utils.lua,
+    kong/tools/uri.lua)
+  - packages/adapters-cf/src/rate-limit/windows.ts (kong/tools/timestamp.lua)
+
+This product includes the decK configurations in examples/deck/kong/, from
+Kong/go-database-reconciler, Apache License 2.0, Copyright Kong Inc. (see
+examples/deck/README.md).
+
+This product includes the decK sample configurations in
+examples/deck/kong-samples/, from Kong/deck v1.49.2, Apache License 2.0,
+Copyright Kong Inc. (see examples/deck/kong-samples/LICENSE).
+
+This product includes user-interface components in packages/ui-kit copied
+by the shadcn CLI from:
+  - shadcn/ui (https://ui.shadcn.com), MIT License, Copyright (c) 2023 shadcn
+  - marmelab's shadcn-admin-kit (https://github.com/marmelab/shadcn-admin-kit),
+    MIT License, Copyright (c) marmelab
+Their licence texts are in packages/ui-kit/third-party/.
+The design token values in packages/tokens come from shadcn/ui's neutral
+theme (MIT License, as above).
+
+packages/ui-kit/src/components/admin/date-time-input.tsx includes
+`useForkRef` from Material UI (https://github.com/mui/material-ui), MIT
+License, Copyright (c) 2014 Call-Em-All.
+
+The admin UI bundles es-toolkit (https://github.com/toss/es-toolkit), MIT
+License, Copyright (c) 2024 Viva Republica, Inc., which includes code derived
+from Lodash (https://github.com/lodash/lodash), MIT License, Copyright
+OpenJS Foundation and other contributors.
+
+Third-party packages bundled into Edgway's admin UI, developer portal, CLI
+and Workers are listed, with their licence texts and NOTICE files, in the
+notices each artifact ships (the UI's /ui/licenses.txt, the portal's
+/licenses.txt, the CLI's dist/THIRD_PARTY_NOTICES.txt) and, for the gateway
+and admin Workers, in THIRD_PARTY_NOTICES.txt.
+
+Cloudflare and Cloudflare Workers are trademarks of Cloudflare, Inc. Edgway
+runs on Cloudflare's platform and is not affiliated with or endorsed by
+Cloudflare, Inc.

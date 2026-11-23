@@ -1,0 +1,62 @@
+{
+  "name": "@edgway/sdk",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobydrew83/edgway.git",
+    "directory": "packages/sdk"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Typed client, TanStack Query hooks and zod schemas for the Edgway admin API, generated from its OpenAPI document",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "generate": "openapi-ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run",
+    "build": "tsc -b tsconfig.build.json",
+    "prepack": "pnpm run build && node ../../tools/release/prepack.mjs",
+    "postpack": "node ../../tools/release/postpack.mjs"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@edgway/constants": "workspace:*",
+    "@hey-api/openapi-ts": "0.99.0",
+    "@tanstack/react-query": "5.104.0",
+    "jose": "^6.2.12",
+    "typescript": "^5.9.3",
+    "vitest": "4.1.11",
+    "wrangler": "4.124.0"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      }
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  }
+}

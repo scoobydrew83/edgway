@@ -1,0 +1,7 @@
+{
+  "name": "Kong/developer.konghq.com",
+  "version": "8cf54cb5f437df50f89d37192fb17a8af71cf1a4",
+  "license": "MIT",
+  "homepage": "https://github.com/Kong/developer.konghq.com",
+  "copied": "Kong Gateway 3.9 plugin JSON Schemas (vendor/kong-schemas/3.9/plugins), compiled into src/generated"
+}

@@ -1,0 +1,10 @@
+{
+  "(MIT OR Apache-2.0) AND GPL-3.0-only": [
+    {
+      "name": "mixed-lib",
+      "versions": ["1.0.0"],
+      "paths": [],
+      "license": "(MIT OR Apache-2.0) AND GPL-3.0-only"
+    }
+  ]
+}

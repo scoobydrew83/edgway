@@ -1,0 +1,7 @@
+# Copy to .dev.vars for local `wrangler dev` (gitignored). The gateway's
+# secrets are public keys (JWK JSON); `pnpm run deploy` creates the pairs.
+# tools/kong-compat-e2e.sh passes its own keys with --var.
+CONFIG_PUBLIC_KEY=
+TRACE_PUBLIC_KEY=
+# Vault references ({vault://env/vault-...}) read VAULT_* secrets, e.g.:
+# VAULT_JWT_KEY=

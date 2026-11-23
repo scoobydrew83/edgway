@@ -1,0 +1,155 @@
+# Pull requests, and pushes to main (audit F3, F9, S21). Three jobs:
+#
+#   check  one checkout/install that runs actionlint over the workflows,
+#          `pnpm drift` (generated files match their generators: docs
+#          references, the admin's openapi.json, the SDK, the gateway's
+#          plugin registry), `pnpm gate` (biome, typecheck, lint, unit
+#          tests and every enabled gate) and the docs build;
+#   e2e    both Playwright suites;
+#   pack   the publishable packages' tarballs, on main only.
+#
+# Each step runs the same command as locally (package.json). Actions are
+# pinned by commit SHA.
+#
+# Reorganised 2026-10-18 to cut billed Actions minutes: the triggers no
+# longer fire on feature-branch pushes, the check job's redundant steps are
+# gone, four jobs became one, and pack moved to main. See the comments on
+# each change below. release.yml handles publishing on push to main; it does
+# not need ci.yml to run on tags, because changesets/action creates tags
+# through the GitHub API with GITHUB_TOKEN, which cannot trigger workflows.
+name: ci
+
+on:
+  # A bare `push:` ran the full suite on every push to every feature branch
+  # and then, once a PR was open, twice per commit -- the push ref and the PR
+  # ref are different concurrency groups, so neither cancelled the other.
+  # 118 of the 137 runs since Sep 1 were feature-branch pushes, about 1,464
+  # of the ~1,788 billed minutes. PRs still get the full suite on every
+  # commit; main gets it again on merge.
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      # Before the install, so a broken workflow file is reported without
+      # paying for the toolchain. Not gated on anything else in this job.
+      - name: actionlint (checksum-verified release binary)
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        run: |
+          tarball="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          curl -fsSLo "$RUNNER_TEMP/$tarball" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/$tarball"
+          echo "$ACTIONLINT_SHA256  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          tar xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" -color
+      # `!cancelled()` on the toolchain and install too: actionlint failing
+      # must not skip the rest of the job, the way a separate actionlint job
+      # would not have blocked one.
+      - if: ${{ !cancelled() }}
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - if: ${{ !cancelled() }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - id: install
+        if: ${{ !cancelled() }}
+        run: pnpm install --frozen-lockfile
+      # The drift, gate and docs steps were separate jobs, each paying for
+      # its own checkout and install. One job keeps the minutes but needs the
+      # `if` guards below to keep the isolation: a failure in one step still
+      # lets the others run and report, instead of ending the job at the
+      # first failure. They do need the install, though, so each is also
+      # gated on it having succeeded.
+      #
+      # Drift runs before anything that could write into a generated dir.
+      - name: pnpm drift
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm drift
+      # `pnpm gate` (tools/gates/run.ts) runs `pnpm turbo run typecheck lint
+      # test`, then `pnpm biome ci .`, then every enabled gate in
+      # tools/gates/gates.json, and reports every failure rather than stopping at
+      # the first. The separate `pnpm check`, `pnpm typecheck` and `pnpm
+      # test` steps that used to precede it were strict subsets of it (gate
+      # also runs turbo lint), so dropping them loses no coverage.
+      - name: pnpm gate
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm gate
+      - name: docs build
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm --filter @edgway/docs build
+
+  e2e:
+    # Ubuntu 24.04, not ubuntu-latest: ubuntu-latest is now 26.04, where
+    # Playwright 1.56 can't install Chromium's system dependencies ("does
+    # not support chromium on ubuntu26.04-x64"). Move back to ubuntu-latest
+    # once a Playwright release supports 26.04.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @edgway/ui exec playwright install --with-deps chromium
+      - run: pnpm --filter @edgway/ui test:e2e
+        env:
+          # The admin and gateway Workers' warnings and errors, in this log.
+          E2E_WORKER_LOG: warn
+      - run: pnpm --filter @edgway/portal test:e2e
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-traces
+          path: |
+            apps/ui/test-results
+            apps/portal/test-results
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # Every public package packs as `pnpm publish` would and passes publint,
+  # arethetypeswrong and an import from a clean npm consumer.
+  #
+  # Pushes only, so with the trigger above that means main: 57 runs and about
+  # 193 billed minutes since Sep 1 for a job that packs what is already built
+  # and typechecked. The trade-off is that a broken pack now surfaces on main
+  # rather than on the PR, before or alongside release.yml's publish, which
+  # runs on the same push.
+  pack:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Each package's prepack builds its dist.
+      - run: node tools/release/check-packs.mjs

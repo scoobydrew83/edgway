@@ -1,0 +1,53 @@
+{
+  "name": "@edgway/gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Edgway data-plane Worker",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test",
+    "cf-typegen": "wrangler types",
+    "test": "vitest run",
+    "gen:plugins": "tsx scripts/gen-plugins.mjs"
+  },
+  "dependencies": {
+    "@edgway/adapters-cf": "workspace:*",
+    "@edgway/constants": "workspace:*",
+    "@edgway/errors": "workspace:*",
+    "@edgway/i18n": "workspace:*",
+    "@edgway/plugin-acl": "workspace:*",
+    "@edgway/plugin-ai-prompt-guard": "workspace:*",
+    "@edgway/plugin-ai-proxy": "workspace:*",
+    "@edgway/plugin-ai-rate-limiting-advanced": "workspace:*",
+    "@edgway/plugin-basic-auth": "workspace:*",
+    "@edgway/plugin-correlation-id": "workspace:*",
+    "@edgway/plugin-cors": "workspace:*",
+    "@edgway/plugin-http-log": "workspace:*",
+    "@edgway/plugin-ip-restriction": "workspace:*",
+    "@edgway/plugin-jwt": "workspace:*",
+    "@edgway/plugin-key-auth": "workspace:*",
+    "@edgway/plugin-openid-connect": "workspace:*",
+    "@edgway/plugin-proxy-cache": "workspace:*",
+    "@edgway/plugin-rate-limiting": "workspace:*",
+    "@edgway/plugin-request-size-limiting": "workspace:*",
+    "@edgway/plugin-request-termination": "workspace:*",
+    "@edgway/plugin-request-transformer": "workspace:*",
+    "@edgway/plugin-response-transformer": "workspace:*",
+    "@edgway/plugin-sdk": "workspace:*",
+    "@edgway/telemetry": "workspace:*",
+    "hono": "^4.13.10",
+    "jose": "^6.0.8"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15",
+    "typescript": "^5.8.2",
+    "vitest": "4.1.11",
+    "wrangler": "4.124.0",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,15 @@
+import { testApp } from "@edgway/plugin-sdk/testing";
+import { describe, expect, it } from "vitest";
+import plugin from "../src/index";
+
+describe("__NAME__", () => {
+  it("adds its header to responses", async () => {
+    const app = testApp(plugin, {});
+    const res = await app.request("/");
+    expect(res.headers.get("x-__NAME__")).toBe("on");
+  });
+
+  it("works as plain Hono middleware", () => {
+    expect(typeof plugin.middleware({})).toBe("function");
+  });
+});

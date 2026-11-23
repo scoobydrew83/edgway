@@ -1,0 +1,45 @@
+---
+title: The admin UI
+description: Manage gateway configuration, credentials and publishing from the browser.
+---
+
+The admin Worker serves its UI at `https://<admin>/ui`, behind the same Cloudflare Access application as the native API. What you can do depends on your role in `ADMIN_ROLES`: `viewer` reads, `editor` changes the staged configuration, `publisher` also publishes and rolls back, and `owner` can do everything.
+
+## Staged changes and publishing
+
+Every edit, from the UI, the API, decK or Terraform, is **staged**. Nothing reaches the gateway until a publish.
+
+- The sidebar's **Publish** entry shows a badge with the number of unpublished changes.
+- The **Publish** page lists each change (added, changed, removed) and asks you to confirm before it publishes. The gateway serves the new version within about a second.
+- The version history on the same page rolls the gateway back to an earlier version, also after a confirmation.
+
+## Entities
+
+The sidebar groups Kong's entities: services, routes and upstreams under **Gateway**; consumers and consumer groups under **Consumers**; certificates, CA certificates, SNIs and vaults together. Lists can be filtered and sorted. A reference to another entity shows its name and links to it.
+
+Secret values are never shown. A field that holds a secret shows **Hidden**, unless it is a vault reference such as `{vault://env/vault-jwt-key}`, which is shown as is. See [Vault references](/guides/vault-references).
+
+## Consumers and their credentials
+
+A consumer's page manages its credentials:
+
+- **API keys (key-auth):** add or rotate a key. The new key is shown once, in a dialog with a copy button; afterwards only its first characters are kept. Deleting or rotating a key takes effect at the gateway at once, without publishing your other staged changes.
+- **Basic auth:** add a user, change its password or delete it. Passwords are stored as Kong's hash.
+
+## Plugins
+
+The **Plugin catalog** lists every plugin by category. Adding one opens a form built from Kong's own schema for that plugin, with a scope: global, a service, a route or a consumer. Editing a plugin uses the same form. A plugin you uploaded yourself (see [Sandbox plugins](/guides/sandbox-plugins)) is edited as plain fields instead.
+
+The [plugin reference](/plugins) lists every field.
+
+## The route tester
+
+The **Tester** sends a request through the gateway and shows the answer and the plugins that ran. It tests the **published** configuration, not your staged changes: publish first to test a change.
+
+## The overview
+
+The **Overview** shows requests and server errors over time, from the gateway's Analytics Engine data. It needs `CF_ACCOUNT_ID` and the `AE_API_TOKEN` secret on the admin (the repository's `docs/deploy.md`, "The overview dashboard"). Until they are set it says so, and with no traffic yet it says that instead.
+
+## When something fails
+
+A page whose data can't load shows the admin's error: its code (for example `EDG-ADM-003`), a link to that code's page in the [error reference](/errors), and a **Try again** button.

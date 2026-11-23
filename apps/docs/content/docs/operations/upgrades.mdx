@@ -1,0 +1,47 @@
+---
+title: Upgrades and migrations
+description: How an upgrade deploys, the database migration policy, and how to recover from a failed migration.
+---
+
+Edgway is pre-1.0. Upgrade to each new minor version in turn, and read its changelog first: a breaking change is listed there under **Breaking**.
+
+## What an upgrade does
+
+`pnpm run deploy` (or `edgway deploy`) runs the same steps for a fresh install and an upgrade:
+
+1. It finds the KV namespace `edgway-config` and the D1 database `edgway-admin`, and creates them if they don't exist.
+2. It applies any new D1 migrations (`wrangler d1 migrations apply DB --remote`).
+3. It deploys the Workers: the admin first, then the gateway, the portal and the admin again, so the Service Bindings between them resolve.
+4. It creates any missing signing key pairs. It never replaces existing ones.
+
+The gateway never reads D1. It serves the last signed snapshot it verified, so traffic keeps flowing while the admin and its database change. A config you published keeps working after an upgrade; publish again to pick up any new defaults.
+
+## The migration policy
+
+Migrations run **before** the new Workers are deployed. For a short window, the old admin and portal run against the new schema. So every migration in a release must be backward compatible with the previous release's code:
+
+- **Add, don't change:** add tables and nullable columns, or columns with a default. Don't rename, retype or drop in the same release that stops using them.
+- **Drop a release later:** stop using a column in release N, and drop it in release N+1.
+- **Data migrations are idempotent:** a migration that rewrites rows (for example `0009_portal_display_names`) must be safe to run against rows the old code writes during the window.
+- **Migrations are generated:** drizzle-kit writes them from `packages/schema/src/db/tables.ts` into `apps/admin/migrations`. A data migration is created with `drizzle-kit generate --custom` and reviewed like code.
+
+D1 records which migrations it has applied (in its `d1_migrations` table), so running a deploy again applies only the new ones.
+
+## If a migration fails
+
+`wrangler d1 migrations apply` stops at the first migration that fails, and the deploy stops before any Worker changes. The Workers you already run keep working.
+
+1. Read the error, then check what was applied:
+
+   ```bash
+   npx wrangler d1 migrations list DB --remote --config apps/admin/wrangler.jsonc
+   ```
+
+2. If the failed migration changed nothing, fix the cause and run the deploy again.
+3. If it left the database half-changed, restore the database to just before the deploy with [D1 Time Travel](/operations/backup-restore#restore-d1-to-a-point-in-time), then run the deploy again once the cause is fixed.
+
+Never edit a migration that has already run on any install. Add a new migration that corrects it.
+
+## Rolling back an upgrade
+
+To go back to the previous release, restore D1 to its pre-upgrade point with Time Travel, then deploy the previous release's code. Because migrations are backward compatible, deploying the previous code alone usually works too. A Time Travel restore also undoes every admin change made since that point, so export the database first (see [Backup and restore](/operations/backup-restore)).

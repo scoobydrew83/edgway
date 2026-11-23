@@ -1,0 +1,4078 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`plugin schemas > acl: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "allow": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "always_use_authenticated_groups": {
+          "default": false,
+          "type": "boolean",
+        },
+        "deny": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "hide_groups_header": {
+          "default": false,
+          "type": "boolean",
+        },
+        "include_consumer_groups": {
+          "default": false,
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > ai-prompt-guard: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "allow_all_conversation_history": {
+          "default": false,
+          "type": "boolean",
+        },
+        "allow_patterns": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "deny_patterns": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "match_all_roles": {
+          "default": false,
+          "type": "boolean",
+        },
+        "max_request_body_size": {
+          "default": 8192,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > ai-proxy: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "allow_override": {
+              "default": false,
+              "type": "boolean",
+            },
+            "aws_access_key_id": {
+              "type": "string",
+            },
+            "aws_secret_access_key": {
+              "type": "string",
+            },
+            "azure_client_id": {
+              "type": "string",
+            },
+            "azure_client_secret": {
+              "type": "string",
+            },
+            "azure_tenant_id": {
+              "type": "string",
+            },
+            "azure_use_managed_identity": {
+              "default": false,
+              "type": "boolean",
+            },
+            "gcp_service_account_json": {
+              "type": "string",
+            },
+            "gcp_use_service_account": {
+              "default": false,
+              "type": "boolean",
+            },
+            "header_name": {
+              "type": "string",
+            },
+            "header_value": {
+              "type": "string",
+            },
+            "param_location": {
+              "enum": [
+                "body",
+                "query",
+              ],
+              "type": "string",
+            },
+            "param_name": {
+              "type": "string",
+            },
+            "param_value": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "logging": {
+          "properties": {
+            "log_payloads": {
+              "default": false,
+              "type": "boolean",
+            },
+            "log_statistics": {
+              "default": false,
+              "type": "boolean",
+            },
+          },
+          "type": "object",
+        },
+        "max_request_body_size": {
+          "default": 8192,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer",
+        },
+        "model": {
+          "properties": {
+            "name": {
+              "type": "string",
+            },
+            "options": {
+              "properties": {
+                "anthropic_version": {
+                  "type": "string",
+                },
+                "azure_api_version": {
+                  "default": "2023-05-15",
+                  "type": "string",
+                },
+                "azure_deployment_id": {
+                  "type": "string",
+                },
+                "azure_instance": {
+                  "type": "string",
+                },
+                "bedrock": {
+                  "properties": {
+                    "aws_region": {
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "gemini": {
+                  "properties": {
+                    "api_endpoint": {
+                      "type": "string",
+                    },
+                    "location_id": {
+                      "type": "string",
+                    },
+                    "project_id": {
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "huggingface": {
+                  "properties": {
+                    "use_cache": {
+                      "type": "boolean",
+                    },
+                    "wait_for_model": {
+                      "type": "boolean",
+                    },
+                  },
+                  "type": "object",
+                },
+                "input_cost": {
+                  "minimum": 0,
+                  "type": "number",
+                },
+                "llama2_format": {
+                  "enum": [
+                    "ollama",
+                    "openai",
+                    "raw",
+                  ],
+                  "type": "string",
+                },
+                "max_tokens": {
+                  "default": 256,
+                  "maximum": 9007199254740991,
+                  "minimum": -9007199254740991,
+                  "type": "integer",
+                },
+                "mistral_format": {
+                  "enum": [
+                    "ollama",
+                    "openai",
+                  ],
+                  "type": "string",
+                },
+                "output_cost": {
+                  "minimum": 0,
+                  "type": "number",
+                },
+                "temperature": {
+                  "maximum": 5,
+                  "minimum": 0,
+                  "type": "number",
+                },
+                "top_k": {
+                  "maximum": 500,
+                  "minimum": 0,
+                  "type": "integer",
+                },
+                "top_p": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number",
+                },
+                "upstream_path": {
+                  "type": "string",
+                },
+                "upstream_url": {
+                  "type": "string",
+                },
+              },
+              "type": "object",
+            },
+            "provider": {
+              "enum": [
+                "anthropic",
+                "azure",
+                "bedrock",
+                "cohere",
+                "gemini",
+                "huggingface",
+                "llama2",
+                "mistral",
+                "openai",
+              ],
+              "type": "string",
+            },
+          },
+          "required": [
+            "provider",
+          ],
+          "type": "object",
+        },
+        "model_name_header": {
+          "default": true,
+          "type": "boolean",
+        },
+        "response_streaming": {
+          "default": "allow",
+          "enum": [
+            "allow",
+            "always",
+            "deny",
+          ],
+          "type": "string",
+        },
+        "route_type": {
+          "enum": [
+            "llm/v1/chat",
+            "llm/v1/completions",
+            "preserve",
+          ],
+          "type": "string",
+        },
+      },
+      "required": [
+        "model",
+        "route_type",
+      ],
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "required": [
+    "config",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > ai-rate-limiting-advanced: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "dictionary_name": {
+          "default": "kong_rate_limiting_counters",
+          "type": "string",
+        },
+        "disable_penalty": {
+          "default": false,
+          "type": "boolean",
+        },
+        "error_code": {
+          "default": 429,
+          "minimum": 0,
+          "type": "number",
+        },
+        "error_hide_providers": {
+          "default": false,
+          "type": "boolean",
+        },
+        "error_message": {
+          "default": "AI token rate limit exceeded for provider(s): ",
+          "type": "string",
+        },
+        "header_name": {
+          "type": "string",
+        },
+        "hide_client_headers": {
+          "default": false,
+          "type": "boolean",
+        },
+        "identifier": {
+          "default": "consumer",
+          "enum": [
+            "consumer",
+            "consumer-group",
+            "credential",
+            "header",
+            "ip",
+            "path",
+            "service",
+          ],
+          "type": "string",
+        },
+        "llm_providers": {
+          "items": {
+            "properties": {
+              "limit": {
+                "type": "number",
+              },
+              "name": {
+                "enum": [
+                  "anthropic",
+                  "azure",
+                  "bedrock",
+                  "cohere",
+                  "gemini",
+                  "huggingface",
+                  "llama2",
+                  "mistral",
+                  "openai",
+                  "requestPrompt",
+                ],
+                "type": "string",
+              },
+              "window_size": {
+                "type": "number",
+              },
+            },
+            "required": [
+              "limit",
+              "name",
+              "window_size",
+            ],
+            "type": "object",
+          },
+          "type": "array",
+        },
+        "path": {
+          "type": "string",
+        },
+        "redis": {
+          "properties": {
+            "cluster_max_redirections": {
+              "default": 5,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "cluster_nodes": {
+              "items": {
+                "properties": {
+                  "ip": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "connect_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "connection_is_proxied": {
+              "default": false,
+              "type": "boolean",
+            },
+            "database": {
+              "default": 0,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "host": {
+              "default": "127.0.0.1",
+              "type": "string",
+            },
+            "keepalive_backlog": {
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "keepalive_pool_size": {
+              "default": 256,
+              "maximum": 2147483646,
+              "minimum": 1,
+              "type": "integer",
+            },
+            "password": {
+              "type": "string",
+            },
+            "port": {
+              "default": 6379,
+              "maximum": 65535,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "read_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "send_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "sentinel_master": {
+              "type": "string",
+            },
+            "sentinel_nodes": {
+              "items": {
+                "properties": {
+                  "host": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "sentinel_password": {
+              "type": "string",
+            },
+            "sentinel_role": {
+              "enum": [
+                "any",
+                "master",
+                "slave",
+              ],
+              "type": "string",
+            },
+            "sentinel_username": {
+              "type": "string",
+            },
+            "server_name": {
+              "type": "string",
+            },
+            "ssl": {
+              "default": false,
+              "type": "boolean",
+            },
+            "ssl_verify": {
+              "default": false,
+              "type": "boolean",
+            },
+            "username": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "request_prompt_count_function": {
+          "type": "string",
+        },
+        "retry_after_jitter_max": {
+          "default": 0,
+          "type": "number",
+        },
+        "strategy": {
+          "default": "local",
+          "enum": [
+            "cluster",
+            "local",
+            "redis",
+          ],
+          "type": "string",
+        },
+        "sync_rate": {
+          "type": "number",
+        },
+        "tokens_count_strategy": {
+          "default": "total_tokens",
+          "enum": [
+            "completion_tokens",
+            "cost",
+            "prompt_tokens",
+            "total_tokens",
+          ],
+          "type": "string",
+        },
+        "window_type": {
+          "default": "sliding",
+          "enum": [
+            "fixed",
+            "sliding",
+          ],
+          "type": "string",
+        },
+      },
+      "required": [
+        "llm_providers",
+      ],
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "required": [
+    "config",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > basic-auth: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "anonymous": {
+          "type": "string",
+        },
+        "hide_credentials": {
+          "default": false,
+          "type": "boolean",
+        },
+        "realm": {
+          "default": "service",
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+        "ws",
+        "wss",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > correlation-id: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "echo_downstream": {
+          "default": false,
+          "type": "boolean",
+        },
+        "generator": {
+          "default": "uuid#counter",
+          "enum": [
+            "tracker",
+            "uuid",
+            "uuid#counter",
+          ],
+          "type": "string",
+        },
+        "header_name": {
+          "default": "Kong-Request-ID",
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > cors: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "credentials": {
+          "default": false,
+          "type": "boolean",
+        },
+        "exposed_headers": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "headers": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "max_age": {
+          "type": "number",
+        },
+        "methods": {
+          "default": [
+            "CONNECT",
+            "DELETE",
+            "GET",
+            "HEAD",
+            "OPTIONS",
+            "PATCH",
+            "POST",
+            "PUT",
+            "TRACE",
+          ],
+          "items": {
+            "enum": [
+              "CONNECT",
+              "DELETE",
+              "GET",
+              "HEAD",
+              "OPTIONS",
+              "PATCH",
+              "POST",
+              "PUT",
+              "TRACE",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "origins": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "preflight_continue": {
+          "default": false,
+          "type": "boolean",
+        },
+        "private_network": {
+          "default": false,
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > http-log: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "content_type": {
+          "default": "application/json",
+          "enum": [
+            "application/json",
+            "application/json; charset=utf-8",
+          ],
+          "type": "string",
+        },
+        "custom_fields_by_lua": {
+          "additionalProperties": {},
+          "propertyNames": {
+            "type": "string",
+          },
+          "type": "object",
+        },
+        "flush_timeout": {
+          "type": "number",
+        },
+        "headers": {
+          "additionalProperties": {},
+          "propertyNames": {
+            "type": "string",
+          },
+          "type": "object",
+        },
+        "http_endpoint": {
+          "type": "string",
+        },
+        "keepalive": {
+          "default": 60000,
+          "type": "number",
+        },
+        "method": {
+          "default": "POST",
+          "enum": [
+            "PATCH",
+            "POST",
+            "PUT",
+          ],
+          "type": "string",
+        },
+        "queue": {
+          "properties": {
+            "concurrency_limit": {
+              "anyOf": [
+                {
+                  "const": -1,
+                  "type": "number",
+                },
+                {
+                  "const": 1,
+                  "type": "number",
+                },
+              ],
+              "default": 1,
+            },
+            "initial_retry_delay": {
+              "default": 0.01,
+              "maximum": 1000000,
+              "minimum": 0.001,
+              "type": "number",
+            },
+            "max_batch_size": {
+              "default": 1,
+              "maximum": 1000000,
+              "minimum": 1,
+              "type": "integer",
+            },
+            "max_bytes": {
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "max_coalescing_delay": {
+              "default": 1,
+              "maximum": 3600,
+              "minimum": 0,
+              "type": "number",
+            },
+            "max_entries": {
+              "default": 10000,
+              "maximum": 1000000,
+              "minimum": 1,
+              "type": "integer",
+            },
+            "max_retry_delay": {
+              "default": 60,
+              "maximum": 1000000,
+              "minimum": 0.001,
+              "type": "number",
+            },
+            "max_retry_time": {
+              "default": 60,
+              "type": "number",
+            },
+          },
+          "type": "object",
+        },
+        "queue_size": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer",
+        },
+        "retry_count": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer",
+        },
+        "timeout": {
+          "default": 10000,
+          "type": "number",
+        },
+      },
+      "required": [
+        "http_endpoint",
+      ],
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "tcp",
+          "tls",
+          "tls_passthrough",
+          "udp",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "required": [
+    "config",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > ip-restriction: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "allow": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "deny": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "message": {
+          "type": "string",
+        },
+        "status": {
+          "type": "number",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+        "tcp",
+        "tls",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "tcp",
+          "tls",
+          "tls_passthrough",
+          "udp",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > jwt: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "anonymous": {
+          "type": "string",
+        },
+        "claims_to_verify": {
+          "items": {
+            "enum": [
+              "exp",
+              "nbf",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "cookie_names": {
+          "default": [],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "header_names": {
+          "default": [
+            "authorization",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "key_claim_name": {
+          "default": "iss",
+          "type": "string",
+        },
+        "maximum_expiration": {
+          "default": 0,
+          "maximum": 31536000,
+          "minimum": 0,
+          "type": "number",
+        },
+        "realm": {
+          "type": "string",
+        },
+        "run_on_preflight": {
+          "default": true,
+          "type": "boolean",
+        },
+        "secret_is_base64": {
+          "default": false,
+          "type": "boolean",
+        },
+        "uri_param_names": {
+          "default": [
+            "jwt",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > key-auth: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "anonymous": {
+          "type": "string",
+        },
+        "hide_credentials": {
+          "default": false,
+          "type": "boolean",
+        },
+        "key_in_body": {
+          "default": false,
+          "type": "boolean",
+        },
+        "key_in_header": {
+          "default": true,
+          "type": "boolean",
+        },
+        "key_in_query": {
+          "default": true,
+          "type": "boolean",
+        },
+        "key_names": {
+          "default": [
+            "apikey",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "realm": {
+          "type": "string",
+        },
+        "run_on_preflight": {
+          "default": true,
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+        "ws",
+        "wss",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > openid-connect: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "anonymous": {
+          "type": "string",
+        },
+        "audience": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "audience_claim": {
+          "default": [
+            "aud",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "audience_required": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "auth_methods": {
+          "default": [
+            "authorization_code",
+            "bearer",
+            "client_credentials",
+            "introspection",
+            "kong_oauth2",
+            "password",
+            "refresh_token",
+            "session",
+            "userinfo",
+          ],
+          "items": {
+            "enum": [
+              "authorization_code",
+              "bearer",
+              "client_credentials",
+              "introspection",
+              "kong_oauth2",
+              "password",
+              "refresh_token",
+              "session",
+              "userinfo",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "authenticated_groups_claim": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "authorization_cookie_domain": {
+          "type": "string",
+        },
+        "authorization_cookie_http_only": {
+          "default": true,
+          "type": "boolean",
+        },
+        "authorization_cookie_name": {
+          "default": "authorization",
+          "type": "string",
+        },
+        "authorization_cookie_path": {
+          "default": "/",
+          "type": "string",
+        },
+        "authorization_cookie_same_site": {
+          "default": "Default",
+          "enum": [
+            "Default",
+            "Lax",
+            "None",
+            "Strict",
+          ],
+          "type": "string",
+        },
+        "authorization_cookie_secure": {
+          "type": "boolean",
+        },
+        "authorization_endpoint": {
+          "type": "string",
+        },
+        "authorization_query_args_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "authorization_query_args_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "authorization_query_args_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "authorization_rolling_timeout": {
+          "default": 600,
+          "type": "number",
+        },
+        "bearer_token_cookie_name": {
+          "type": "string",
+        },
+        "bearer_token_param_type": {
+          "default": [
+            "body",
+            "header",
+            "query",
+          ],
+          "items": {
+            "enum": [
+              "body",
+              "cookie",
+              "header",
+              "query",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "by_username_ignore_case": {
+          "default": false,
+          "type": "boolean",
+        },
+        "cache_introspection": {
+          "default": true,
+          "type": "boolean",
+        },
+        "cache_token_exchange": {
+          "default": true,
+          "type": "boolean",
+        },
+        "cache_tokens": {
+          "default": true,
+          "type": "boolean",
+        },
+        "cache_tokens_salt": {
+          "type": "string",
+        },
+        "cache_ttl": {
+          "default": 3600,
+          "type": "number",
+        },
+        "cache_ttl_max": {
+          "type": "number",
+        },
+        "cache_ttl_min": {
+          "type": "number",
+        },
+        "cache_ttl_neg": {
+          "type": "number",
+        },
+        "cache_ttl_resurrect": {
+          "type": "number",
+        },
+        "cache_user_info": {
+          "default": true,
+          "type": "boolean",
+        },
+        "claims_forbidden": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "client_alg": {
+          "items": {
+            "enum": [
+              "ES256",
+              "ES384",
+              "ES512",
+              "EdDSA",
+              "HS256",
+              "HS384",
+              "HS512",
+              "PS256",
+              "PS384",
+              "PS512",
+              "RS256",
+              "RS384",
+              "RS512",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "client_arg": {
+          "default": "client_id",
+          "type": "string",
+        },
+        "client_auth": {
+          "items": {
+            "enum": [
+              "client_secret_basic",
+              "client_secret_jwt",
+              "client_secret_post",
+              "none",
+              "private_key_jwt",
+              "self_signed_tls_client_auth",
+              "tls_client_auth",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "client_credentials_param_type": {
+          "default": [
+            "body",
+            "header",
+            "query",
+          ],
+          "items": {
+            "enum": [
+              "body",
+              "header",
+              "query",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "client_id": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "client_jwk": {
+          "items": {
+            "properties": {
+              "alg": {
+                "type": "string",
+              },
+              "crv": {
+                "type": "string",
+              },
+              "d": {
+                "type": "string",
+              },
+              "dp": {
+                "type": "string",
+              },
+              "dq": {
+                "type": "string",
+              },
+              "e": {
+                "type": "string",
+              },
+              "issuer": {
+                "type": "string",
+              },
+              "k": {
+                "type": "string",
+              },
+              "key_ops": {
+                "items": {
+                  "type": "string",
+                },
+                "type": "array",
+              },
+              "kid": {
+                "type": "string",
+              },
+              "kty": {
+                "type": "string",
+              },
+              "n": {
+                "type": "string",
+              },
+              "oth": {
+                "type": "string",
+              },
+              "p": {
+                "type": "string",
+              },
+              "q": {
+                "type": "string",
+              },
+              "qi": {
+                "type": "string",
+              },
+              "r": {
+                "type": "string",
+              },
+              "t": {
+                "type": "string",
+              },
+              "use": {
+                "type": "string",
+              },
+              "x": {
+                "type": "string",
+              },
+              "x5c": {
+                "items": {
+                  "type": "string",
+                },
+                "type": "array",
+              },
+              "x5t": {
+                "type": "string",
+              },
+              "x5t#S256": {
+                "type": "string",
+              },
+              "x5u": {
+                "type": "string",
+              },
+              "y": {
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "type": "array",
+        },
+        "client_secret": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "cluster_cache_redis": {
+          "properties": {
+            "cluster_max_redirections": {
+              "default": 5,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "cluster_nodes": {
+              "items": {
+                "properties": {
+                  "ip": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "connect_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "connection_is_proxied": {
+              "default": false,
+              "type": "boolean",
+            },
+            "database": {
+              "default": 0,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "host": {
+              "default": "127.0.0.1",
+              "type": "string",
+            },
+            "keepalive_backlog": {
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "keepalive_pool_size": {
+              "default": 256,
+              "maximum": 2147483646,
+              "minimum": 1,
+              "type": "integer",
+            },
+            "password": {
+              "type": "string",
+            },
+            "port": {
+              "default": 6379,
+              "maximum": 65535,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "read_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "send_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "sentinel_master": {
+              "type": "string",
+            },
+            "sentinel_nodes": {
+              "items": {
+                "properties": {
+                  "host": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "sentinel_password": {
+              "type": "string",
+            },
+            "sentinel_role": {
+              "enum": [
+                "any",
+                "master",
+                "slave",
+              ],
+              "type": "string",
+            },
+            "sentinel_username": {
+              "type": "string",
+            },
+            "server_name": {
+              "type": "string",
+            },
+            "ssl": {
+              "default": false,
+              "type": "boolean",
+            },
+            "ssl_verify": {
+              "default": false,
+              "type": "boolean",
+            },
+            "username": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "cluster_cache_strategy": {
+          "default": "off",
+          "enum": [
+            "off",
+            "redis",
+          ],
+          "type": "string",
+        },
+        "consumer_by": {
+          "default": [
+            "custom_id",
+            "username",
+          ],
+          "items": {
+            "enum": [
+              "custom_id",
+              "id",
+              "username",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "consumer_claim": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "consumer_optional": {
+          "default": false,
+          "type": "boolean",
+        },
+        "credential_claim": {
+          "default": [
+            "sub",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "disable_session": {
+          "items": {
+            "enum": [
+              "authorization_code",
+              "bearer",
+              "client_credentials",
+              "introspection",
+              "kong_oauth2",
+              "password",
+              "refresh_token",
+              "session",
+              "userinfo",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "discovery_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "discovery_headers_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "display_errors": {
+          "default": false,
+          "type": "boolean",
+        },
+        "domains": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "downstream_access_token_header": {
+          "type": "string",
+        },
+        "downstream_access_token_jwk_header": {
+          "type": "string",
+        },
+        "downstream_headers_claims": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "downstream_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "downstream_id_token_header": {
+          "type": "string",
+        },
+        "downstream_id_token_jwk_header": {
+          "type": "string",
+        },
+        "downstream_introspection_header": {
+          "type": "string",
+        },
+        "downstream_introspection_jwt_header": {
+          "type": "string",
+        },
+        "downstream_refresh_token_header": {
+          "type": "string",
+        },
+        "downstream_session_id_header": {
+          "type": "string",
+        },
+        "downstream_user_info_header": {
+          "type": "string",
+        },
+        "downstream_user_info_jwt_header": {
+          "type": "string",
+        },
+        "dpop_proof_lifetime": {
+          "default": 300,
+          "type": "number",
+        },
+        "dpop_use_nonce": {
+          "default": false,
+          "type": "boolean",
+        },
+        "enable_hs_signatures": {
+          "default": false,
+          "type": "boolean",
+        },
+        "end_session_endpoint": {
+          "type": "string",
+        },
+        "expose_error_code": {
+          "default": true,
+          "type": "boolean",
+        },
+        "extra_jwks_uris": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "forbidden_destroy_session": {
+          "default": true,
+          "type": "boolean",
+        },
+        "forbidden_error_message": {
+          "default": "Forbidden",
+          "type": "string",
+        },
+        "forbidden_redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "groups_claim": {
+          "default": [
+            "groups",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "groups_required": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "hide_credentials": {
+          "default": false,
+          "type": "boolean",
+        },
+        "http_proxy": {
+          "type": "string",
+        },
+        "http_proxy_authorization": {
+          "type": "string",
+        },
+        "http_version": {
+          "default": 1.1,
+          "type": "number",
+        },
+        "https_proxy": {
+          "type": "string",
+        },
+        "https_proxy_authorization": {
+          "type": "string",
+        },
+        "id_token_param_name": {
+          "type": "string",
+        },
+        "id_token_param_type": {
+          "default": [
+            "body",
+            "header",
+            "query",
+          ],
+          "items": {
+            "enum": [
+              "body",
+              "header",
+              "query",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "ignore_signature": {
+          "default": [],
+          "items": {
+            "enum": [
+              "authorization_code",
+              "client_credentials",
+              "introspection",
+              "password",
+              "refresh_token",
+              "session",
+              "userinfo",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspect_jwt_tokens": {
+          "default": false,
+          "type": "boolean",
+        },
+        "introspection_accept": {
+          "default": "application/json",
+          "enum": [
+            "application/json",
+            "application/jwt",
+            "application/token-introspection+jwt",
+          ],
+          "type": "string",
+        },
+        "introspection_check_active": {
+          "default": true,
+          "type": "boolean",
+        },
+        "introspection_endpoint": {
+          "type": "string",
+        },
+        "introspection_endpoint_auth_method": {
+          "enum": [
+            "client_secret_basic",
+            "client_secret_jwt",
+            "client_secret_post",
+            "none",
+            "private_key_jwt",
+            "self_signed_tls_client_auth",
+            "tls_client_auth",
+          ],
+          "type": "string",
+        },
+        "introspection_headers_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_headers_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_hint": {
+          "default": "access_token",
+          "type": "string",
+        },
+        "introspection_post_args_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_post_args_client_headers": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_post_args_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_post_args_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "introspection_token_param_name": {
+          "default": "token",
+          "type": "string",
+        },
+        "issuer": {
+          "type": "string",
+        },
+        "issuers_allowed": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "jwt_session_claim": {
+          "default": "sid",
+          "type": "string",
+        },
+        "jwt_session_cookie": {
+          "type": "string",
+        },
+        "keepalive": {
+          "default": true,
+          "type": "boolean",
+        },
+        "leeway": {
+          "default": 0,
+          "type": "number",
+        },
+        "login_action": {
+          "default": "upstream",
+          "enum": [
+            "redirect",
+            "response",
+            "upstream",
+          ],
+          "type": "string",
+        },
+        "login_methods": {
+          "default": [
+            "authorization_code",
+          ],
+          "items": {
+            "enum": [
+              "authorization_code",
+              "bearer",
+              "client_credentials",
+              "introspection",
+              "kong_oauth2",
+              "password",
+              "refresh_token",
+              "session",
+              "userinfo",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "login_redirect_mode": {
+          "default": "fragment",
+          "enum": [
+            "fragment",
+            "query",
+          ],
+          "type": "string",
+        },
+        "login_redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "login_tokens": {
+          "default": [
+            "id_token",
+          ],
+          "items": {
+            "enum": [
+              "access_token",
+              "id_token",
+              "introspection",
+              "refresh_token",
+              "tokens",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "logout_methods": {
+          "default": [
+            "DELETE",
+            "POST",
+          ],
+          "items": {
+            "enum": [
+              "DELETE",
+              "GET",
+              "POST",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "logout_post_arg": {
+          "type": "string",
+        },
+        "logout_query_arg": {
+          "type": "string",
+        },
+        "logout_redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "logout_revoke": {
+          "default": false,
+          "type": "boolean",
+        },
+        "logout_revoke_access_token": {
+          "default": true,
+          "type": "boolean",
+        },
+        "logout_revoke_refresh_token": {
+          "default": true,
+          "type": "boolean",
+        },
+        "logout_uri_suffix": {
+          "type": "string",
+        },
+        "max_age": {
+          "type": "number",
+        },
+        "mtls_introspection_endpoint": {
+          "type": "string",
+        },
+        "mtls_revocation_endpoint": {
+          "type": "string",
+        },
+        "mtls_token_endpoint": {
+          "type": "string",
+        },
+        "no_proxy": {
+          "type": "string",
+        },
+        "password_param_type": {
+          "default": [
+            "body",
+            "header",
+            "query",
+          ],
+          "items": {
+            "enum": [
+              "body",
+              "header",
+              "query",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "preserve_query_args": {
+          "default": false,
+          "type": "boolean",
+        },
+        "proof_of_possession_auth_methods_validation": {
+          "default": true,
+          "type": "boolean",
+        },
+        "proof_of_possession_dpop": {
+          "default": "off",
+          "enum": [
+            "off",
+            "optional",
+            "strict",
+          ],
+          "type": "string",
+        },
+        "proof_of_possession_mtls": {
+          "default": "off",
+          "enum": [
+            "off",
+            "optional",
+            "strict",
+          ],
+          "type": "string",
+        },
+        "pushed_authorization_request_endpoint": {
+          "type": "string",
+        },
+        "pushed_authorization_request_endpoint_auth_method": {
+          "enum": [
+            "client_secret_basic",
+            "client_secret_jwt",
+            "client_secret_post",
+            "none",
+            "private_key_jwt",
+            "self_signed_tls_client_auth",
+            "tls_client_auth",
+          ],
+          "type": "string",
+        },
+        "redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "redis": {
+          "properties": {
+            "cluster_max_redirections": {
+              "default": 5,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "cluster_nodes": {
+              "items": {
+                "properties": {
+                  "ip": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "connect_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "connection_is_proxied": {
+              "default": false,
+              "type": "boolean",
+            },
+            "database": {
+              "default": 0,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "host": {
+              "default": "127.0.0.1",
+              "type": "string",
+            },
+            "keepalive_backlog": {
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "keepalive_pool_size": {
+              "default": 256,
+              "maximum": 2147483646,
+              "minimum": 1,
+              "type": "integer",
+            },
+            "password": {
+              "type": "string",
+            },
+            "port": {
+              "default": 6379,
+              "maximum": 65535,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "prefix": {
+              "type": "string",
+            },
+            "read_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "send_timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "sentinel_master": {
+              "type": "string",
+            },
+            "sentinel_nodes": {
+              "items": {
+                "properties": {
+                  "host": {
+                    "default": "127.0.0.1",
+                    "type": "string",
+                  },
+                  "port": {
+                    "default": 6379,
+                    "maximum": 65535,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                },
+                "type": "object",
+              },
+              "type": "array",
+            },
+            "sentinel_password": {
+              "type": "string",
+            },
+            "sentinel_role": {
+              "enum": [
+                "any",
+                "master",
+                "slave",
+              ],
+              "type": "string",
+            },
+            "sentinel_username": {
+              "type": "string",
+            },
+            "server_name": {
+              "type": "string",
+            },
+            "socket": {
+              "type": "string",
+            },
+            "ssl": {
+              "default": false,
+              "type": "boolean",
+            },
+            "ssl_verify": {
+              "default": false,
+              "type": "boolean",
+            },
+            "username": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "rediscovery_lifetime": {
+          "default": 30,
+          "type": "number",
+        },
+        "refresh_token_param_name": {
+          "type": "string",
+        },
+        "refresh_token_param_type": {
+          "default": [
+            "body",
+            "header",
+            "query",
+          ],
+          "items": {
+            "enum": [
+              "body",
+              "header",
+              "query",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "refresh_tokens": {
+          "default": true,
+          "type": "boolean",
+        },
+        "require_proof_key_for_code_exchange": {
+          "type": "boolean",
+        },
+        "require_pushed_authorization_requests": {
+          "type": "boolean",
+        },
+        "require_signed_request_object": {
+          "type": "boolean",
+        },
+        "resolve_distributed_claims": {
+          "default": false,
+          "type": "boolean",
+        },
+        "response_mode": {
+          "default": "query",
+          "enum": [
+            "form_post",
+            "form_post.jwt",
+            "fragment",
+            "fragment.jwt",
+            "jwt",
+            "query",
+            "query.jwt",
+          ],
+          "type": "string",
+        },
+        "response_type": {
+          "default": [
+            "code",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "reverify": {
+          "default": false,
+          "type": "boolean",
+        },
+        "revocation_endpoint": {
+          "type": "string",
+        },
+        "revocation_endpoint_auth_method": {
+          "enum": [
+            "client_secret_basic",
+            "client_secret_jwt",
+            "client_secret_post",
+            "none",
+            "private_key_jwt",
+            "self_signed_tls_client_auth",
+            "tls_client_auth",
+          ],
+          "type": "string",
+        },
+        "revocation_token_param_name": {
+          "default": "token",
+          "type": "string",
+        },
+        "roles_claim": {
+          "default": [
+            "roles",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "roles_required": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "run_on_preflight": {
+          "default": true,
+          "type": "boolean",
+        },
+        "scopes": {
+          "default": [
+            "openid",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "scopes_claim": {
+          "default": [
+            "scope",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "scopes_required": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "search_user_info": {
+          "default": false,
+          "type": "boolean",
+        },
+        "session_absolute_timeout": {
+          "default": 86400,
+          "type": "number",
+        },
+        "session_audience": {
+          "default": "default",
+          "type": "string",
+        },
+        "session_cookie_domain": {
+          "type": "string",
+        },
+        "session_cookie_http_only": {
+          "default": true,
+          "type": "boolean",
+        },
+        "session_cookie_name": {
+          "default": "session",
+          "type": "string",
+        },
+        "session_cookie_path": {
+          "default": "/",
+          "type": "string",
+        },
+        "session_cookie_same_site": {
+          "default": "Lax",
+          "enum": [
+            "Default",
+            "Lax",
+            "None",
+            "Strict",
+          ],
+          "type": "string",
+        },
+        "session_cookie_secure": {
+          "type": "boolean",
+        },
+        "session_enforce_same_subject": {
+          "default": false,
+          "type": "boolean",
+        },
+        "session_hash_storage_key": {
+          "default": false,
+          "type": "boolean",
+        },
+        "session_hash_subject": {
+          "default": false,
+          "type": "boolean",
+        },
+        "session_idling_timeout": {
+          "default": 900,
+          "type": "number",
+        },
+        "session_memcached_host": {
+          "default": "127.0.0.1",
+          "type": "string",
+        },
+        "session_memcached_port": {
+          "default": 11211,
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer",
+        },
+        "session_memcached_prefix": {
+          "type": "string",
+        },
+        "session_memcached_socket": {
+          "type": "string",
+        },
+        "session_remember": {
+          "default": false,
+          "type": "boolean",
+        },
+        "session_remember_absolute_timeout": {
+          "default": 2592000,
+          "type": "number",
+        },
+        "session_remember_cookie_name": {
+          "default": "remember",
+          "type": "string",
+        },
+        "session_remember_rolling_timeout": {
+          "default": 604800,
+          "type": "number",
+        },
+        "session_request_headers": {
+          "items": {
+            "enum": [
+              "absolute-timeout",
+              "audience",
+              "id",
+              "idling-timeout",
+              "rolling-timeout",
+              "subject",
+              "timeout",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "session_response_headers": {
+          "items": {
+            "enum": [
+              "absolute-timeout",
+              "audience",
+              "id",
+              "idling-timeout",
+              "rolling-timeout",
+              "subject",
+              "timeout",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "session_rolling_timeout": {
+          "default": 3600,
+          "type": "number",
+        },
+        "session_secret": {
+          "type": "string",
+        },
+        "session_storage": {
+          "default": "cookie",
+          "enum": [
+            "cookie",
+            "memcache",
+            "memcached",
+            "redis",
+          ],
+          "type": "string",
+        },
+        "session_store_metadata": {
+          "default": false,
+          "type": "boolean",
+        },
+        "ssl_verify": {
+          "default": false,
+          "type": "boolean",
+        },
+        "timeout": {
+          "default": 10000,
+          "type": "number",
+        },
+        "tls_client_auth_cert_id": {
+          "type": "string",
+        },
+        "tls_client_auth_ssl_verify": {
+          "default": true,
+          "type": "boolean",
+        },
+        "token_cache_key_include_scope": {
+          "default": false,
+          "type": "boolean",
+        },
+        "token_endpoint": {
+          "type": "string",
+        },
+        "token_endpoint_auth_method": {
+          "enum": [
+            "client_secret_basic",
+            "client_secret_jwt",
+            "client_secret_post",
+            "none",
+            "private_key_jwt",
+            "self_signed_tls_client_auth",
+            "tls_client_auth",
+          ],
+          "type": "string",
+        },
+        "token_exchange_endpoint": {
+          "type": "string",
+        },
+        "token_headers_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_headers_grants": {
+          "items": {
+            "enum": [
+              "authorization_code",
+              "client_credentials",
+              "password",
+              "refresh_token",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_headers_prefix": {
+          "type": "string",
+        },
+        "token_headers_replay": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_headers_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_post_args_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_post_args_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "token_post_args_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "unauthorized_destroy_session": {
+          "default": true,
+          "type": "boolean",
+        },
+        "unauthorized_error_message": {
+          "default": "Unauthorized",
+          "type": "string",
+        },
+        "unauthorized_redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "unexpected_redirect_uri": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "upstream_access_token_header": {
+          "default": "authorization:bearer",
+          "type": "string",
+        },
+        "upstream_access_token_jwk_header": {
+          "type": "string",
+        },
+        "upstream_headers_claims": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "upstream_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "upstream_id_token_header": {
+          "type": "string",
+        },
+        "upstream_id_token_jwk_header": {
+          "type": "string",
+        },
+        "upstream_introspection_header": {
+          "type": "string",
+        },
+        "upstream_introspection_jwt_header": {
+          "type": "string",
+        },
+        "upstream_refresh_token_header": {
+          "type": "string",
+        },
+        "upstream_session_id_header": {
+          "type": "string",
+        },
+        "upstream_user_info_header": {
+          "type": "string",
+        },
+        "upstream_user_info_jwt_header": {
+          "type": "string",
+        },
+        "userinfo_accept": {
+          "default": "application/json",
+          "enum": [
+            "application/json",
+            "application/jwt",
+          ],
+          "type": "string",
+        },
+        "userinfo_endpoint": {
+          "type": "string",
+        },
+        "userinfo_headers_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "userinfo_headers_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "userinfo_headers_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "userinfo_query_args_client": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "userinfo_query_args_names": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "userinfo_query_args_values": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "using_pseudo_issuer": {
+          "default": false,
+          "type": "boolean",
+        },
+        "verify_claims": {
+          "default": true,
+          "type": "boolean",
+        },
+        "verify_nonce": {
+          "default": true,
+          "type": "boolean",
+        },
+        "verify_parameters": {
+          "default": false,
+          "type": "boolean",
+        },
+        "verify_signature": {
+          "default": true,
+          "type": "boolean",
+        },
+      },
+      "required": [
+        "issuer",
+      ],
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "required": [
+    "config",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > proxy-cache: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "cache_control": {
+          "default": false,
+          "type": "boolean",
+        },
+        "cache_ttl": {
+          "default": 300,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer",
+        },
+        "content_type": {
+          "default": [
+            "application/json",
+            "text/plain",
+          ],
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "ignore_uri_case": {
+          "default": false,
+          "type": "boolean",
+        },
+        "memory": {
+          "properties": {
+            "dictionary_name": {
+              "default": "kong_db_cache",
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "request_method": {
+          "default": [
+            "GET",
+            "HEAD",
+          ],
+          "items": {
+            "enum": [
+              "GET",
+              "HEAD",
+              "PATCH",
+              "POST",
+              "PUT",
+            ],
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "response_code": {
+          "default": [
+            200,
+            301,
+            404,
+          ],
+          "items": {
+            "maximum": 900,
+            "minimum": 100,
+            "type": "integer",
+          },
+          "type": "array",
+        },
+        "response_headers": {
+          "properties": {
+            "X-Cache-Key": {
+              "default": true,
+              "type": "boolean",
+            },
+            "X-Cache-Status": {
+              "default": true,
+              "type": "boolean",
+            },
+            "age": {
+              "default": true,
+              "type": "boolean",
+            },
+          },
+          "type": "object",
+        },
+        "storage_ttl": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer",
+        },
+        "strategy": {
+          "enum": [
+            "memory",
+          ],
+          "type": "string",
+        },
+        "vary_headers": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+        "vary_query_params": {
+          "items": {
+            "type": "string",
+          },
+          "type": "array",
+        },
+      },
+      "required": [
+        "strategy",
+      ],
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "tcp",
+          "tls",
+          "tls_passthrough",
+          "udp",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "required": [
+    "config",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > rate-limiting: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "day": {
+          "minimum": 0,
+          "type": "number",
+        },
+        "error_code": {
+          "default": 429,
+          "minimum": 0,
+          "type": "number",
+        },
+        "error_message": {
+          "default": "API rate limit exceeded",
+          "type": "string",
+        },
+        "fault_tolerant": {
+          "default": true,
+          "type": "boolean",
+        },
+        "header_name": {
+          "type": "string",
+        },
+        "hide_client_headers": {
+          "default": false,
+          "type": "boolean",
+        },
+        "hour": {
+          "minimum": 0,
+          "type": "number",
+        },
+        "limit_by": {
+          "default": "consumer",
+          "enum": [
+            "consumer",
+            "consumer-group",
+            "credential",
+            "header",
+            "ip",
+            "path",
+            "service",
+          ],
+          "type": "string",
+        },
+        "minute": {
+          "minimum": 0,
+          "type": "number",
+        },
+        "month": {
+          "minimum": 0,
+          "type": "number",
+        },
+        "path": {
+          "type": "string",
+        },
+        "policy": {
+          "default": "local",
+          "enum": [
+            "cluster",
+            "local",
+            "redis",
+          ],
+          "type": "string",
+        },
+        "redis": {
+          "properties": {
+            "database": {
+              "default": 0,
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer",
+            },
+            "host": {
+              "type": "string",
+            },
+            "password": {
+              "minLength": 0,
+              "type": "string",
+            },
+            "port": {
+              "default": 6379,
+              "maximum": 65535,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "server_name": {
+              "type": "string",
+            },
+            "ssl": {
+              "default": false,
+              "type": "boolean",
+            },
+            "ssl_verify": {
+              "default": false,
+              "type": "boolean",
+            },
+            "timeout": {
+              "default": 2000,
+              "maximum": 2147483646,
+              "minimum": 0,
+              "type": "integer",
+            },
+            "username": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "second": {
+          "minimum": 0,
+          "type": "number",
+        },
+        "sync_rate": {
+          "default": -1,
+          "type": "number",
+        },
+        "year": {
+          "minimum": 0,
+          "type": "number",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > request-size-limiting: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "allowed_payload_size": {
+          "default": 128,
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer",
+        },
+        "require_content_length": {
+          "default": false,
+          "type": "boolean",
+        },
+        "size_unit": {
+          "default": "megabytes",
+          "enum": [
+            "bytes",
+            "kilobytes",
+            "megabytes",
+          ],
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > request-termination: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "body": {
+          "type": "string",
+        },
+        "content_type": {
+          "type": "string",
+        },
+        "echo": {
+          "default": false,
+          "type": "boolean",
+        },
+        "message": {
+          "type": "string",
+        },
+        "status_code": {
+          "default": 503,
+          "maximum": 599,
+          "minimum": 100,
+          "type": "integer",
+        },
+        "trigger": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > request-transformer: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "add": {
+          "properties": {
+            "body": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "querystring": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "append": {
+          "properties": {
+            "body": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "querystring": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "http_method": {
+          "pattern": "^[A-Z]+$",
+          "type": "string",
+        },
+        "remove": {
+          "properties": {
+            "body": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "headers": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "querystring": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "rename": {
+          "properties": {
+            "body": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "querystring": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "replace": {
+          "properties": {
+            "body": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "querystring": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "uri": {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+          "tcp",
+          "tls",
+          "tls_passthrough",
+          "udp",
+          "ws",
+          "wss",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`plugin schemas > response-transformer: zod schema is stable 1`] = `
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "config": {
+      "properties": {
+        "add": {
+          "properties": {
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json_types": {
+              "default": [],
+              "items": {
+                "enum": [
+                  "boolean",
+                  "number",
+                  "string",
+                ],
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "append": {
+          "properties": {
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json_types": {
+              "default": [],
+              "items": {
+                "enum": [
+                  "boolean",
+                  "number",
+                  "string",
+                ],
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "remove": {
+          "properties": {
+            "headers": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json": {
+              "default": [],
+              "items": {
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "rename": {
+          "properties": {
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+        "replace": {
+          "properties": {
+            "headers": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json": {
+              "default": [],
+              "items": {
+                "pattern": "^[^:]+:.*$",
+                "type": "string",
+              },
+              "type": "array",
+            },
+            "json_types": {
+              "default": [],
+              "items": {
+                "enum": [
+                  "boolean",
+                  "number",
+                  "string",
+                ],
+                "type": "string",
+              },
+              "type": "array",
+            },
+          },
+          "type": "object",
+        },
+      },
+      "type": "object",
+    },
+    "consumer": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "consumer_group": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "protocols": {
+      "default": [
+        "grpc",
+        "grpcs",
+        "http",
+        "https",
+      ],
+      "items": {
+        "enum": [
+          "grpc",
+          "grpcs",
+          "http",
+          "https",
+        ],
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "route": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+    "service": {
+      "properties": {
+        "id": {
+          "type": "string",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;

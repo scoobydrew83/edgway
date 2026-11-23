@@ -1,0 +1,1913 @@
+{
+  "source": "Kong/kong spec/fixtures/router_path_handling_tests.lua @ 3.9.0 (0118b3c220681d4f0327540ae1a5e8f271081bf6), Apache-2.0. Every row expanded for strip_path and for path_handling v0 and v1.",
+  "tests": [
+    {
+      "line": 1,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 1,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 1,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 1,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 2,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 2,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 2,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 2,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 3,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 3,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 3,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 3,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 4,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 4,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 4,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 4,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 5,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 5,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 5,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 5,
+      "service_path": "/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 6,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 6,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 7,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 7,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 8,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 8,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/routereq"
+    },
+    {
+      "line": 9,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/"
+    },
+    {
+      "line": 9,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/"
+    },
+    {
+      "line": 10,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/"
+    },
+    {
+      "line": 10,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/"
+    },
+    {
+      "line": 11,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/req"
+    },
+    {
+      "line": 11,
+      "service_path": "/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/req"
+    },
+    {
+      "line": 12,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 12,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 13,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 13,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/route/req"
+    },
+    {
+      "line": 14,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/"
+    },
+    {
+      "line": 14,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/"
+    },
+    {
+      "line": 15,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/req"
+    },
+    {
+      "line": 15,
+      "service_path": "/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/req"
+    },
+    {
+      "line": 16,
+      "service_path": "/srv",
+      "route_path": "/rou",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/roureq",
+      "expected_path": "/srv/roureq"
+    },
+    {
+      "line": 17,
+      "service_path": "/srv",
+      "route_path": "/rou",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/roureq",
+      "expected_path": "/srvroureq"
+    },
+    {
+      "line": 18,
+      "service_path": "/srv",
+      "route_path": "/rou",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/roureq",
+      "expected_path": "/srv/req"
+    },
+    {
+      "line": 19,
+      "service_path": "/srv",
+      "route_path": "/rou",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/roureq",
+      "expected_path": "/srvreq"
+    },
+    {
+      "line": 20,
+      "service_path": "/srv/",
+      "route_path": "/rou",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/rou",
+      "expected_path": "/srv/rou"
+    },
+    {
+      "line": 20,
+      "service_path": "/srv/",
+      "route_path": "/rou",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/rou",
+      "expected_path": "/srv/rou"
+    },
+    {
+      "line": 21,
+      "service_path": "/srv/",
+      "route_path": "/rou",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/rou",
+      "expected_path": "/srv"
+    },
+    {
+      "line": 22,
+      "service_path": "/srv/",
+      "route_path": "/rou",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/rou",
+      "expected_path": "/srv/"
+    },
+    {
+      "line": 23,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 23,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 23,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 23,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 24,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 24,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 25,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/serviceroute"
+    },
+    {
+      "line": 25,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/serviceroute"
+    },
+    {
+      "line": 26,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 26,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 27,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 27,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 28,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 28,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 29,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/serviceroutereq"
+    },
+    {
+      "line": 29,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/serviceroutereq"
+    },
+    {
+      "line": 30,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 30,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 31,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/serviceroute/req"
+    },
+    {
+      "line": 31,
+      "service_path": "/service",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/serviceroute/req"
+    },
+    {
+      "line": 32,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 33,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/serviceroute"
+    },
+    {
+      "line": 34,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 35,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 36,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 37,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/serviceroutereq"
+    },
+    {
+      "line": 38,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service"
+    },
+    {
+      "line": 38,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service"
+    },
+    {
+      "line": 39,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 39,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 40,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 41,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 42,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 43,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 44,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 45,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/serviceroute/req"
+    },
+    {
+      "line": 46,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 47,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 48,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 49,
+      "service_path": "/service",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 50,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 50,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 51,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 51,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 52,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 52,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 52,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 52,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 53,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 53,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 53,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 53,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 54,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 54,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 54,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 54,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 55,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 55,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 55,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 55,
+      "service_path": "/service/",
+      "route_path": "/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 56,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 56,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 57,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 57,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 58,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 58,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/service/routereq"
+    },
+    {
+      "line": 59,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service"
+    },
+    {
+      "line": 60,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 61,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 61,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 62,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/routereq",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 62,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/routereq",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 63,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 63,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 64,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 64,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/service/route/req"
+    },
+    {
+      "line": 65,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 65,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 66,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 66,
+      "service_path": "/service/",
+      "route_path": "/route/",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 67,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 67,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 67,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 67,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/"
+    },
+    {
+      "line": 68,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 68,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 68,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 68,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/route"
+    },
+    {
+      "line": 69,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 69,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 69,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 69,
+      "service_path": "/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/route/"
+    },
+    {
+      "line": 70,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 70,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 70,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 70,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service"
+    },
+    {
+      "line": 71,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 71,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 72,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/serviceroute"
+    },
+    {
+      "line": 72,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/serviceroute"
+    },
+    {
+      "line": 73,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 73,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 74,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 74,
+      "service_path": "/service",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/serviceroute/"
+    },
+    {
+      "line": 75,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 75,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 75,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 75,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/",
+      "expected_path": "/service/"
+    },
+    {
+      "line": 76,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 76,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 76,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 76,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route",
+      "expected_path": "/service/route"
+    },
+    {
+      "line": 77,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 77,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 77,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 77,
+      "service_path": "/service/",
+      "route_path": null,
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route/",
+      "expected_path": "/service/route/"
+    },
+    {
+      "line": 78,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route./req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 79,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route./req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 80,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route./req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 80,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route./req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 81,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 82,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2E/req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 83,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 83,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 84,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 85,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2e/req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 86,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 86,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 87,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route../req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 88,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route../req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 89,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route../req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 89,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route../req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 90,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 91,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 92,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 92,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 93,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 94,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/servicereq"
+    },
+    {
+      "line": 95,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v0",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 95,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": true,
+      "path_handling": "v1",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/req"
+    },
+    {
+      "line": 96,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route./req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 97,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route./req",
+      "expected_path": "/serviceroute./req"
+    },
+    {
+      "line": 98,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route./req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 98,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route./req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 99,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 100,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2E/req",
+      "expected_path": "/serviceroute./req"
+    },
+    {
+      "line": 101,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 101,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2E/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 102,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 103,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2e/req",
+      "expected_path": "/serviceroute./req"
+    },
+    {
+      "line": 104,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 104,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2e/req",
+      "expected_path": "/service/route./req"
+    },
+    {
+      "line": 105,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route../req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 106,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route../req",
+      "expected_path": "/serviceroute../req"
+    },
+    {
+      "line": 107,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route../req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 107,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route../req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 108,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 109,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/serviceroute../req"
+    },
+    {
+      "line": 110,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 110,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2E%2E/req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 111,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 112,
+      "service_path": "/service",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/serviceroute../req"
+    },
+    {
+      "line": 113,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v0",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/route../req"
+    },
+    {
+      "line": 113,
+      "service_path": "/service/",
+      "route_path": "/route",
+      "strip_path": false,
+      "path_handling": "v1",
+      "request_path": "/route%2e%2E/req",
+      "expected_path": "/service/route../req"
+    }
+  ]
+}

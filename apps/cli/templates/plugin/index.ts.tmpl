@@ -1,0 +1,24 @@
+/**
+ * The __NAME__ plugin. Edit the config schema and the phases you need:
+ * rewrite, access, header_filter, body_filter, log.
+ */
+import { definePlugin } from "@edgway/plugin-sdk";
+import { z } from "zod";
+
+export default definePlugin({
+  name: "__NAME__",
+  version: "0.1.0",
+  // Kong's order: higher runs first (auth plugins are around 1000).
+  priority: 500,
+  config: z.object({
+    config: z
+      .object({
+        header_name: z.string().default("x-__NAME__"),
+        header_value: z.string().default("on"),
+      })
+      .prefault({}),
+  }),
+  header_filter: (config) => (c) => {
+    c.res.headers.set(config.header_name, config.header_value);
+  },
+});

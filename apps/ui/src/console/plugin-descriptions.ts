@@ -1,0 +1,43 @@
+/** One line on what each catalog plugin does: the catalog cards and the service page's "Which plugins run". */
+import {
+  uiPluginsDescriptionAcl,
+  uiPluginsDescriptionAiPromptGuard,
+  uiPluginsDescriptionAiProxy,
+  uiPluginsDescriptionAiRateLimitingAdvanced,
+  uiPluginsDescriptionBasicAuth,
+  uiPluginsDescriptionCorrelationId,
+  uiPluginsDescriptionCors,
+  uiPluginsDescriptionHttpLog,
+  uiPluginsDescriptionIpRestriction,
+  uiPluginsDescriptionJwt,
+  uiPluginsDescriptionKeyAuth,
+  uiPluginsDescriptionOpenidConnect,
+  uiPluginsDescriptionProxyCache,
+  uiPluginsDescriptionRateLimiting,
+  uiPluginsDescriptionRequestSizeLimiting,
+  uiPluginsDescriptionRequestTermination,
+  uiPluginsDescriptionRequestTransformer,
+  uiPluginsDescriptionResponseTransformer,
+} from "@edgway/i18n/messages";
+import type { MessageDescriptor } from "react-intl";
+
+export const DESCRIPTIONS: Record<string, MessageDescriptor> = {
+  acl: uiPluginsDescriptionAcl,
+  "ai-prompt-guard": uiPluginsDescriptionAiPromptGuard,
+  "ai-proxy": uiPluginsDescriptionAiProxy,
+  "ai-rate-limiting-advanced": uiPluginsDescriptionAiRateLimitingAdvanced,
+  "basic-auth": uiPluginsDescriptionBasicAuth,
+  "correlation-id": uiPluginsDescriptionCorrelationId,
+  cors: uiPluginsDescriptionCors,
+  "http-log": uiPluginsDescriptionHttpLog,
+  "ip-restriction": uiPluginsDescriptionIpRestriction,
+  jwt: uiPluginsDescriptionJwt,
+  "key-auth": uiPluginsDescriptionKeyAuth,
+  "openid-connect": uiPluginsDescriptionOpenidConnect,
+  "proxy-cache": uiPluginsDescriptionProxyCache,
+  "rate-limiting": uiPluginsDescriptionRateLimiting,
+  "request-size-limiting": uiPluginsDescriptionRequestSizeLimiting,
+  "request-termination": uiPluginsDescriptionRequestTermination,
+  "request-transformer": uiPluginsDescriptionRequestTransformer,
+  "response-transformer": uiPluginsDescriptionResponseTransformer,
+};

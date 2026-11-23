@@ -1,0 +1,6 @@
+dist/
+test-results/
+playwright-report/
+.e2e-state/
+# Generated at build
+public/licenses.txt

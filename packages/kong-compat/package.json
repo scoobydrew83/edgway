@@ -1,0 +1,37 @@
+{
+  "name": "@edgway/kong-compat",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Kong 3.9 Admin API subset decK and Terraform use, over @edgway/admin-core",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@edgway/admin-core": "workspace:*",
+    "@edgway/constants": "workspace:*",
+    "@edgway/errors": "workspace:*",
+    "@edgway/i18n": "workspace:*",
+    "@edgway/schema": "workspace:*",
+    "drizzle-orm": "0.45.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@edgway/core": "workspace:*",
+    "hono": "^4.13.10",
+    "typescript": "^5.9.3",
+    "vitest": "4.1.11"
+  },
+  "peerDependencies": {
+    "hono": "^4.12.34"
+  }
+}

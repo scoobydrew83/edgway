@@ -1,0 +1,7 @@
+id: no-raw-crypto
+valid:
+  - "const id = uuidv7();"
+  - "const hash = await sha256Hex(raw);"
+invalid:
+  - 'const d = await crypto.subtle.digest("SHA-256", data);'
+  - "const id = crypto.randomUUID();"

@@ -1,0 +1,1 @@
+ALTER TABLE `keyauth_credentials` ADD `name` text;

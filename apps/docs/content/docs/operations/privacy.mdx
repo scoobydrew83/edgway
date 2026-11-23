@@ -1,0 +1,72 @@
+---
+title: Privacy and telemetry
+description: Edgway sends nothing home. What its logs, metrics and audit trail hold.
+---
+
+## No phone-home
+
+Edgway has no telemetry. Its Workers make outbound requests only to:
+
+- your upstreams;
+- services your configuration names: an http-log endpoint, an AI provider, your identity provider's discovery, userinfo and key endpoints;
+- Cloudflare: Access certificates, and the Analytics Engine SQL API for the overview, if you set it up.
+
+Third-party tools in the build are configured not to send data either:
+
+- **The admin UI** turns off the telemetry of the shadcn-admin-kit components it is built on. Its Content-Security-Policy would block that request anyway.
+- **The portal build** sets `ZUDOKU_DO_NOT_TRACK` and `ZUDOKU_DISABLE_UPDATE_CHECK`, so `zudoku build` makes no network calls.
+- **wrangler**, which deploys Edgway, has usage metrics of its own. Turn them off with `WRANGLER_SEND_METRICS=false` or `npx wrangler telemetry disable`.
+
+## What the gateway records
+
+**Metrics** (Analytics Engine dataset `edgway_requests`, if the `ANALYTICS` binding is set). One data point per request:
+
+- route id, service id, consumer id and method;
+- status and duration.
+
+No client IP, path, headers or bodies.
+
+**Plugin timing** (Analytics Engine dataset `edgway_plugins`, if the `PLUGIN_ANALYTICS` binding is set). One data point per plugin phase that runs:
+
+- the plugin's name and id, the phase, the outcome and the route id;
+- how long it took.
+
+No client IP, path, headers, bodies or consumer.
+
+**Developers' usage in the portal.** With `CF_ACCOUNT_ID` and the `AE_API_TOKEN` secret set, the portal reads `edgway_requests` for the signed-in developer: requests and server errors per day, for their own consumer only, so no developer sees anyone else's traffic. It keeps each answer for a minute and stores nothing.
+
+**Logs** (Workers Logs, JSON). The gateway writes:
+- an entry for an unhandled 5xx error: error type, method, path, request id and the exception;
+- a warning when it skips routes it can't compile.
+
+It doesn't log requests that succeed. Cloudflare's Workers Logs also records invocation metadata for each request, as the platform does for any Worker with observability on. Turn it off with `observability.enabled: false` in each `wrangler.jsonc`.
+
+**The http-log plugin** sends an entry per request to the endpoint you configure. It holds:
+- the request and response headers;
+- the URL and query string;
+- the client IP;
+- the matched route, service and consumer.
+
+It doesn't hold bodies. It always redacts credentials:
+- the `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `apikey` and `x-api-key` headers;
+- the `apikey`, `api_key`, `x-api-key`, `jwt` and `access_token` query parameters;
+- every header and query parameter your key-auth and jwt plugins read credentials from.
+
+Configure it only with an endpoint you trust with that data.
+
+## What the admin records
+
+The **audit log** (D1 `audit_events`) records every change:
+- who made it;
+- the action, the entity, the request id and the time;
+- what changed, with secret fields redacted.
+
+"Who" is:
+- an Access email or service-token id;
+- `kong-admin-token:<hash prefix>` for the Kong-compatible API (never the token);
+- `oidc:<subject>` for a portal developer;
+- `portal` for the portal's batched publishes.
+
+**Portal developers:** the admin stores each developer's OIDC subject and a display name, their verified email or else their name, so you can find them in the admin UI. Nothing else from their identity provider is kept.
+
+**Credentials** are stored as Kong stores them: key-auth keys as a hash, basic-auth passwords as Kong's hash. jwt secrets are stored only as vault references.

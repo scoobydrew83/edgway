@@ -1,0 +1,6 @@
+{
+  "workspaces": {
+    "packages/i18n": { "includeEntryExports": true },
+    "apps/web": {}
+  }
+}

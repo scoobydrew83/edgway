@@ -1,0 +1,44 @@
+---
+title: The developer portal
+description: Let your API's developers sign in and manage their own API keys.
+---
+
+The `edgway-portal` Worker is a [Zudoku](https://zudoku.dev) site for the developers who call your APIs. It is public: keep its hostname outside Cloudflare Access.
+
+## What developers see
+
+- `/`: a landing page, open to everyone.
+- `/reference`: your API reference, when the portal is built with one (below). Also public.
+- `/settings/api-keys`: their API keys, after signing in.
+
+A developer signs in with OpenID Connect and gets a consumer of their own. They can hold up to five keys, each with a name. A key is shown in full only when it is created or rolled, so they copy it then; afterwards the portal shows only its first characters. Rolling a key gives that key a new value: the old value stops working within about a second, and their other keys keep working.
+
+Changes go live through the admin within about a second: the portal hands each developer's change to the admin, which publishes it together with the current configuration, never with other staged edits.
+
+## Set it up
+
+1. Register the portal with your identity provider as a single-page application. The callback URL is `https://<portal>/oauth/callback`.
+2. In `apps/portal/wrangler.jsonc`, set `OIDC_ISSUER` and `OIDC_AUDIENCE`, the audience your provider puts in access tokens (often the client id). With either empty, the portal refuses every key request ([EDG-ADM-016](/errors/EDG-ADM-016)).
+3. Set these where the deploy runs (Workers Builds: build variables), then redeploy:
+   - `ZUDOKU_PUBLIC_OIDC_ISSUER` and `ZUDOKU_PUBLIC_OIDC_CLIENT_ID`;
+   - optionally `ZUDOKU_PUBLIC_PORTAL_OPENAPI`, the path to an OpenAPI document (JSON or YAML) for `/reference`.
+
+   `ZUDOKU_PUBLIC_*` values are compiled into the site and are public. Never put a secret in one.
+
+## Who may sign up
+
+Anyone your identity provider signs in gets a consumer of their own and up to five API keys, and those keys pass key-auth on every route that has no `acl` plugin. If anyone can register with your provider (a social login, or open sign-up), limit sign-up to email domains with `PORTAL_ALLOWED_EMAIL_DOMAINS` in `apps/portal/wrangler.jsonc`, space- or comma-separated:
+
+```jsonc
+"PORTAL_ALLOWED_EMAIL_DOMAINS": "example.com partner.example"
+```
+
+The portal then asks your provider's userinfo endpoint before it makes a consumer, and answers 403 (`portal_not_allowed`) to anyone without a verified email at a listed domain, developers who signed up before you set it included. Empty (the default), anyone your provider signs in can sign up. Either way, put `acl` on routes that only some consumers should reach.
+
+## Developers in the admin
+
+On a developer's first sign-in, the portal asks your provider's userinfo endpoint for their email and name, and labels their consumer with a **display name**: the email if your provider says it is verified, otherwise the name. The admin UI lists developers by it. A display name is only a label. It is never the consumer's username, so a developer can't claim a username that you, decK or Terraform use, and the Kong-compatible Admin API never shows it. An admin's own consumer is never taken over: developers are matched by their OIDC subject, in a field only the portal sets.
+
+To revoke a developer, block their consumer through the admin API (`POST /api/v1/consumers/{id}/portal-block`; `DELETE` unblocks). The portal refuses them from then on, and their keys stop working at the gateway at once: the admin publishes the removal straight away, without publishing anything else you have staged. Deleting or rotating a credential through the admin API (`/api/v1`) or the admin UI takes effect at once in the same way. A delete through the Kong-compatible Admin API (decK, Terraform) is staged, as in Kong, and takes effect at the next publish.
+
+A rollback to a version from before a revocation would make those keys work again. The admin UI's rollback confirmation lists every credential the rollback would revive before you confirm, and the API answers the same list for `POST /api/v1/config/rollback` with `"dry_run": true`.

@@ -1,0 +1,12 @@
+id: no-edgway-header-literal
+language: TypeScript
+severity: error
+message: x-edgway-* header names live in @edgway/constants; import them instead.
+rule:
+  any:
+    - kind: string
+      regex: "^[\"'](?i)x-edgway-"
+    - kind: template_string
+      regex: "^`(?i)x-edgway-"
+ignores:
+  - "**/packages/constants/**"
