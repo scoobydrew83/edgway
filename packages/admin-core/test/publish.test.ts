@@ -1047,7 +1047,12 @@ describe("publish integrity", () => {
   });
 });
 
-describe("retention", () => {
+// The retention tests seed a full retention window and publish more than
+// once. They take 3-5 s on CI, too close to vitest's 5 s default, so every
+// test in these blocks gets more room.
+const RETENTION_TEST_TIMEOUT_MS = 15_000;
+
+describe("retention", { timeout: RETENTION_TEST_TIMEOUT_MS }, () => {
   /** Published versions as an older install left them: rows and snapshots. */
   async function seedVersions(
     workspaceId: string,
@@ -1096,66 +1101,62 @@ describe("retention", () => {
   });
 });
 
-// This test seeds a full retention window and publishes twice. It takes
-// 3-5 s on CI, too close to vitest's 5 s default, so it gets more room.
-const RETENTION_TEST_TIMEOUT_MS = 15_000;
+describe("retention after a failed snapshot delete", {
+  timeout: RETENTION_TEST_TIMEOUT_MS,
+}, () => {
+  it("keeps the row until its snapshot is gone, so the next publish retries", async () => {
+    const { admin, target, workspaceId } = await setup();
+    const db = drizzle(env.DB);
+    const old = Math.floor(Date.now() / 1000) - CONFIG.retainSeconds - 3600;
+    for (let version = 1; version <= CONFIG.retainVersions + 2; version++) {
+      await db.insert(tables.config_versions).values({
+        id: uuidv7(),
+        workspace_id: workspaceId,
+        version,
+        sha256: "seeded",
+        created_by: "seed",
+        created_at: old,
+      });
+      await env.CONFIG_KV.put(KV_KEY.configVersion(version), "{}");
+    }
+    // KV refuses to delete version 1's snapshot, once.
+    let refuse = true;
+    const flaky = {
+      ...target,
+      kv: new Proxy(env.CONFIG_KV, {
+        get(kv, prop) {
+          if (prop === "delete") {
+            return async (key: string) => {
+              if (refuse && key === KV_KEY.configVersion(1)) {
+                refuse = false;
+                throw new Error("KV unavailable");
+              }
+              return kv.delete(key);
+            };
+          }
+          const value = Reflect.get(kv, prop);
+          return typeof value === "function" ? value.bind(kv) : value;
+        },
+      }),
+    };
+    await admin.config.publish(flaky);
+    let kept = (await admin.config.list()).map((v) => v.version);
+    // Version 2 went (snapshot and row); version 1's row stays for a retry.
+    expect(kept).not.toContain(2);
+    expect(await env.CONFIG_KV.get(KV_KEY.configVersion(2))).toBeNull();
+    expect(kept).toContain(1);
+    expect(await env.CONFIG_KV.get(KV_KEY.configVersion(1))).not.toBeNull();
 
-describe("retention after a failed snapshot delete", () => {
-  it(
-    "keeps the row until its snapshot is gone, so the next publish retries",
-    async () => {
-      const { admin, target, workspaceId } = await setup();
-      const db = drizzle(env.DB);
-      const old = Math.floor(Date.now() / 1000) - CONFIG.retainSeconds - 3600;
-      for (let version = 1; version <= CONFIG.retainVersions + 2; version++) {
-        await db.insert(tables.config_versions).values({
-          id: uuidv7(),
-          workspace_id: workspaceId,
-          version,
-          sha256: "seeded",
-          created_by: "seed",
-          created_at: old,
-        });
-        await env.CONFIG_KV.put(KV_KEY.configVersion(version), "{}");
-      }
-      // KV refuses to delete version 1's snapshot, once.
-      let refuse = true;
-      const flaky = {
-        ...target,
-        kv: new Proxy(env.CONFIG_KV, {
-          get(kv, prop) {
-            if (prop === "delete") {
-              return async (key: string) => {
-                if (refuse && key === KV_KEY.configVersion(1)) {
-                  refuse = false;
-                  throw new Error("KV unavailable");
-                }
-                return kv.delete(key);
-              };
-            }
-            const value = Reflect.get(kv, prop);
-            return typeof value === "function" ? value.bind(kv) : value;
-          },
-        }),
-      };
-      await admin.config.publish(flaky);
-      let kept = (await admin.config.list()).map((v) => v.version);
-      // Version 2 went (snapshot and row); version 1's row stays for a retry.
-      expect(kept).not.toContain(2);
-      expect(await env.CONFIG_KV.get(KV_KEY.configVersion(2))).toBeNull();
-      expect(kept).toContain(1);
-      expect(await env.CONFIG_KV.get(KV_KEY.configVersion(1))).not.toBeNull();
-
-      await admin.config.publish(flaky);
-      kept = (await admin.config.list()).map((v) => v.version);
-      expect(kept).not.toContain(1);
-      expect(await env.CONFIG_KV.get(KV_KEY.configVersion(1))).toBeNull();
-    },
-    RETENTION_TEST_TIMEOUT_MS,
-  );
+    await admin.config.publish(flaky);
+    kept = (await admin.config.list()).map((v) => v.version);
+    expect(kept).not.toContain(1);
+    expect(await env.CONFIG_KV.get(KV_KEY.configVersion(1))).toBeNull();
+  });
 });
 
-describe("an admin publish racing portal batches", () => {
+describe("an admin publish racing portal batches", {
+  timeout: RETENTION_TEST_TIMEOUT_MS,
+}, () => {
   /** A ConfigVersion stand-in whose compare-and-set loses `losses` times. */
   function racingTarget(workspaceId: string, losses: number, winner: string) {
     const db = drizzle(env.DB);
@@ -1217,7 +1218,9 @@ describe("an admin publish racing portal batches", () => {
   });
 });
 
-describe("retention racing a rollback", () => {
+describe("retention racing a rollback", {
+  timeout: RETENTION_TEST_TIMEOUT_MS,
+}, () => {
   /** Old versions with readable (unsigned) snapshots, as rollback reads them. */
   async function seedOld(workspaceId: string, count: number) {
     const db = drizzle(env.DB);

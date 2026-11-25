@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- 562c8ee: Production hardening (Step 10, the 2026-10-03 audit), first published release:
+- 562c8ee: Production hardening for the first release:
   
   - Vault references: `{vault://env/…}` and `{vault://cf-secrets-store/…}` resolve on the gateway, and secrets never reach D1. A secret that doesn't resolve fails its plugin closed.
   - Fail closed: an enabled plugin the gateway doesn't bundle refuses its routes, and a plugin's `on_error` comes from the published config.
@@ -14,14 +14,14 @@
   - Upstreams: Kong upstreams and targets are balanced, and Service Binding and Workers VPC targets are selected by service tags.
   - Kong route `protocols` (426 for plain HTTP on an https-only route), and `X-Forwarded-For` is appended. `x-edgway-route` is sent only on traced requests.
   - Packages ship their source only (`files`). `@edgway/telemetry` is public, and `@edgway/sdk` pins wrangler 4.124.0.
-- 562c8ee: Step 10 follow-ups (Step 11):
+- 562c8ee: More gateway hardening:
   
   - Service tags reach only bindings named `UPSTREAM_*`, and `{vault://env/…}` reads only names starting with `VAULT_`. Rename existing upstream bindings and vault secrets, and update the tags and references to match.
   - A route's `https_redirect_status_code` (301, 302, 307 or 308) redirects plain HTTP to HTTPS; any other value answers 426, without naming the route.
   - `X-Forwarded-Proto`, `X-Forwarded-Host`, `X-Forwarded-Port` and `X-Real-IP` are set upstream, as Kong sets them.
   - Balancer state (round-robin position, passive health) carries over a publish that leaves an upstream and its targets unchanged.
   - `isVaultReference` is exported from `@edgway/adapters-cf/secrets`.
-- 562c8ee: Audit fixes (Step 12) and pre-release fixes (Step 13), towards the first public release, 0.1.0.
+- 562c8ee: Security, Kong-compatibility and CLI fixes for the first public release.
   
   **Breaking**
   
@@ -90,9 +90,9 @@
 
 ### Patch Changes
 
-- 562c8ee: Open-source readiness (Steps 14–15):
+- 562c8ee: Open-source readiness:
   
   - `@edgway/schema`, `@edgway/core` and `@edgway/adapters-cf` ship the licence texts of the code they copy from Kong (`third-party/`), and the files ported from Kong 3.9's Lua say so.
   - `@edgway/constants` adds `PORTAL.listSeparator` and `PORTAL.notAllowedDetail` for the portal's new `PORTAL_ALLOWED_EMAIL_DOMAINS` sign-up allow-list.
-  - `@edgway/i18n` and the ai-proxy and response-transformer READMEs drop internal decision tags.
+  - `@edgway/i18n` and the ai-proxy and response-transformer READMEs drop internal notes.
 - 562c8ee: `edgway deploy` works under Workers Builds (the Deploy to Cloudflare button): it runs wrangler without Workers Builds' `WRANGLER_CI_OVERRIDE_NAME` and `WRANGLER_CI_MATCH_TAG`, so each Worker deploys under the name in its own config instead of the name of the Worker the build is connected to.

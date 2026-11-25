@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- 562c8ee: Production hardening (Step 10, the 2026-10-03 audit), first published release:
+- 562c8ee: Production hardening for the first release:
   
   - Vault references: `{vault://env/…}` and `{vault://cf-secrets-store/…}` resolve on the gateway, and secrets never reach D1. A secret that doesn't resolve fails its plugin closed.
   - Fail closed: an enabled plugin the gateway doesn't bundle refuses its routes, and a plugin's `on_error` comes from the published config.
@@ -14,7 +14,7 @@
   - Upstreams: Kong upstreams and targets are balanced, and Service Binding and Workers VPC targets are selected by service tags.
   - Kong route `protocols` (426 for plain HTTP on an https-only route), and `X-Forwarded-For` is appended. `x-edgway-route` is sent only on traced requests.
   - Packages ship their source only (`files`). `@edgway/telemetry` is public, and `@edgway/sdk` pins wrangler 4.124.0.
-- 562c8ee: Audit fixes (Step 12) and pre-release fixes (Step 13), towards the first public release, 0.1.0.
+- 562c8ee: Security, Kong-compatibility and CLI fixes for the first public release.
   
   **Breaking**
   
@@ -58,17 +58,6 @@
 ### Patch Changes
 
 - 562c8ee: Dependency security updates before the public release: zod 4.6.7 (GHSA-mrhx-c7xc-m3w5). The workspace also moves the docs site to next 16.4.3 and the admin UI to vite 8.3.5, and raises the overrides for transitive dompurify, vite, zod, toml and undici so `pnpm audit --prod --audit-level high` passes again.
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
-- Updated dependencies [562c8ee]
 - Updated dependencies [562c8ee]
   - @edgway/constants@0.1.0
   - @edgway/core@0.1.0
